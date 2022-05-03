@@ -21,6 +21,10 @@ public class CityDto {
         return name;
     }
 
+    public CountryDto getCountry() {
+        return country;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

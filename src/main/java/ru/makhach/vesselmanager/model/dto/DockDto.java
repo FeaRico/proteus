@@ -9,7 +9,7 @@ public class DockDto {
     private final Double longitude;
     private final PortDto port;
 
-    public DockDto(Builder builder) {
+    private DockDto(Builder builder) {
         this.id = builder.id;
         this.vesselsCapacity = builder.vesselsCapacity;
         this.latitude = builder.latitude;

@@ -18,7 +18,7 @@ public class VesselDto {
     private final PortDto homePort;
     private final DockDto dock;
 
-    public VesselDto(Builder builder) {
+    private VesselDto(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.status = builder.status;

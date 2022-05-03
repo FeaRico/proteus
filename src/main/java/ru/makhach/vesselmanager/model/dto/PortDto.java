@@ -9,7 +9,7 @@ public class PortDto {
     private final Double longitude;
     private final CityDto city;
 
-    public PortDto(Builder builder) {
+    private PortDto(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.latitude = builder.latitude;
