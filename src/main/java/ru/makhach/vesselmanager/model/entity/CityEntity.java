@@ -1,5 +1,8 @@
 package ru.makhach.vesselmanager.model.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -18,8 +21,9 @@ public class CityEntity {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private CountryEntity country;
 
     public CityEntity() {

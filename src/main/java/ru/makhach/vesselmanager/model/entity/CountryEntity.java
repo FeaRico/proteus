@@ -1,7 +1,6 @@
 package ru.makhach.vesselmanager.model.entity;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,10 +20,6 @@ public class CountryEntity {
 
     @Column(name = "code", nullable = false)
     private String code;
-
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,
-            mappedBy = "country")
-    private List<CityEntity> cities;
 
     public CountryEntity() {
     }
@@ -53,25 +48,17 @@ public class CountryEntity {
         this.code = code;
     }
 
-    public List<CityEntity> getCities() {
-        return cities;
-    }
-
-    public void setCities(List<CityEntity> cities) {
-        this.cities = cities;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CountryEntity that = (CountryEntity) o;
-        return id.equals(that.id) && name.equals(that.name) && Objects.equals(code, that.code) && Objects.equals(cities, that.cities);
+        return id.equals(that.id) && name.equals(that.name) && Objects.equals(code, that.code);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, code, cities);
+        return Objects.hash(id, name, code);
     }
 
     @Override
@@ -80,7 +67,6 @@ public class CountryEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", code='" + code + '\'' +
-                ", cities=" + cities +
                 '}';
     }
 }

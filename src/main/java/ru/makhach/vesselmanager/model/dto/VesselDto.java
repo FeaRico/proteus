@@ -16,6 +16,7 @@ public class VesselDto {
     private final CountryDto country;
     private final PortDto currentPort;
     private final PortDto homePort;
+    private final DockDto dock;
 
     public VesselDto(Builder builder) {
         this.id = builder.id;
@@ -28,6 +29,7 @@ public class VesselDto {
         this.country = builder.country;
         this.currentPort = builder.currentPort;
         this.homePort = builder.homePort;
+        this.dock = builder.dock;
     }
 
     public Long getId() {
@@ -70,7 +72,11 @@ public class VesselDto {
         return homePort;
     }
 
-    public static class Builder{
+    public DockDto getDock() {
+        return dock;
+    }
+
+    public static class Builder {
         private Long id;
         private String name;
         private Status status;
@@ -81,58 +87,64 @@ public class VesselDto {
         private CountryDto country;
         private PortDto currentPort;
         private PortDto homePort;
+        private DockDto dock;
 
-        public Builder setId(Long id){
+        public Builder setId(Long id) {
             this.id = id;
             return this;
         }
 
-        public Builder setName(String name){
+        public Builder setName(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder setStatus(Status status){
+        public Builder setStatus(Status status) {
             this.status = status;
             return this;
         }
 
-        public Builder setType(Type type){
+        public Builder setType(Type type) {
             this.type = type;
             return this;
         }
 
-        public Builder setYearBuilt(Integer yearBuilt){
+        public Builder setYearBuilt(Integer yearBuilt) {
             this.yearBuilt = yearBuilt;
             return this;
         }
 
-        public Builder setLatitude(Double latitude){
+        public Builder setLatitude(Double latitude) {
             this.latitude = latitude;
             return this;
         }
 
-        public Builder setLongitude(Double longitude){
+        public Builder setLongitude(Double longitude) {
             this.longitude = longitude;
             return this;
         }
 
-        public Builder setCountry(CountryDto country){
+        public Builder setCountry(CountryDto country) {
             this.country = country;
             return this;
         }
 
-        public Builder setCurrentPort(PortDto currentPort){
+        public Builder setCurrentPort(PortDto currentPort) {
             this.currentPort = currentPort;
             return this;
         }
 
-        public Builder setHomePort(PortDto homePort){
+        public Builder setHomePort(PortDto homePort) {
             this.homePort = homePort;
             return this;
         }
 
-        public VesselDto build(){
+        public Builder setDock(DockDto dock) {
+            this.dock = dock;
+            return this;
+        }
+
+        public VesselDto build() {
             return new VesselDto(this);
         }
     }
@@ -142,12 +154,12 @@ public class VesselDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VesselDto vesselDto = (VesselDto) o;
-        return Objects.equals(id, vesselDto.id) && Objects.equals(name, vesselDto.name) && status == vesselDto.status && type == vesselDto.type && Objects.equals(yearBuilt, vesselDto.yearBuilt) && Objects.equals(latitude, vesselDto.latitude) && Objects.equals(longitude, vesselDto.longitude) && Objects.equals(country, vesselDto.country) && Objects.equals(currentPort, vesselDto.currentPort) && Objects.equals(homePort, vesselDto.homePort);
+        return Objects.equals(id, vesselDto.id) && Objects.equals(name, vesselDto.name) && status == vesselDto.status && type == vesselDto.type && Objects.equals(yearBuilt, vesselDto.yearBuilt) && Objects.equals(latitude, vesselDto.latitude) && Objects.equals(longitude, vesselDto.longitude) && Objects.equals(country, vesselDto.country) && Objects.equals(currentPort, vesselDto.currentPort) && Objects.equals(homePort, vesselDto.homePort) && Objects.equals(dock, vesselDto.dock);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, status, type, yearBuilt, latitude, longitude, country, currentPort, homePort);
+        return Objects.hash(id, name, status, type, yearBuilt, latitude, longitude, country, currentPort, homePort, dock);
     }
 
     @Override
@@ -163,6 +175,7 @@ public class VesselDto {
                 ", country=" + country +
                 ", currentPort=" + currentPort +
                 ", homePort=" + homePort +
+                ", dock=" + dock +
                 '}';
     }
 }

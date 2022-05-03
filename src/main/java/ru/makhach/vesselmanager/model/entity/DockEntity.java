@@ -1,7 +1,9 @@
 package ru.makhach.vesselmanager.model.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,11 +29,8 @@ public class DockEntity {
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "port_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private PortEntity port;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            mappedBy = "dock")
-    private List<VesselEntity> vessels;
 
     public DockEntity() {
     }
@@ -76,25 +75,17 @@ public class DockEntity {
         this.port = port;
     }
 
-    public List<VesselEntity> getVessels() {
-        return vessels;
-    }
-
-    public void setVessels(List<VesselEntity> vessels) {
-        this.vessels = vessels;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DockEntity that = (DockEntity) o;
-        return id.equals(that.id) && Objects.equals(vesselsCapacity, that.vesselsCapacity) && Objects.equals(latitude, that.latitude) && Objects.equals(longitude, that.longitude) && Objects.equals(port, that.port) && Objects.equals(vessels, that.vessels);
+        return id.equals(that.id) && Objects.equals(vesselsCapacity, that.vesselsCapacity) && Objects.equals(latitude, that.latitude) && Objects.equals(longitude, that.longitude) && Objects.equals(port, that.port);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, vesselsCapacity, latitude, longitude, port, vessels);
+        return Objects.hash(id, vesselsCapacity, latitude, longitude, port);
     }
 
     @Override
@@ -105,7 +96,6 @@ public class DockEntity {
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", port=" + port +
-                ", vessels=" + vessels +
                 '}';
     }
 }

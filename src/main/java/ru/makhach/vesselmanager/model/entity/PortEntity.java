@@ -1,7 +1,9 @@
 package ru.makhach.vesselmanager.model.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,18 +14,11 @@ public class PortEntity {
             generator = "port_id_seq")
     @SequenceGenerator(name = "port_id_seq",
             sequenceName = "port_id_seq")
-    @Column(
-            name = "id",
-            unique = true,
-            nullable = false,
-            insertable = false
-    )
+    @Column(name = "id", unique = true,
+            nullable = false, insertable = false)
     private Long id;
 
-    @Column(
-            name = "name",
-            nullable = false
-    )
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "lat")
@@ -34,15 +29,8 @@ public class PortEntity {
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private CityEntity city;
-
-    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id")
-    private CountryEntity country;
-
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            mappedBy = "port")
-    private List<DockEntity> docks;
 
     public PortEntity() {
     }
@@ -87,33 +75,17 @@ public class PortEntity {
         this.city = city;
     }
 
-    public CountryEntity getCountry() {
-        return country;
-    }
-
-    public void setCountry(CountryEntity country) {
-        this.country = country;
-    }
-
-    public List<DockEntity> getDocks() {
-        return docks;
-    }
-
-    public void setDocks(List<DockEntity> docks) {
-        this.docks = docks;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PortEntity that = (PortEntity) o;
-        return id.equals(that.id) && Objects.equals(name, that.name) && Objects.equals(latitude, that.latitude) && Objects.equals(longitude, that.longitude) && Objects.equals(city, that.city) && Objects.equals(country, that.country) && Objects.equals(docks, that.docks);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(latitude, that.latitude) && Objects.equals(longitude, that.longitude) && Objects.equals(city, that.city);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, latitude, longitude, city, country, docks);
+        return Objects.hash(id, name, latitude, longitude, city);
     }
 
     @Override
@@ -124,8 +96,6 @@ public class PortEntity {
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", city=" + city +
-                ", country=" + country +
-                ", docks=" + docks +
                 '}';
     }
 }
