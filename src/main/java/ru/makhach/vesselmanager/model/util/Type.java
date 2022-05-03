@@ -1,4 +1,4 @@
-package ru.makhach.vesselmanager.model.entity.util;
+package ru.makhach.vesselmanager.model.util;
 
 public enum Type {
     UNKNOWN("Неизвестное судно"),

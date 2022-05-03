@@ -1,7 +1,7 @@
 package ru.makhach.vesselmanager.model.entity;
 
-import ru.makhach.vesselmanager.model.entity.util.Status;
-import ru.makhach.vesselmanager.model.entity.util.Type;
+import ru.makhach.vesselmanager.model.util.Status;
+import ru.makhach.vesselmanager.model.util.Type;
 
 import javax.persistence.*;
 import java.util.Objects;
