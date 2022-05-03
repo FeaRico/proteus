@@ -1,6 +1,7 @@
 package ru.makhach.vesselmanager.model.util;
 
 public enum Status {
+    UNKNOWN("Неизвестно"),
     UNDERWAY("На ходу"),
     STOPPED("Остановился"),
     MOORED("Пришвартован"),
