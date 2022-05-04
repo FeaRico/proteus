@@ -4,7 +4,7 @@ import ru.makhach.vesselmanager.model.util.Status;
 import ru.makhach.vesselmanager.model.util.Type;
 
 import java.util.Objects;
-
+//TODO: вынести координаты в отдельный класс
 public class VesselDto {
     private final Long id;
     private final String name;
