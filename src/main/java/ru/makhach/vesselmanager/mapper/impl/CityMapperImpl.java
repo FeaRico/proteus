@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.makhach.vesselmanager.mapper.CityMapper;
 import ru.makhach.vesselmanager.mapper.CountryMapper;
 import ru.makhach.vesselmanager.model.dto.CityDto;
-import ru.makhach.vesselmanager.model.entity.CityEntity;
+import ru.makhach.vesselmanager.model.entity.City;
 
 import java.util.List;
 import java.util.function.Function;
@@ -18,12 +18,12 @@ public class CityMapperImpl implements CityMapper {
         this.countryMapper = countryMapper;
     }
 
-    Function<CityEntity, CityDto> entityToDto = entity ->
+    Function<City, CityDto> entityToDto = entity ->
             new CityDto(entity.getId(), entity.getName(),
                     countryMapper.entityToDto(entity.getCountry()));
 
-    Function<CityDto, CityEntity> dtoToEntity = dto -> {
-        CityEntity entity = new CityEntity();
+    Function<CityDto, City> dtoToEntity = dto -> {
+        City entity = new City();
         entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setCountry(countryMapper.dtoToEntity(dto.getCountry()));
@@ -31,22 +31,22 @@ public class CityMapperImpl implements CityMapper {
     };
 
     @Override
-    public CityEntity dtoToEntity(CityDto dto) {
+    public City dtoToEntity(CityDto dto) {
         return dtoToEntity.apply(dto);
     }
 
     @Override
-    public List<CityEntity> dtoToEntity(List<CityDto> list) {
+    public List<City> dtoToEntity(List<CityDto> list) {
         return list.stream().map(this::dtoToEntity).collect(Collectors.toList());
     }
 
     @Override
-    public CityDto entityToDto(CityEntity entity) {
+    public CityDto entityToDto(City entity) {
         return entityToDto.apply(entity);
     }
 
     @Override
-    public List<CityDto> entityToDto(List<CityEntity> list) {
+    public List<CityDto> entityToDto(List<City> list) {
         return list.stream().map(this::entityToDto).collect(Collectors.toList());
     }
 }

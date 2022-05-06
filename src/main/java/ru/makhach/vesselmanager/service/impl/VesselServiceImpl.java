@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.makhach.vesselmanager.exceptions.ResourceNotFoundException;
 import ru.makhach.vesselmanager.mapper.VesselMapper;
 import ru.makhach.vesselmanager.model.dto.VesselDto;
-import ru.makhach.vesselmanager.model.entity.VesselEntity;
+import ru.makhach.vesselmanager.model.entity.Vessel;
 import ru.makhach.vesselmanager.model.util.Status;
 import ru.makhach.vesselmanager.model.util.Type;
 import ru.makhach.vesselmanager.repository.VesselRepository;
@@ -74,8 +74,8 @@ public class VesselServiceImpl implements VesselService {
 
     @Override
     public VesselDto updateStatusByVesselId(Long id, Status status) {
-        VesselEntity vesselEntity = vesselRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(VesselEntity.class, "id", id));
+        Vessel vesselEntity = vesselRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(Vessel.class, "id", id));
         vesselEntity.setStatus(status);
 
         return vesselMapper.entityToDto(vesselRepository.save(vesselEntity));
@@ -85,22 +85,22 @@ public class VesselServiceImpl implements VesselService {
     public VesselDto updateVessel(VesselDto vessel) {
         Long id = vessel.getId();
         vesselRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(VesselEntity.class, "id", id));
+                .orElseThrow(() -> new ResourceNotFoundException(Vessel.class, "id", id));
 
-        VesselEntity vesselEntity = vesselMapper.dtoToEntity(vessel);
+        Vessel vesselEntity = vesselMapper.dtoToEntity(vessel);
         return vesselMapper.entityToDto(vesselRepository.save(vesselEntity));
     }
 
     @Override
     public VesselDto saveVessel(VesselDto vessel) {
-        VesselEntity vesselEntity = vesselMapper.dtoToEntity(vessel);
+        Vessel vesselEntity = vesselMapper.dtoToEntity(vessel);
         return vesselMapper.entityToDto(vesselRepository.save(vesselEntity));
     }
 
     @Override
     public VesselDto deleteVessel(Long id) {
-        VesselEntity vesselEntity = vesselRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(VesselEntity.class, "id", id));
+        Vessel vesselEntity = vesselRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(Vessel.class, "id", id));
 
         vesselRepository.delete(vesselEntity);
         return vesselMapper.entityToDto(vesselEntity);

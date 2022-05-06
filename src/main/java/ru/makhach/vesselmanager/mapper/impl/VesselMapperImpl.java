@@ -6,7 +6,7 @@ import ru.makhach.vesselmanager.mapper.DockMapper;
 import ru.makhach.vesselmanager.mapper.PortMapper;
 import ru.makhach.vesselmanager.mapper.VesselMapper;
 import ru.makhach.vesselmanager.model.dto.VesselDto;
-import ru.makhach.vesselmanager.model.entity.VesselEntity;
+import ru.makhach.vesselmanager.model.entity.Vessel;
 
 import java.util.List;
 import java.util.function.Function;
@@ -24,7 +24,7 @@ public class VesselMapperImpl implements VesselMapper {
         this.dockMapper = dockMapper;
     }
 
-    Function<VesselEntity, VesselDto> entityToDto = entity ->
+    Function<Vessel, VesselDto> entityToDto = entity ->
             new VesselDto.Builder()
                     .setId(entity.getId())
                     .setName(entity.getName())
@@ -39,8 +39,8 @@ public class VesselMapperImpl implements VesselMapper {
                     .setDock(dockMapper.entityToDto(entity.getDock()))
                     .build();
 
-    Function<VesselDto, VesselEntity> dtoToEntity = dto -> {
-        VesselEntity entity = new VesselEntity();
+    Function<VesselDto, Vessel> dtoToEntity = dto -> {
+        Vessel entity = new Vessel();
         entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setStatus(dto.getStatus());
@@ -56,22 +56,22 @@ public class VesselMapperImpl implements VesselMapper {
     };
 
     @Override
-    public VesselEntity dtoToEntity(VesselDto dto) {
+    public Vessel dtoToEntity(VesselDto dto) {
         return dtoToEntity.apply(dto);
     }
 
     @Override
-    public List<VesselEntity> dtoToEntity(List<VesselDto> list) {
+    public List<Vessel> dtoToEntity(List<VesselDto> list) {
         return list.stream().map(this::dtoToEntity).collect(Collectors.toList());
     }
 
     @Override
-    public VesselDto entityToDto(VesselEntity entity) {
+    public VesselDto entityToDto(Vessel entity) {
         return entityToDto.apply(entity);
     }
 
     @Override
-    public List<VesselDto> entityToDto(List<VesselEntity> list) {
+    public List<VesselDto> entityToDto(List<Vessel> list) {
         return list.stream().map(this::entityToDto).collect(Collectors.toList());
     }
 }

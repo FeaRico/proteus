@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.makhach.vesselmanager.mapper.DockMapper;
 import ru.makhach.vesselmanager.mapper.PortMapper;
 import ru.makhach.vesselmanager.model.dto.DockDto;
-import ru.makhach.vesselmanager.model.entity.DockEntity;
+import ru.makhach.vesselmanager.model.entity.Dock;
 
 import java.util.List;
 import java.util.function.Function;
@@ -18,42 +18,40 @@ public class DockMapperImpl implements DockMapper {
         this.portMapper = portMapper;
     }
 
-    Function<DockEntity, DockDto> entityToDto = entity ->
+    Function<Dock, DockDto> entityToDto = entity ->
             new DockDto.Builder()
                     .setId(entity.getId())
                     .setVesselsCapacity(entity.getVesselsCapacity())
                     .setLatitude(entity.getLatitude())
                     .setLongitude(entity.getLongitude())
-                    .setPort(portMapper.entityToDto(entity.getPort()))
                     .build();
 
-    Function<DockDto, DockEntity> dtoToEntity = dto -> {
-        DockEntity entity = new DockEntity();
+    Function<DockDto, Dock> dtoToEntity = dto -> {
+        Dock entity = new Dock();
         entity.setId(dto.getId());
         entity.setVesselsCapacity(dto.getVesselsCapacity());
         entity.setLatitude(dto.getLatitude());
         entity.setLongitude(dto.getLongitude());
-        entity.setPort(portMapper.dtoToEntity(dto.getPort()));
         return entity;
     };
 
     @Override
-    public DockEntity dtoToEntity(DockDto dto) {
+    public Dock dtoToEntity(DockDto dto) {
         return dtoToEntity.apply(dto);
     }
 
     @Override
-    public List<DockEntity> dtoToEntity(List<DockDto> list) {
+    public List<Dock> dtoToEntity(List<DockDto> list) {
         return list.stream().map(this::dtoToEntity).collect(Collectors.toList());
     }
 
     @Override
-    public DockDto entityToDto(DockEntity entity) {
+    public DockDto entityToDto(Dock entity) {
         return entityToDto.apply(entity);
     }
 
     @Override
-    public List<DockDto> entityToDto(List<DockEntity> list) {
+    public List<DockDto> entityToDto(List<Dock> list) {
         return list.stream().map(this::entityToDto).collect(Collectors.toList());
     }
 }

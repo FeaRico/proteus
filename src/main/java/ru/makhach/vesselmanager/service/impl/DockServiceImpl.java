@@ -4,11 +4,14 @@ import org.springframework.stereotype.Service;
 import ru.makhach.vesselmanager.exceptions.ResourceNotFoundException;
 import ru.makhach.vesselmanager.mapper.DockMapper;
 import ru.makhach.vesselmanager.model.dto.DockDto;
-import ru.makhach.vesselmanager.model.entity.DockEntity;
+import ru.makhach.vesselmanager.model.entity.Dock;
 import ru.makhach.vesselmanager.repository.DockRepository;
 import ru.makhach.vesselmanager.service.DockService;
 
 import java.util.List;
+
+//TODO: тут принимать ентити, а сверху создать фасад, который будет связывать док и порт сервисы,
+// а потом кидать ему порт
 
 @Service
 public class DockServiceImpl implements DockService {
@@ -33,29 +36,29 @@ public class DockServiceImpl implements DockService {
     @Override
     public DockDto getDockById(Long id) {
         return dockMapper.entityToDto(dockRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(DockEntity.class, "id", id)));
+                .orElseThrow(() -> new ResourceNotFoundException(Dock.class, "id", id)));
     }
 
     @Override
     public DockDto updateDock(DockDto dock) {
         Long id = dock.getId();
         dockRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(DockEntity.class, "id", id));
+                .orElseThrow(() -> new ResourceNotFoundException(Dock.class, "id", id));
 
-        DockEntity entity = dockMapper.dtoToEntity(dock);
+        Dock entity = dockMapper.dtoToEntity(dock);
         return dockMapper.entityToDto(dockRepository.save(entity));
     }
 
     @Override
     public DockDto saveDock(DockDto dock) {
-        DockEntity entity = dockMapper.dtoToEntity(dock);
+        Dock entity = dockMapper.dtoToEntity(dock);
         return dockMapper.entityToDto(dockRepository.save(entity));
     }
 
     @Override
     public DockDto deleteDock(Long id) {
-        DockEntity foundEntity = dockRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(DockEntity.class, "id", id));
+        Dock foundEntity = dockRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(Dock.class, "id", id));
 
         dockRepository.delete(foundEntity);
         return dockMapper.entityToDto(foundEntity);

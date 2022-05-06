@@ -1,14 +1,12 @@
 package ru.makhach.vesselmanager.model.entity;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "port")
-public class PortEntity {
+public class Port {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "port_id_seq")
@@ -29,10 +27,13 @@ public class PortEntity {
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private CityEntity city;
+    private City city;
 
-    public PortEntity() {
+    @OneToMany(mappedBy = "port", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Dock> docks;
+
+    public Port() {
     }
 
     public Long getId() {
@@ -67,11 +68,11 @@ public class PortEntity {
         this.longitude = longitude;
     }
 
-    public CityEntity getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(CityEntity city) {
+    public void setCity(City city) {
         this.city = city;
     }
 
@@ -79,7 +80,7 @@ public class PortEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PortEntity that = (PortEntity) o;
+        Port that = (Port) o;
         return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(latitude, that.latitude) && Objects.equals(longitude, that.longitude) && Objects.equals(city, that.city);
     }
 

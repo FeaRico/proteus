@@ -1,16 +1,16 @@
 package ru.makhach.vesselmanager.mapper;
 
 import ru.makhach.vesselmanager.model.dto.DockDto;
-import ru.makhach.vesselmanager.model.entity.DockEntity;
+import ru.makhach.vesselmanager.model.entity.Dock;
 
 import java.util.List;
 
 public interface DockMapper {
-    DockEntity dtoToEntity(DockDto dto);
+    Dock dtoToEntity(DockDto dto);
 
-    List<DockEntity> dtoToEntity(List<DockDto> list);
+    List<Dock> dtoToEntity(List<DockDto> list);
 
-    DockDto entityToDto(DockEntity entity);
+    DockDto entityToDto(Dock entity);
 
-    List<DockDto> entityToDto(List<DockEntity> list);
+    List<DockDto> entityToDto(List<Dock> list);
 }

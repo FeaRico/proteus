@@ -4,24 +4,25 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "country")
-public class CountryEntity {
+@Table(name = "city")
+public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "country_id_seq")
-    @SequenceGenerator(name = "country_id_seq",
-            sequenceName = "country_id_seq")
+            generator = "city_id_seq")
+    @SequenceGenerator(name = "city_id_seq",
+            sequenceName = "city_id_seq")
     @Column(name = "id", unique = true,
             nullable = false, insertable = false)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "code", nullable = false, unique = true)
-    private String code;
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id")
+    private Country country;
 
-    public CountryEntity() {
+    public City() {
     }
 
     public Long getId() {
@@ -40,33 +41,33 @@ public class CountryEntity {
         this.name = name;
     }
 
-    public String getCode() {
-        return code;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CountryEntity that = (CountryEntity) o;
-        return id.equals(that.id) && name.equals(that.name) && Objects.equals(code, that.code);
+        City that = (City) o;
+        return id.equals(that.id) && name.equals(that.name) && Objects.equals(country, that.country);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, code);
+        return Objects.hash(id, name, country);
     }
 
     @Override
     public String toString() {
-        return "CountryEntity{" +
+        return "CityEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", code='" + code + '\'' +
+                ", country=" + country +
                 '}';
     }
 }

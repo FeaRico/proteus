@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "vessel")
-public class VesselEntity {
+public class Vessel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "vessel_id_seq")
@@ -40,21 +40,21 @@ public class VesselEntity {
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", nullable = false)
-    private CountryEntity country;
+    private Country country;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "current_port_id")
-    private PortEntity currentPort;
+    private Port currentPort;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "home_port_id")
-    private PortEntity homePort;
+    private Port homePort;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "dock_id")
-    private DockEntity dock;
+    private Dock dock;
 
-    public VesselEntity() {
+    public Vessel() {
     }
 
     public Long getId() {
@@ -113,35 +113,35 @@ public class VesselEntity {
         this.longitude = longitude;
     }
 
-    public CountryEntity getCountry() {
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(CountryEntity country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 
-    public PortEntity getCurrentPort() {
+    public Port getCurrentPort() {
         return currentPort;
     }
 
-    public void setCurrentPort(PortEntity currentPort) {
+    public void setCurrentPort(Port currentPort) {
         this.currentPort = currentPort;
     }
 
-    public PortEntity getHomePort() {
+    public Port getHomePort() {
         return homePort;
     }
 
-    public void setHomePort(PortEntity homePort) {
+    public void setHomePort(Port homePort) {
         this.homePort = homePort;
     }
 
-    public DockEntity getDock() {
+    public Dock getDock() {
         return dock;
     }
 
-    public void setDock(DockEntity dock) {
+    public void setDock(Dock dock) {
         this.dock = dock;
     }
 
@@ -149,7 +149,7 @@ public class VesselEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        VesselEntity that = (VesselEntity) o;
+        Vessel that = (Vessel) o;
         return id.equals(that.id) && name.equals(that.name) && status == that.status && type == that.type && Objects.equals(yearBuilt, that.yearBuilt) && Objects.equals(latitude, that.latitude) && Objects.equals(longitude, that.longitude) && Objects.equals(country, that.country) && Objects.equals(currentPort, that.currentPort) && Objects.equals(homePort, that.homePort) && Objects.equals(dock, that.dock);
     }
 

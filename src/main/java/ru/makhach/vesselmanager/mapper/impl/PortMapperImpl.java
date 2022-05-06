@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import ru.makhach.vesselmanager.mapper.CityMapper;
 import ru.makhach.vesselmanager.mapper.PortMapper;
 import ru.makhach.vesselmanager.model.dto.PortDto;
-import ru.makhach.vesselmanager.model.entity.PortEntity;
+import ru.makhach.vesselmanager.model.entity.Port;
 
 import java.util.List;
 import java.util.function.Function;
@@ -18,7 +18,7 @@ public class PortMapperImpl implements PortMapper {
         this.cityMapper = cityMapper;
     }
 
-    Function<PortEntity, PortDto> entityToDto = entity ->
+    Function<Port, PortDto> entityToDto = entity ->
             new PortDto.Builder()
                     .setId(entity.getId())
                     .setName(entity.getName())
@@ -27,8 +27,8 @@ public class PortMapperImpl implements PortMapper {
                     .setCity(cityMapper.entityToDto(entity.getCity()))
                     .build();
 
-    Function<PortDto, PortEntity> dtoToEntity = dto -> {
-        PortEntity entity = new PortEntity();
+    Function<PortDto, Port> dtoToEntity = dto -> {
+        Port entity = new Port();
         entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setLatitude(dto.getLatitude());
@@ -38,22 +38,22 @@ public class PortMapperImpl implements PortMapper {
     };
 
     @Override
-    public PortEntity dtoToEntity(PortDto dto) {
+    public Port dtoToEntity(PortDto dto) {
         return dtoToEntity.apply(dto);
     }
 
     @Override
-    public List<PortEntity> dtoToEntity(List<PortDto> list) {
+    public List<Port> dtoToEntity(List<PortDto> list) {
         return list.stream().map(this::dtoToEntity).collect(Collectors.toList());
     }
 
     @Override
-    public PortDto entityToDto(PortEntity entity) {
+    public PortDto entityToDto(Port entity) {
         return entityToDto.apply(entity);
     }
 
     @Override
-    public List<PortDto> entityToDto(List<PortEntity> list) {
+    public List<PortDto> entityToDto(List<Port> list) {
         return list.stream().map(this::entityToDto).collect(Collectors.toList());
     }
 }

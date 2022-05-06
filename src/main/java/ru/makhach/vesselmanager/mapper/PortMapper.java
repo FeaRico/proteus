@@ -1,16 +1,16 @@
 package ru.makhach.vesselmanager.mapper;
 
 import ru.makhach.vesselmanager.model.dto.PortDto;
-import ru.makhach.vesselmanager.model.entity.PortEntity;
+import ru.makhach.vesselmanager.model.entity.Port;
 
 import java.util.List;
 
 public interface PortMapper {
-    PortEntity dtoToEntity(PortDto dto);
+    Port dtoToEntity(PortDto dto);
 
-    List<PortEntity> dtoToEntity(List<PortDto> list);
+    List<Port> dtoToEntity(List<PortDto> list);
 
-    PortDto entityToDto(PortEntity entity);
+    PortDto entityToDto(Port entity);
 
-    List<PortDto> entityToDto(List<PortEntity> list);
+    List<PortDto> entityToDto(List<Port> list);
 }

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.makhach.vesselmanager.exceptions.ResourceNotFoundException;
 import ru.makhach.vesselmanager.mapper.CountryMapper;
 import ru.makhach.vesselmanager.model.dto.CountryDto;
-import ru.makhach.vesselmanager.model.entity.CountryEntity;
+import ru.makhach.vesselmanager.model.entity.Country;
 import ru.makhach.vesselmanager.repository.CountryRepository;
 import ru.makhach.vesselmanager.service.CountryService;
 
@@ -28,35 +28,35 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public CountryDto getCountryById(Long id) {
         return countryMapper.entityToDto(countryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(CountryEntity.class, "id", id)));
+                .orElseThrow(() -> new ResourceNotFoundException(Country.class, "id", id)));
     }
 
     @Override
     public CountryDto getCountryByCode(String code) {
         return countryMapper.entityToDto(countryRepository.findCountryEntityByCode(code)
-                .orElseThrow(() -> new ResourceNotFoundException(CountryEntity.class, "code", code)));
+                .orElseThrow(() -> new ResourceNotFoundException(Country.class, "code", code)));
     }
 
     @Override
     public CountryDto updateCountry(CountryDto country) {
         Long id = country.getId();
         countryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(CountryEntity.class, "id", id));
+                .orElseThrow(() -> new ResourceNotFoundException(Country.class, "id", id));
 
-        CountryEntity entity = countryMapper.dtoToEntity(country);
+        Country entity = countryMapper.dtoToEntity(country);
         return countryMapper.entityToDto(countryRepository.save(entity));
     }
 
     @Override
     public CountryDto saveCountry(CountryDto country) {
-        CountryEntity entity = countryMapper.dtoToEntity(country);
+        Country entity = countryMapper.dtoToEntity(country);
         return countryMapper.entityToDto(countryRepository.save(entity));
     }
 
     @Override
     public CountryDto deleteCountry(Long id) {
-        CountryEntity foundEntity = countryRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(CountryEntity.class, "id", id));
+        Country foundEntity = countryRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(Country.class, "id", id));
         countryRepository.delete(foundEntity);
         return countryMapper.entityToDto(foundEntity);
     }

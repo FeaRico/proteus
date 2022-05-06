@@ -5,12 +5,12 @@ import java.util.Objects;
 public class CityDto {
     private final Long id;
     private final String name;
-    private final CountryDto country;
+    private final Long countryId;
 
-    public CityDto(Long id, String name, CountryDto country) {
+    public CityDto(Long id, String name, Long countryId) {
         this.id = id;
         this.name = name;
-        this.country = country;
+        this.countryId = countryId;
     }
 
     public Long getId() {
@@ -21,8 +21,8 @@ public class CityDto {
         return name;
     }
 
-    public CountryDto getCountry() {
-        return country;
+    public Long getCountryId() {
+        return countryId;
     }
 
     @Override
@@ -30,12 +30,12 @@ public class CityDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CityDto cityDto = (CityDto) o;
-        return Objects.equals(id, cityDto.id) && Objects.equals(name, cityDto.name) && Objects.equals(country, cityDto.country);
+        return Objects.equals(id, cityDto.id) && Objects.equals(name, cityDto.name) && Objects.equals(countryId, cityDto.countryId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, country);
+        return Objects.hash(id, name, countryId);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class CityDto {
         return "CityDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", country=" + country +
+                ", countryId=" + countryId +
                 '}';
     }
 }

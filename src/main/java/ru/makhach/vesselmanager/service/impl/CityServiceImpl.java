@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.makhach.vesselmanager.exceptions.ResourceNotFoundException;
 import ru.makhach.vesselmanager.mapper.CityMapper;
 import ru.makhach.vesselmanager.model.dto.CityDto;
-import ru.makhach.vesselmanager.model.entity.CityEntity;
+import ru.makhach.vesselmanager.model.entity.City;
 import ru.makhach.vesselmanager.repository.CityRepository;
 import ru.makhach.vesselmanager.service.CityService;
 
@@ -33,29 +33,29 @@ public class CityServiceImpl implements CityService {
     @Override
     public CityDto getCityById(Long id) {
         return cityMapper.entityToDto(cityRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(CityEntity.class, "id", id)));
+                .orElseThrow(() -> new ResourceNotFoundException(City.class, "id", id)));
     }
 
     @Override
     public CityDto updateCity(CityDto city) {
         Long id = city.getId();
         cityRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(CityEntity.class, "id", id));
+                .orElseThrow(() -> new ResourceNotFoundException(City.class, "id", id));
 
-        CityEntity entity = cityMapper.dtoToEntity(city);
+        City entity = cityMapper.dtoToEntity(city);
         return cityMapper.entityToDto(cityRepository.save(entity));
     }
 
     @Override
     public CityDto saveCity(CityDto city) {
-        CityEntity entity = cityMapper.dtoToEntity(city);
+        City entity = cityMapper.dtoToEntity(city);
         return cityMapper.entityToDto(cityRepository.save(entity));
     }
 
     @Override
     public CityDto deleteCity(Long id) {
-        CityEntity foundEntity = cityRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(CityEntity.class, "id", id));
+        City foundEntity = cityRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(City.class, "id", id));
 
         cityRepository.delete(foundEntity);
         return cityMapper.entityToDto(foundEntity);

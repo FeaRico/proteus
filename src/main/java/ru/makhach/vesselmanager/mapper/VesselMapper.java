@@ -1,16 +1,16 @@
 package ru.makhach.vesselmanager.mapper;
 
 import ru.makhach.vesselmanager.model.dto.VesselDto;
-import ru.makhach.vesselmanager.model.entity.VesselEntity;
+import ru.makhach.vesselmanager.model.entity.Vessel;
 
 import java.util.List;
 
 public interface VesselMapper {
-    VesselEntity dtoToEntity(VesselDto dto);
+    Vessel dtoToEntity(VesselDto dto);
 
-    List<VesselEntity> dtoToEntity(List<VesselDto> list);
+    List<Vessel> dtoToEntity(List<VesselDto> list);
 
-    VesselDto entityToDto(VesselEntity entity);
+    VesselDto entityToDto(Vessel entity);
 
-    List<VesselDto> entityToDto(List<VesselEntity> list);
+    List<VesselDto> entityToDto(List<Vessel> list);
 }

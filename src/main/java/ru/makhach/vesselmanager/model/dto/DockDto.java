@@ -7,14 +7,14 @@ public class DockDto {
     private final Integer vesselsCapacity;
     private final Double latitude;
     private final Double longitude;
-    private final PortDto port;
+    private final Long portId;
 
     private DockDto(Builder builder) {
         this.id = builder.id;
         this.vesselsCapacity = builder.vesselsCapacity;
         this.latitude = builder.latitude;
         this.longitude = builder.longitude;
-        this.port = builder.port;
+        this.portId = builder.portId;
     }
 
     public Long getId() {
@@ -33,8 +33,8 @@ public class DockDto {
         return longitude;
     }
 
-    public PortDto getPort() {
-        return port;
+    public Long getPortId() {
+        return portId;
     }
 
     public static class Builder {
@@ -42,7 +42,7 @@ public class DockDto {
         private Integer vesselsCapacity;
         private Double latitude;
         private Double longitude;
-        private PortDto port;
+        private Long portId;
 
         public Builder setId(Long id) {
             this.id = id;
@@ -64,8 +64,8 @@ public class DockDto {
             return this;
         }
 
-        public Builder setPort(PortDto port) {
-            this.port = port;
+        public Builder setPort(Long portId) {
+            this.portId = portId;
             return this;
         }
 
@@ -79,12 +79,12 @@ public class DockDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DockDto dockDto = (DockDto) o;
-        return Objects.equals(id, dockDto.id) && Objects.equals(vesselsCapacity, dockDto.vesselsCapacity) && Objects.equals(latitude, dockDto.latitude) && Objects.equals(longitude, dockDto.longitude) && Objects.equals(port, dockDto.port);
+        return Objects.equals(id, dockDto.id) && Objects.equals(vesselsCapacity, dockDto.vesselsCapacity) && Objects.equals(latitude, dockDto.latitude) && Objects.equals(longitude, dockDto.longitude) && Objects.equals(portId, dockDto.portId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, vesselsCapacity, latitude, longitude, port);
+        return Objects.hash(id, vesselsCapacity, latitude, longitude, portId);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class DockDto {
                 ", vesselsCapacity=" + vesselsCapacity +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
-                ", port=" + port +
+                ", portId=" + portId +
                 '}';
     }
 }

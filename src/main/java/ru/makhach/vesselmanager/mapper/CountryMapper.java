@@ -1,16 +1,16 @@
 package ru.makhach.vesselmanager.mapper;
 
 import ru.makhach.vesselmanager.model.dto.CountryDto;
-import ru.makhach.vesselmanager.model.entity.CountryEntity;
+import ru.makhach.vesselmanager.model.entity.Country;
 
 import java.util.List;
 
 public interface CountryMapper {
-    CountryEntity dtoToEntity(CountryDto dto);
+    Country dtoToEntity(CountryDto dto);
 
-    List<CountryEntity> dtoToEntity(List<CountryDto> list);
+    List<Country> dtoToEntity(List<CountryDto> list);
 
-    CountryDto entityToDto(CountryEntity entity);
+    CountryDto entityToDto(Country entity);
 
-    List<CountryDto> entityToDto(List<CountryEntity> list);
+    List<CountryDto> entityToDto(List<Country> list);
 }
