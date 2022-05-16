@@ -1,19 +1,19 @@
 package ru.makhach.vesselmanager.service;
 
-import ru.makhach.vesselmanager.model.dto.DockDto;
+import ru.makhach.vesselmanager.model.entity.Dock;
 
 import java.util.List;
 
 public interface DockService {
-    List<DockDto> getAllDocks();
+    List<Dock> getAllDocks();
 
-    List<DockDto> getAllDocksByPort(Long portId);
+    List<Dock> getAllDocksByPort(Long portId);
 
-    DockDto getDockById(Long id);
+    Dock getDockById(Long id);
 
-    DockDto updateDock(DockDto dock);
+    Dock updateDock(Dock dock);
 
-    DockDto saveDock(DockDto dock);
+    Dock saveDock(Dock dock);
 
-    DockDto deleteDock(Long id);
+    Dock deleteDock(Long id);
 }

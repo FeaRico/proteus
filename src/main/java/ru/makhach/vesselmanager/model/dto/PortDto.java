@@ -7,14 +7,14 @@ public class PortDto {
     private final String name;
     private final Double latitude;
     private final Double longitude;
-    private final CityDto city;
+    private final Long cityId;
 
     private PortDto(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.latitude = builder.latitude;
         this.longitude = builder.longitude;
-        this.city = builder.city;
+        this.cityId = builder.cityId;
     }
 
     public Long getId() {
@@ -33,8 +33,8 @@ public class PortDto {
         return longitude;
     }
 
-    public CityDto getCity() {
-        return city;
+    public Long getCityId() {
+        return cityId;
     }
 
     public static class Builder {
@@ -42,7 +42,7 @@ public class PortDto {
         private String name;
         private Double latitude;
         private Double longitude;
-        private CityDto city;
+        private Long cityId;
 
         public Builder setId(Long id) {
             this.id = id;
@@ -64,8 +64,8 @@ public class PortDto {
             return this;
         }
 
-        public Builder setCity(CityDto city) {
-            this.city = city;
+        public Builder setCityId(Long cityId) {
+            this.cityId = cityId;
             return this;
         }
 
@@ -79,12 +79,12 @@ public class PortDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PortDto portDto = (PortDto) o;
-        return Objects.equals(id, portDto.id) && Objects.equals(name, portDto.name) && Objects.equals(latitude, portDto.latitude) && Objects.equals(longitude, portDto.longitude) && Objects.equals(city, portDto.city);
+        return Objects.equals(id, portDto.id) && Objects.equals(name, portDto.name) && Objects.equals(latitude, portDto.latitude) && Objects.equals(longitude, portDto.longitude) && Objects.equals(cityId, portDto.cityId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, latitude, longitude, city);
+        return Objects.hash(id, name, latitude, longitude, cityId);
     }
 
     @Override
@@ -94,7 +94,7 @@ public class PortDto {
                 ", name='" + name + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
-                ", city=" + city +
+                ", cityId=" + cityId +
                 '}';
     }
 }

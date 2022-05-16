@@ -24,7 +24,7 @@ public class PortMapperImpl implements PortMapper {
                     .setName(entity.getName())
                     .setLatitude(entity.getLatitude())
                     .setLongitude(entity.getLongitude())
-                    .setCity(cityMapper.entityToDto(entity.getCity()))
+                    .setCityId(entity.getCity().getId())
                     .build();
 
     Function<PortDto, Port> dtoToEntity = dto -> {
@@ -33,7 +33,6 @@ public class PortMapperImpl implements PortMapper {
         entity.setName(dto.getName());
         entity.setLatitude(dto.getLatitude());
         entity.setLongitude(dto.getLongitude());
-        entity.setCity(cityMapper.dtoToEntity(dto.getCity()));
         return entity;
     };
 

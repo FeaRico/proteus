@@ -2,8 +2,6 @@ package ru.makhach.vesselmanager.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.makhach.vesselmanager.exceptions.ResourceNotFoundException;
-import ru.makhach.vesselmanager.mapper.VesselMapper;
-import ru.makhach.vesselmanager.model.dto.VesselDto;
 import ru.makhach.vesselmanager.model.entity.Vessel;
 import ru.makhach.vesselmanager.model.util.Status;
 import ru.makhach.vesselmanager.model.util.Type;
@@ -14,95 +12,91 @@ import java.util.List;
 
 @Service
 public class VesselServiceImpl implements VesselService {
-    private final VesselMapper vesselMapper;
     private final VesselRepository vesselRepository;
 
-    public VesselServiceImpl(VesselMapper vesselMapper, VesselRepository vesselRepository) {
-        this.vesselMapper = vesselMapper;
+    public VesselServiceImpl(VesselRepository vesselRepository) {
         this.vesselRepository = vesselRepository;
     }
 
     @Override
-    public List<VesselDto> getAllVessels() {
-        return vesselMapper.entityToDto(vesselRepository.findAll());
+    public List<Vessel> getAllVessels() {
+        return vesselRepository.findAll();
     }
 
     @Override
-    public List<VesselDto> getAllVesselsByStatus(Status status) {
-        return vesselMapper.entityToDto(vesselRepository.findAllByStatus(status));
+    public List<Vessel> getAllVesselsByStatus(Status status) {
+        return vesselRepository.findAllByStatus(status);
     }
 
     @Override
-    public List<VesselDto> getAllVesselsByType(Type type) {
-        return vesselMapper.entityToDto(vesselRepository.findAllByType(type));
+    public List<Vessel> getAllVesselsByType(Type type) {
+        return vesselRepository.findAllByType(type);
     }
 
     @Override
-    public List<VesselDto> getAllVesselsByYearBuilt(Integer yearBuilt) {
-        return vesselMapper.entityToDto(vesselRepository.findAllByYearBuilt(yearBuilt));
+    public List<Vessel> getAllVesselsByYearBuilt(Integer yearBuilt) {
+        return vesselRepository.findAllByYearBuilt(yearBuilt);
     }
 
     @Override
-    public List<VesselDto> getAllVesselsByCountry(Long countryId) {
-        return vesselMapper.entityToDto(vesselRepository.findAllByCountry(countryId));
+    public List<Vessel> getAllVesselsByCountry(Long countryId) {
+        return vesselRepository.findAllByCountry(countryId);
     }
 
     @Override
-    public List<VesselDto> getAllVesselsByCurrentPort(Long portId) {
-        return vesselMapper.entityToDto(vesselRepository.findAllByCurrentPort(portId));
+    public List<Vessel> getAllVesselsByCurrentPort(Long portId) {
+        return vesselRepository.findAllByCurrentPort(portId);
     }
 
     @Override
-    public List<VesselDto> getAllVesselsByHomePort(Long portId) {
-        return vesselMapper.entityToDto(vesselRepository.findAllByHomePort(portId));
+    public List<Vessel> getAllVesselsByHomePort(Long portId) {
+        return vesselRepository.findAllByHomePort(portId);
     }
 
     @Override
-    public List<VesselDto> getAllVesselsByDock(Long dockId) {
-        return vesselMapper.entityToDto(vesselRepository.findAllByDock(dockId));
+    public List<Vessel> getAllVesselsByDock(Long dockId) {
+        return vesselRepository.findAllByDock(dockId);
     }
 
     @Override
-    public List<VesselDto> getAllVesselsWhereNameStartWith(String name) {
-        return vesselMapper.entityToDto(vesselRepository.findAllByNameStartsWith(name));
+    public List<Vessel> getAllVesselsWhereNameStartWith(String name) {
+        return vesselRepository.findAllByNameStartsWith(name);
     }
 
     @Override
-    public List<VesselDto> getVesselByName(String name) {
-        return vesselMapper.entityToDto(vesselRepository.findAllByName(name));
+    public List<Vessel> getVesselByName(String name) {
+        return vesselRepository.findAllByName(name);
     }
 
     @Override
-    public VesselDto updateStatusByVesselId(Long id, Status status) {
+    public Vessel updateStatusByVesselId(Long id, Status status) {
         Vessel vesselEntity = vesselRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Vessel.class, "id", id));
         vesselEntity.setStatus(status);
 
-        return vesselMapper.entityToDto(vesselRepository.save(vesselEntity));
+        return vesselRepository.save(vesselEntity);
     }
 
     @Override
-    public VesselDto updateVessel(VesselDto vessel) {
+    public Vessel updateVessel(Vessel vessel) {
         Long id = vessel.getId();
         vesselRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Vessel.class, "id", id));
 
-        Vessel vesselEntity = vesselMapper.dtoToEntity(vessel);
-        return vesselMapper.entityToDto(vesselRepository.save(vesselEntity));
+        return vesselRepository.save(vessel);
     }
 
     @Override
-    public VesselDto saveVessel(VesselDto vessel) {
-        Vessel vesselEntity = vesselMapper.dtoToEntity(vessel);
-        return vesselMapper.entityToDto(vesselRepository.save(vesselEntity));
+    public Vessel saveVessel(Vessel vessel) {
+        return vesselRepository.save(vessel);
     }
 
     @Override
-    public VesselDto deleteVessel(Long id) {
+    public Vessel deleteVessel(Long id) {
         Vessel vesselEntity = vesselRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Vessel.class, "id", id));
 
         vesselRepository.delete(vesselEntity);
-        return vesselMapper.entityToDto(vesselEntity);
+        return vesselEntity;
     }
 }

@@ -2,8 +2,6 @@ package ru.makhach.vesselmanager.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.makhach.vesselmanager.exceptions.ResourceNotFoundException;
-import ru.makhach.vesselmanager.mapper.PortMapper;
-import ru.makhach.vesselmanager.model.dto.PortDto;
 import ru.makhach.vesselmanager.model.entity.Port;
 import ru.makhach.vesselmanager.repository.PortRepository;
 import ru.makhach.vesselmanager.service.PortService;
@@ -12,57 +10,53 @@ import java.util.List;
 
 @Service
 public class PortServiceImpl implements PortService {
-    private final PortMapper portMapper;
     private final PortRepository portRepository;
 
-    public PortServiceImpl(PortMapper portMapper, PortRepository portRepository) {
-        this.portMapper = portMapper;
+    public PortServiceImpl(PortRepository portRepository) {
         this.portRepository = portRepository;
     }
 
     @Override
-    public List<PortDto> getAllPorts() {
-        return portMapper.entityToDto(portRepository.findAll());
+    public List<Port> getAllPorts() {
+        return portRepository.findAll();
     }
 
     @Override
-    public List<PortDto> getAllPortsByCity(Long cityId) {
-        return portMapper.entityToDto(portRepository.findAllByCity(cityId));
+    public List<Port> getAllPortsByCity(Long cityId) {
+        return portRepository.findAllByCity(cityId);
     }
 
     @Override
-    public List<PortDto> getAllPortsByCountry(Long countryId) {
-        return portMapper.entityToDto(portRepository.findAllByCountry(countryId));
+    public List<Port> getAllPortsByCountry(Long countryId) {
+        return portRepository.findAllByCountry(countryId);
     }
 
     @Override
-    public PortDto getPortById(Long id) {
-        return portMapper.entityToDto(portRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(Port.class, "id", id)));
+    public Port getPortById(Long id) {
+        return portRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(Port.class, "id", id));
     }
 
     @Override
-    public PortDto updatePort(PortDto port) {
+    public Port updatePort(Port port) {
         Long id = port.getId();
         portRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Port.class, "id", id));
 
-        Port entity = portMapper.dtoToEntity(port);
-        return portMapper.entityToDto(portRepository.save(entity));
+        return portRepository.save(port);
     }
 
     @Override
-    public PortDto savePort(PortDto port) {
-        Port entity = portMapper.dtoToEntity(port);
-        return portMapper.entityToDto(portRepository.save(entity));
+    public Port savePort(Port port) {
+        return portRepository.save(port);
     }
 
     @Override
-    public PortDto deletePort(Long id) {
+    public Port deletePort(Long id) {
         Port foundEntity = portRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Port.class, "id", id));
 
         portRepository.delete(foundEntity);
-        return portMapper.entityToDto(foundEntity);
+        return foundEntity;
     }
 }

@@ -33,10 +33,10 @@ public class VesselMapperImpl implements VesselMapper {
                     .setYearBuilt(entity.getYearBuilt())
                     .setLatitude(entity.getLatitude())
                     .setLongitude(entity.getLongitude())
-                    .setCountry(countryMapper.entityToDto(entity.getCountry()))
-                    .setCurrentPort(portMapper.entityToDto(entity.getCurrentPort()))
-                    .setHomePort(portMapper.entityToDto(entity.getHomePort()))
-                    .setDock(dockMapper.entityToDto(entity.getDock()))
+                    .setCountryId(entity.getCountry().getId())
+                    .setCurrentPortId(entity.getCurrentPort().getId())
+                    .setHomePortId(entity.getHomePort().getId())
+                    .setDockId(entity.getDock().getId())
                     .build();
 
     Function<VesselDto, Vessel> dtoToEntity = dto -> {
@@ -48,10 +48,6 @@ public class VesselMapperImpl implements VesselMapper {
         entity.setYearBuilt(dto.getYearBuilt());
         entity.setLatitude(dto.getLatitude());
         entity.setLongitude(dto.getLongitude());
-        entity.setCountry(countryMapper.dtoToEntity(dto.getCountry()));
-        entity.setCurrentPort(portMapper.dtoToEntity(dto.getCurrentPort()));
-        entity.setHomePort(portMapper.dtoToEntity(dto.getHomePort()));
-        entity.setDock(dockMapper.dtoToEntity(dto.getDock()));
         return entity;
     };
 

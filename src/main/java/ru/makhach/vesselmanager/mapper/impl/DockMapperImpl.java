@@ -24,6 +24,7 @@ public class DockMapperImpl implements DockMapper {
                     .setVesselsCapacity(entity.getVesselsCapacity())
                     .setLatitude(entity.getLatitude())
                     .setLongitude(entity.getLongitude())
+                    .setPort(entity.getPort().getId())
                     .build();
 
     Function<DockDto, Dock> dtoToEntity = dto -> {

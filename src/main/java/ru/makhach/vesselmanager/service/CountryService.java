@@ -1,19 +1,19 @@
 package ru.makhach.vesselmanager.service;
 
-import ru.makhach.vesselmanager.model.dto.CountryDto;
+import ru.makhach.vesselmanager.model.entity.Country;
 
 import java.util.List;
 
 public interface CountryService {
-    List<CountryDto> getAllCountries();
+    List<Country> getAllCountries();
 
-    CountryDto getCountryById(Long id);
+    Country getCountryById(Long id);
 
-    CountryDto getCountryByCode(String code);
+    Country getCountryByCode(String code);
 
-    CountryDto updateCountry(CountryDto country);
+    Country updateCountry(Country country);
 
-    CountryDto saveCountry(CountryDto country);
+    Country saveCountry(Country country);
 
-    CountryDto deleteCountry(Long id);
+    Country deleteCountry(Long id);
 }

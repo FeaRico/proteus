@@ -2,8 +2,6 @@ package ru.makhach.vesselmanager.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.makhach.vesselmanager.exceptions.ResourceNotFoundException;
-import ru.makhach.vesselmanager.mapper.CityMapper;
-import ru.makhach.vesselmanager.model.dto.CityDto;
 import ru.makhach.vesselmanager.model.entity.City;
 import ru.makhach.vesselmanager.repository.CityRepository;
 import ru.makhach.vesselmanager.service.CityService;
@@ -13,51 +11,47 @@ import java.util.List;
 @Service
 public class CityServiceImpl implements CityService {
     private final CityRepository cityRepository;
-    private final CityMapper cityMapper;
 
-    public CityServiceImpl(CityRepository cityRepository, CityMapper cityMapper) {
+    public CityServiceImpl(CityRepository cityRepository) {
         this.cityRepository = cityRepository;
-        this.cityMapper = cityMapper;
     }
 
     @Override
-    public List<CityDto> getAllCities() {
-        return cityMapper.entityToDto(cityRepository.findAll());
+    public List<City> getAllCities() {
+        return cityRepository.findAll();
     }
 
     @Override
-    public List<CityDto> getAllCitiesByCountry(Long countryId) {
-        return cityMapper.entityToDto(cityRepository.findAllByCountry(countryId));
+    public List<City> getAllCitiesByCountry(Long countryId) {
+        return cityRepository.findAllByCountry(countryId);
     }
 
     @Override
-    public CityDto getCityById(Long id) {
-        return cityMapper.entityToDto(cityRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(City.class, "id", id)));
+    public City getCityById(Long id) {
+        return cityRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(City.class, "id", id));
     }
 
     @Override
-    public CityDto updateCity(CityDto city) {
+    public City updateCity(City city) {
         Long id = city.getId();
         cityRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(City.class, "id", id));
 
-        City entity = cityMapper.dtoToEntity(city);
-        return cityMapper.entityToDto(cityRepository.save(entity));
+        return cityRepository.save(city);
     }
 
     @Override
-    public CityDto saveCity(CityDto city) {
-        City entity = cityMapper.dtoToEntity(city);
-        return cityMapper.entityToDto(cityRepository.save(entity));
+    public City saveCity(City city) {
+        return cityRepository.save(city);
     }
 
     @Override
-    public CityDto deleteCity(Long id) {
+    public City deleteCity(Long id) {
         City foundEntity = cityRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(City.class, "id", id));
 
         cityRepository.delete(foundEntity);
-        return cityMapper.entityToDto(foundEntity);
+        return foundEntity;
     }
 }

@@ -1,19 +1,19 @@
 package ru.makhach.vesselmanager.service;
 
-import ru.makhach.vesselmanager.model.dto.CityDto;
+import ru.makhach.vesselmanager.model.entity.City;
 
 import java.util.List;
 
 public interface CityService {
-    List<CityDto> getAllCities();
+    List<City> getAllCities();
 
-    List<CityDto> getAllCitiesByCountry(Long countryId);
+    List<City> getAllCitiesByCountry(Long countryId);
 
-    CityDto getCityById(Long id);
+    City getCityById(Long id);
 
-    CityDto updateCity(CityDto city);
+    City updateCity(City city);
 
-    CityDto saveCity(CityDto city);
+    City saveCity(City city);
 
-    CityDto deleteCity(Long id);
+    City deleteCity(Long id);
 }

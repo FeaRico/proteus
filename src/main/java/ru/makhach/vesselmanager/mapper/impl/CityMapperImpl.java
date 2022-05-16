@@ -20,13 +20,12 @@ public class CityMapperImpl implements CityMapper {
 
     Function<City, CityDto> entityToDto = entity ->
             new CityDto(entity.getId(), entity.getName(),
-                    countryMapper.entityToDto(entity.getCountry()));
+                    entity.getCountry().getId());
 
     Function<CityDto, City> dtoToEntity = dto -> {
         City entity = new City();
         entity.setId(dto.getId());
         entity.setName(dto.getName());
-        entity.setCountry(countryMapper.dtoToEntity(dto.getCountry()));
         return entity;
     };
 
