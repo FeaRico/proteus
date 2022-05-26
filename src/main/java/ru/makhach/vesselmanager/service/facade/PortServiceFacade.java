@@ -1,6 +1,6 @@
 package ru.makhach.vesselmanager.service.facade;
 
-import ru.makhach.vesselmanager.model.dto.PortDto;
+import ru.makhach.vesselmanager.model.dto.base.PortDto;
 
 import java.util.List;
 

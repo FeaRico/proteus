@@ -1,16 +1,16 @@
-package ru.makhach.vesselmanager.model.dto;
+package ru.makhach.vesselmanager.model.dto.base;
 
 import java.util.Objects;
 
-public class CountryDto {
+public class CityDto {
     private final Long id;
     private final String name;
-    private final String code;
+    private final Long countryId;
 
-    public CountryDto(Long id, String name, String code) {
+    public CityDto(Long id, String name, Long countryId) {
         this.id = id;
         this.name = name;
-        this.code = code;
+        this.countryId = countryId;
     }
 
     public Long getId() {
@@ -21,29 +21,29 @@ public class CountryDto {
         return name;
     }
 
-    public String getCode() {
-        return code;
+    public Long getCountryId() {
+        return countryId;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CountryDto that = (CountryDto) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(code, that.code);
+        CityDto cityDto = (CityDto) o;
+        return Objects.equals(id, cityDto.id) && Objects.equals(name, cityDto.name) && Objects.equals(countryId, cityDto.countryId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, code);
+        return Objects.hash(id, name, countryId);
     }
 
     @Override
     public String toString() {
-        return "CountryDto{" +
+        return "CityDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", code='" + code + '\'' +
+                ", countryId=" + countryId +
                 '}';
     }
 }

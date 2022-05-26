@@ -1,6 +1,6 @@
 package ru.makhach.vesselmanager.service.facade;
 
-import ru.makhach.vesselmanager.model.dto.VesselDto;
+import ru.makhach.vesselmanager.model.dto.base.VesselDto;
 import ru.makhach.vesselmanager.model.util.Status;
 import ru.makhach.vesselmanager.model.util.Type;
 

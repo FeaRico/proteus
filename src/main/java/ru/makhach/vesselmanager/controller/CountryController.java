@@ -2,7 +2,7 @@ package ru.makhach.vesselmanager.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.makhach.vesselmanager.model.dto.CountryDto;
+import ru.makhach.vesselmanager.model.dto.base.CountryDto;
 import ru.makhach.vesselmanager.service.facade.CountryServiceFacade;
 
 import java.util.List;

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import ru.makhach.vesselmanager.exceptions.ResourceNotFoundException;
-import ru.makhach.vesselmanager.model.transfer.ErrorMessage;
+import ru.makhach.vesselmanager.model.dto.ErrorMessage;
 
 @ControllerAdvice
 public class RestExceptionsHandler {

@@ -4,8 +4,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
-import ru.makhach.vesselmanager.model.dto.CityDto;
-import ru.makhach.vesselmanager.model.dto.CountryDto;
+import ru.makhach.vesselmanager.model.dto.base.CityDto;
+import ru.makhach.vesselmanager.model.dto.base.CountryDto;
 import ru.makhach.vesselmanager.model.entity.City;
 
 import java.util.List;

@@ -2,7 +2,7 @@ package ru.makhach.vesselmanager.service.impl.facade;
 
 import org.springframework.stereotype.Service;
 import ru.makhach.vesselmanager.mapper.CityMapper;
-import ru.makhach.vesselmanager.model.dto.CityDto;
+import ru.makhach.vesselmanager.model.dto.base.CityDto;
 import ru.makhach.vesselmanager.model.entity.City;
 import ru.makhach.vesselmanager.model.entity.Country;
 import ru.makhach.vesselmanager.service.CityService;

@@ -1,4 +1,4 @@
-package ru.makhach.vesselmanager.model.transfer;
+package ru.makhach.vesselmanager.model.dto;
 
 public class ErrorMessage {
     private final Long createdTime;

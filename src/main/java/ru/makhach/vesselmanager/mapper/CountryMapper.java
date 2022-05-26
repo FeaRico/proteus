@@ -2,7 +2,7 @@ package ru.makhach.vesselmanager.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
-import ru.makhach.vesselmanager.model.dto.CountryDto;
+import ru.makhach.vesselmanager.model.dto.base.CountryDto;
 import ru.makhach.vesselmanager.model.entity.Country;
 
 import java.util.List;

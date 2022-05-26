@@ -1,32 +1,32 @@
-package ru.makhach.vesselmanager.model.dto;
+package ru.makhach.vesselmanager.model.dto.base;
 
 import java.util.Objects;
 
-public class DockDto {
+public class PortDto {
     private final Long id;
-    private final Integer vesselsCapacity;
+    private final String name;
     private final Double latitude;
     private final Double longitude;
-    private final Long portId;
+    private final Long cityId;
 
-    protected DockDto(Builder builder) {
+    protected PortDto(Builder builder) {
         this.id = builder.id;
-        this.vesselsCapacity = builder.vesselsCapacity;
+        this.name = builder.name;
         this.latitude = builder.latitude;
         this.longitude = builder.longitude;
-        this.portId = builder.portId;
+        this.cityId = builder.cityId;
     }
 
-    public static DockDto.Builder builder() {
-        return new DockDto.Builder();
+    public static PortDto.Builder builder() {
+        return new PortDto.Builder();
     }
 
     public Long getId() {
         return id;
     }
 
-    public Integer getVesselsCapacity() {
-        return vesselsCapacity;
+    public String getName() {
+        return name;
     }
 
     public Double getLatitude() {
@@ -37,24 +37,24 @@ public class DockDto {
         return longitude;
     }
 
-    public Long getPortId() {
-        return portId;
+    public Long getCityId() {
+        return cityId;
     }
 
     public static class Builder {
         private Long id;
-        private Integer vesselsCapacity;
+        private String name;
         private Double latitude;
         private Double longitude;
-        private Long portId;
+        private Long cityId;
 
         public Builder setId(Long id) {
             this.id = id;
             return this;
         }
 
-        public Builder setVesselsCapacity(Integer vesselsCapacity) {
-            this.vesselsCapacity = vesselsCapacity;
+        public Builder setName(String name) {
+            this.name = name;
             return this;
         }
 
@@ -68,13 +68,13 @@ public class DockDto {
             return this;
         }
 
-        public Builder setPortId(Long portId) {
-            this.portId = portId;
+        public Builder setCityId(Long cityId) {
+            this.cityId = cityId;
             return this;
         }
 
-        public DockDto build() {
-            return new DockDto(this);
+        public PortDto build() {
+            return new PortDto(this);
         }
     }
 
@@ -82,23 +82,23 @@ public class DockDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DockDto dockDto = (DockDto) o;
-        return Objects.equals(id, dockDto.id) && Objects.equals(vesselsCapacity, dockDto.vesselsCapacity) && Objects.equals(latitude, dockDto.latitude) && Objects.equals(longitude, dockDto.longitude) && Objects.equals(portId, dockDto.portId);
+        PortDto portDto = (PortDto) o;
+        return Objects.equals(id, portDto.id) && Objects.equals(name, portDto.name) && Objects.equals(latitude, portDto.latitude) && Objects.equals(longitude, portDto.longitude) && Objects.equals(cityId, portDto.cityId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, vesselsCapacity, latitude, longitude, portId);
+        return Objects.hash(id, name, latitude, longitude, cityId);
     }
 
     @Override
     public String toString() {
-        return "DockDto{" +
+        return "PortDto{" +
                 "id=" + id +
-                ", vesselsCapacity=" + vesselsCapacity +
+                ", name='" + name + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
-                ", portId=" + portId +
+                ", cityId=" + cityId +
                 '}';
     }
 }

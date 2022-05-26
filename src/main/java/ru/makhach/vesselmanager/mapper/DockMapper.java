@@ -4,8 +4,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
-import ru.makhach.vesselmanager.model.dto.DockDto;
-import ru.makhach.vesselmanager.model.dto.PortDto;
+import ru.makhach.vesselmanager.model.dto.base.DockDto;
+import ru.makhach.vesselmanager.model.dto.base.PortDto;
 import ru.makhach.vesselmanager.model.entity.Dock;
 
 import java.util.List;

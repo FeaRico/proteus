@@ -1,10 +1,10 @@
 package ru.makhach.vesselmanager.mapper;
 
 import org.mapstruct.*;
-import ru.makhach.vesselmanager.model.dto.CountryDto;
-import ru.makhach.vesselmanager.model.dto.DockDto;
-import ru.makhach.vesselmanager.model.dto.PortDto;
-import ru.makhach.vesselmanager.model.dto.VesselDto;
+import ru.makhach.vesselmanager.model.dto.base.CountryDto;
+import ru.makhach.vesselmanager.model.dto.base.DockDto;
+import ru.makhach.vesselmanager.model.dto.base.PortDto;
+import ru.makhach.vesselmanager.model.dto.base.VesselDto;
 import ru.makhach.vesselmanager.model.entity.Vessel;
 
 import java.util.List;

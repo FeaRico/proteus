@@ -1,4 +1,4 @@
-package ru.makhach.vesselmanager.model.dto;
+package ru.makhach.vesselmanager.model.dto.base;
 
 import java.util.Objects;
 

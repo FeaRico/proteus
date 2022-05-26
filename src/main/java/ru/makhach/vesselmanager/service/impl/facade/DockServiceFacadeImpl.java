@@ -2,7 +2,7 @@ package ru.makhach.vesselmanager.service.impl.facade;
 
 import org.springframework.stereotype.Service;
 import ru.makhach.vesselmanager.mapper.DockMapper;
-import ru.makhach.vesselmanager.model.dto.DockDto;
+import ru.makhach.vesselmanager.model.dto.base.DockDto;
 import ru.makhach.vesselmanager.model.entity.Dock;
 import ru.makhach.vesselmanager.model.entity.Port;
 import ru.makhach.vesselmanager.service.DockService;
