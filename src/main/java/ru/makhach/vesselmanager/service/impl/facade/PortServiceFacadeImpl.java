@@ -25,42 +25,42 @@ public class PortServiceFacadeImpl implements PortServiceFacade {
 
     @Override
     public List<PortDto> getAllPorts() {
-        return portMapper.entityToDto(portService.getAllPorts());
+        return portMapper.convertToDtos(portService.getAllPorts());
     }
 
     @Override
     public List<PortDto> getAllPortsByCity(Long cityId) {
-        return portMapper.entityToDto(portService.getAllPortsByCity(cityId));
+        return portMapper.convertToDtos(portService.getAllPortsByCity(cityId));
     }
 
     @Override
     public List<PortDto> getAllPortsByCountry(Long countryId) {
-        return portMapper.entityToDto(portService.getAllPortsByCountry(countryId));
+        return portMapper.convertToDtos(portService.getAllPortsByCountry(countryId));
     }
 
     @Override
     public PortDto getPortById(Long id) {
-        return portMapper.entityToDto(portService.getPortById(id));
+        return portMapper.convert(portService.getPortById(id));
     }
 
     @Override
     public PortDto updatePort(PortDto port) {
-        Port portEntity = portMapper.dtoToEntity(port);
+        Port portEntity = portMapper.convert(port);
         City city = cityService.getCityById(port.getCityId());
         portEntity.setCity(city);
-        return portMapper.entityToDto(portService.updatePort(portEntity));
+        return portMapper.convert(portService.updatePort(portEntity));
     }
 
     @Override
     public PortDto savePort(PortDto port) {
-        Port portEntity = portMapper.dtoToEntity(port);
+        Port portEntity = portMapper.convert(port);
         City city = cityService.getCityById(port.getCityId());
         portEntity.setCity(city);
-        return portMapper.entityToDto(portService.savePort(portEntity));
+        return portMapper.convert(portService.savePort(portEntity));
     }
 
     @Override
     public PortDto deletePort(Long id) {
-        return portMapper.entityToDto(portService.deletePort(id));
+        return portMapper.convert(portService.deletePort(id));
     }
 }

@@ -25,37 +25,37 @@ public class CityServiceFacadeImpl implements CityServiceFacade {
 
     @Override
     public List<CityDto> getAllCities() {
-        return cityMapper.entityToDto(cityService.getAllCities());
+        return cityMapper.convertToDtos(cityService.getAllCities());
     }
 
     @Override
     public List<CityDto> getAllCitiesByCountry(Long countryId) {
-        return cityMapper.entityToDto(cityService.getAllCitiesByCountry(countryId));
+        return cityMapper.convertToDtos(cityService.getAllCitiesByCountry(countryId));
     }
 
     @Override
     public CityDto getCityById(Long id) {
-        return cityMapper.entityToDto(cityService.getCityById(id));
+        return cityMapper.convert(cityService.getCityById(id));
     }
 
     @Override
     public CityDto updateCity(CityDto city) {
-        City cityEntity = cityMapper.dtoToEntity(city);
+        City cityEntity = cityMapper.convert(city);
         Country country = countryService.getCountryById(city.getCountryId());
         cityEntity.setCountry(country);
-        return cityMapper.entityToDto(cityService.updateCity(cityEntity));
+        return cityMapper.convert(cityService.updateCity(cityEntity));
     }
 
     @Override
     public CityDto saveCity(CityDto city) {
-        City cityEntity = cityMapper.dtoToEntity(city);
+        City cityEntity = cityMapper.convert(city);
         Country country = countryService.getCountryById(city.getCountryId());
         cityEntity.setCountry(country);
-        return cityMapper.entityToDto(cityService.saveCity(cityEntity));
+        return cityMapper.convert(cityService.saveCity(cityEntity));
     }
 
     @Override
     public CityDto deleteCity(Long id) {
-        return cityMapper.entityToDto(cityService.deleteCity(id));
+        return cityMapper.convert(cityService.deleteCity(id));
     }
 }

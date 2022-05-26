@@ -25,37 +25,37 @@ public class DockServiceFacadeImpl implements DockServiceFacade {
 
     @Override
     public List<DockDto> getAllDocks() {
-        return dockMapper.entityToDto(dockService.getAllDocks());
+        return dockMapper.convertToDtos(dockService.getAllDocks());
     }
 
     @Override
     public List<DockDto> getAllDocksByPort(Long portId) {
-        return dockMapper.entityToDto(dockService.getAllDocksByPort(portId));
+        return dockMapper.convertToDtos(dockService.getAllDocksByPort(portId));
     }
 
     @Override
     public DockDto getDockById(Long id) {
-        return dockMapper.entityToDto(dockService.getDockById(id));
+        return dockMapper.convert(dockService.getDockById(id));
     }
 
     @Override
     public DockDto updateDock(DockDto dock) {
-        Dock dockEntity = dockMapper.dtoToEntity(dock);
+        Dock dockEntity = dockMapper.convert(dock);
         Port port = portService.getPortById(dock.getPortId());
         dockEntity.setPort(port);
-        return dockMapper.entityToDto(dockService.updateDock(dockEntity));
+        return dockMapper.convert(dockService.updateDock(dockEntity));
     }
 
     @Override
     public DockDto saveDock(DockDto dock) {
-        Dock dockEntity = dockMapper.dtoToEntity(dock);
+        Dock dockEntity = dockMapper.convert(dock);
         Port port = portService.getPortById(dock.getPortId());
         dockEntity.setPort(port);
-        return dockMapper.entityToDto(dockService.saveDock(dockEntity));
+        return dockMapper.convert(dockService.saveDock(dockEntity));
     }
 
     @Override
     public DockDto deleteDock(Long id) {
-        return dockMapper.entityToDto(dockService.deleteDock(id));
+        return dockMapper.convert(dockService.deleteDock(id));
     }
 }

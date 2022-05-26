@@ -35,76 +35,76 @@ public class VesselServiceFacadeImpl implements VesselServiceFacade {
 
     @Override
     public List<VesselDto> getAllVessels() {
-        return vesselMapper.entityToDto(vesselService.getAllVessels());
+        return vesselMapper.convertToDtos(vesselService.getAllVessels());
     }
 
     @Override
     public List<VesselDto> getAllVesselsByStatus(Status status) {
-        return vesselMapper.entityToDto(vesselService.getAllVesselsByStatus(status));
+        return vesselMapper.convertToDtos(vesselService.getAllVesselsByStatus(status));
     }
 
     @Override
     public List<VesselDto> getAllVesselsByType(Type type) {
-        return vesselMapper.entityToDto(vesselService.getAllVesselsByType(type));
+        return vesselMapper.convertToDtos(vesselService.getAllVesselsByType(type));
     }
 
     @Override
     public List<VesselDto> getAllVesselsByYearBuilt(Integer yearBuilt) {
-        return vesselMapper.entityToDto(vesselService.getAllVesselsByYearBuilt(yearBuilt));
+        return vesselMapper.convertToDtos(vesselService.getAllVesselsByYearBuilt(yearBuilt));
     }
 
     @Override
     public List<VesselDto> getAllVesselsByCountry(Long countryId) {
-        return vesselMapper.entityToDto(vesselService.getAllVesselsByCountry(countryId));
+        return vesselMapper.convertToDtos(vesselService.getAllVesselsByCountry(countryId));
     }
 
     @Override
     public List<VesselDto> getAllVesselsByCurrentPort(Long portId) {
-        return vesselMapper.entityToDto(vesselService.getAllVesselsByCurrentPort(portId));
+        return vesselMapper.convertToDtos(vesselService.getAllVesselsByCurrentPort(portId));
     }
 
     @Override
     public List<VesselDto> getAllVesselsByHomePort(Long portId) {
-        return vesselMapper.entityToDto(vesselService.getAllVesselsByHomePort(portId));
+        return vesselMapper.convertToDtos(vesselService.getAllVesselsByHomePort(portId));
     }
 
     @Override
     public List<VesselDto> getAllVesselsByDock(Long dockId) {
-        return vesselMapper.entityToDto(vesselService.getAllVesselsByDock(dockId));
+        return vesselMapper.convertToDtos(vesselService.getAllVesselsByDock(dockId));
     }
 
     @Override
     public List<VesselDto> getAllVesselsWhereNameStartWith(String name) {
-        return vesselMapper.entityToDto(vesselService.getAllVesselsWhereNameStartWith(name));
+        return vesselMapper.convertToDtos(vesselService.getAllVesselsWhereNameStartWith(name));
     }
 
     @Override
     public List<VesselDto> getVesselByName(String name) {
-        return vesselMapper.entityToDto(vesselService.getVesselByName(name));
+        return vesselMapper.convertToDtos(vesselService.getVesselByName(name));
     }
 
     @Override
     public VesselDto updateStatusByVesselId(Long id, Status status) {
-        return vesselMapper.entityToDto(vesselService.updateStatusByVesselId(id, status));
+        return vesselMapper.convert(vesselService.updateStatusByVesselId(id, status));
     }
 
     @Override
     public VesselDto updateVessel(VesselDto vessel) {
-        return vesselMapper.entityToDto(vesselService.updateVessel(configureVesselEntities(vessel)));
+        return vesselMapper.convert(vesselService.updateVessel(configureVesselEntities(vessel)));
     }
 
     @Override
     public VesselDto saveVessel(VesselDto vessel) {
-        return vesselMapper.entityToDto(vesselService.saveVessel(configureVesselEntities(vessel)));
+        return vesselMapper.convert(vesselService.saveVessel(configureVesselEntities(vessel)));
     }
 
     @Override
     public VesselDto deleteVessel(Long id) {
-        return vesselMapper.entityToDto(vesselService.deleteVessel(id));
+        return vesselMapper.convert(vesselService.deleteVessel(id));
     }
 
     private Vessel configureVesselEntities(VesselDto vessel) {
-        Vessel vesselEntity = vesselMapper.dtoToEntity(vessel);
+        Vessel vesselEntity = vesselMapper.convert(vessel);
         Country country = countryService.getCountryById(vessel.getCountryId());
         Port currentPort = portService.getPortById(vessel.getCurrentPortId());
         Port homePort = portService.getPortById(vessel.getHomePortId());

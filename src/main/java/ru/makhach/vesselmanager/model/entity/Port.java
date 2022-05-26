@@ -76,27 +76,36 @@ public class Port {
         this.city = city;
     }
 
+    public List<Dock> getDocks() {
+        return docks;
+    }
+
+    public void setDocks(List<Dock> docks) {
+        this.docks = docks;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Port that = (Port) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(latitude, that.latitude) && Objects.equals(longitude, that.longitude) && Objects.equals(city, that.city);
+        Port port = (Port) o;
+        return Objects.equals(id, port.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, latitude, longitude, city);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
-        return "PortEntity{" +
+        return "Port{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", city=" + city +
+                ", docks=" + docks +
                 '}';
     }
 }

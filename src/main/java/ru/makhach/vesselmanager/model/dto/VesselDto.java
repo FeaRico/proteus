@@ -1,16 +1,13 @@
 package ru.makhach.vesselmanager.model.dto;
 
-import ru.makhach.vesselmanager.model.util.Status;
-import ru.makhach.vesselmanager.model.util.Type;
-
 import java.util.Objects;
 
 //TODO: вынести координаты в отдельный класс
 public class VesselDto {
     private final Long id;
     private final String name;
-    private final Status status;
-    private final Type type;
+    private final String status;
+    private final String type;
     private final Integer yearBuilt;
     private final Double latitude;
     private final Double longitude;
@@ -19,7 +16,7 @@ public class VesselDto {
     private final Long homePortId;
     private final Long dockId;
 
-    private VesselDto(Builder builder) {
+    protected VesselDto(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.status = builder.status;
@@ -33,6 +30,10 @@ public class VesselDto {
         this.dockId = builder.dockId;
     }
 
+    public static VesselDto.Builder builder() {
+        return new VesselDto.Builder();
+    }
+
     public Long getId() {
         return id;
     }
@@ -41,11 +42,11 @@ public class VesselDto {
         return name;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
@@ -80,8 +81,8 @@ public class VesselDto {
     public static class Builder {
         private Long id;
         private String name;
-        private Status status;
-        private Type type;
+        private String status;
+        private String type;
         private Integer yearBuilt;
         private Double latitude;
         private Double longitude;
@@ -100,12 +101,12 @@ public class VesselDto {
             return this;
         }
 
-        public Builder setStatus(Status status) {
+        public Builder setStatus(String status) {
             this.status = status;
             return this;
         }
 
-        public Builder setType(Type type) {
+        public Builder setType(String type) {
             this.type = type;
             return this;
         }

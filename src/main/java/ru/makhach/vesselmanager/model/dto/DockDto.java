@@ -9,12 +9,16 @@ public class DockDto {
     private final Double longitude;
     private final Long portId;
 
-    private DockDto(Builder builder) {
+    protected DockDto(Builder builder) {
         this.id = builder.id;
         this.vesselsCapacity = builder.vesselsCapacity;
         this.latitude = builder.latitude;
         this.longitude = builder.longitude;
         this.portId = builder.portId;
+    }
+
+    public static DockDto.Builder builder() {
+        return new DockDto.Builder();
     }
 
     public Long getId() {
@@ -64,7 +68,7 @@ public class DockDto {
             return this;
         }
 
-        public Builder setPort(Long portId) {
+        public Builder setPortId(Long portId) {
             this.portId = portId;
             return this;
         }

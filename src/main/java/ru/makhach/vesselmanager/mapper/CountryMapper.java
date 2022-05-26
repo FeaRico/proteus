@@ -1,16 +1,20 @@
 package ru.makhach.vesselmanager.mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.Named;
 import ru.makhach.vesselmanager.model.dto.CountryDto;
 import ru.makhach.vesselmanager.model.entity.Country;
 
 import java.util.List;
 
+@Mapper(componentModel = "spring")
 public interface CountryMapper {
-    Country dtoToEntity(CountryDto dto);
+    CountryDto convert(Country country);
 
-    List<Country> dtoToEntity(List<CountryDto> list);
+    @Named("countryDtoToEntity")
+    Country convert(CountryDto countryDto);
 
-    CountryDto entityToDto(Country entity);
+    List<CountryDto> convertToDtos(List<Country> countries);
 
-    List<CountryDto> entityToDto(List<Country> list);
+    List<Country> convertToEntities(List<CountryDto> countriesDto);
 }

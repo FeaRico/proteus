@@ -20,33 +20,33 @@ public class CountryServiceFacadeImpl implements CountryServiceFacade {
     }
 
     public List<CountryDto> getAllCountries() {
-        return countryMapper.entityToDto(countryService.getAllCountries());
+        return countryMapper.convertToDtos(countryService.getAllCountries());
     }
 
     @Override
     public CountryDto getCountryById(Long id) {
-        return countryMapper.entityToDto(countryService.getCountryById(id));
+        return countryMapper.convert(countryService.getCountryById(id));
     }
 
     @Override
     public CountryDto getCountryByCode(String code) {
-        return countryMapper.entityToDto(countryService.getCountryByCode(code));
+        return countryMapper.convert(countryService.getCountryByCode(code));
     }
 
     @Override
     public CountryDto updateCountry(CountryDto country) {
-        Country entity = countryMapper.dtoToEntity(country);
-        return countryMapper.entityToDto(countryService.updateCountry(entity));
+        Country entity = countryMapper.convert(country);
+        return countryMapper.convert(countryService.updateCountry(entity));
     }
 
     @Override
     public CountryDto saveCountry(CountryDto country) {
-        Country entity = countryMapper.dtoToEntity(country);
-        return countryMapper.entityToDto(countryService.saveCountry(entity));
+        Country entity = countryMapper.convert(country);
+        return countryMapper.convert(countryService.saveCountry(entity));
     }
 
     @Override
     public CountryDto deleteCountry(Long id) {
-        return countryMapper.entityToDto(countryService.deleteCountry(id));
+        return countryMapper.convert(countryService.deleteCountry(id));
     }
 }

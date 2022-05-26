@@ -9,12 +9,16 @@ public class PortDto {
     private final Double longitude;
     private final Long cityId;
 
-    private PortDto(Builder builder) {
+    protected PortDto(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.latitude = builder.latitude;
         this.longitude = builder.longitude;
         this.cityId = builder.cityId;
+    }
+
+    public static PortDto.Builder builder() {
+        return new PortDto.Builder();
     }
 
     public Long getId() {

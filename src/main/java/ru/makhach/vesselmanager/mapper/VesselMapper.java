@@ -1,16 +1,62 @@
 package ru.makhach.vesselmanager.mapper;
 
+import org.mapstruct.*;
+import ru.makhach.vesselmanager.model.dto.CountryDto;
+import ru.makhach.vesselmanager.model.dto.DockDto;
+import ru.makhach.vesselmanager.model.dto.PortDto;
 import ru.makhach.vesselmanager.model.dto.VesselDto;
 import ru.makhach.vesselmanager.model.entity.Vessel;
 
 import java.util.List;
 
+@Mapper(componentModel = "spring", uses = {CountryMapper.class, PortMapper.class,
+        DockMapper.class, EnumMapper.class})
 public interface VesselMapper {
-    Vessel dtoToEntity(VesselDto dto);
+    @Mappings({
+            @Mapping(target = "id", source = "vessel.id"),
+            @Mapping(target = "name", source = "vessel.name"),
+            @Mapping(target = "status", source = "vessel.status", qualifiedByName = "enumStatusToString"),
+            @Mapping(target = "type", source = "vessel.type", qualifiedByName = "enumTypeToString"),
+            @Mapping(target = "yearBuilt", source = "vessel.yearBuilt"),
+            @Mapping(target = "latitude", source = "vessel.latitude"),
+            @Mapping(target = "longitude", source = "vessel.longitude"),
+            @Mapping(target = "countryId", source = "vessel.country.id"),
+            @Mapping(target = "currentPortId", source = "vessel.currentPort.id"),
+            @Mapping(target = "homePortId", source = "vessel.homePort.id"),
+            @Mapping(target = "dockId", source = "vessel.dock.id")
+    })
+    VesselDto convert(Vessel vessel);
 
-    List<Vessel> dtoToEntity(List<VesselDto> list);
+    @Mappings({
+            @Mapping(target = "id", source = "vesselDto.id"),
+            @Mapping(target = "name", source = "vesselDto.name"),
+            @Mapping(target = "status", source = "vesselDto.status", qualifiedByName = "stringStatusToEnum"),
+            @Mapping(target = "type", source = "vesselDto.type", qualifiedByName = "stringTypeToEnum"),
+            @Mapping(target = "yearBuilt", source = "vesselDto.yearBuilt"),
+            @Mapping(target = "latitude", source = "vesselDto.latitude"),
+            @Mapping(target = "longitude", source = "vesselDto.longitude"),
+    })
+    @Named("vesselDtoToEntity")
+    Vessel convert(VesselDto vesselDto);
 
-    VesselDto entityToDto(Vessel entity);
+    @Mappings({
+            @Mapping(target = "id", source = "vesselDto.id"),
+            @Mapping(target = "name", source = "vesselDto.name"),
+            @Mapping(target = "status", source = "vesselDto.status", qualifiedByName = "stringStatusToEnum"),
+            @Mapping(target = "type", source = "vesselDto.type", qualifiedByName = "stringTypeToEnum"),
+            @Mapping(target = "yearBuilt", source = "vesselDto.yearBuilt"),
+            @Mapping(target = "latitude", source = "vesselDto.latitude"),
+            @Mapping(target = "longitude", source = "vesselDto.longitude"),
+            @Mapping(target = "country", source = "countryDto", qualifiedByName = "countryDtoToEntity"),
+            @Mapping(target = "currentPort", source = "currentPortDto", qualifiedByName = "portDtoToEntity"),
+            @Mapping(target = "homePort", source = "homePortDto", qualifiedByName = "portDtoToEntity"),
+            @Mapping(target = "dock", source = "dockDto", qualifiedByName = "dockDtoToEntity")
+    })
+    Vessel convert(VesselDto vesselDto, CountryDto countryDto,
+                   PortDto currentPortDto, PortDto homePortDto, DockDto dockDto);
 
-    List<VesselDto> entityToDto(List<Vessel> list);
+    List<VesselDto> convertToDtos(List<Vessel> vessels);
+
+    @IterableMapping(qualifiedByName = "vesselDtoToEntity")
+    List<Vessel> convertToEntities(List<VesselDto> vesselsDto);
 }
