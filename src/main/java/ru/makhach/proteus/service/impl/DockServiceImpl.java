@@ -54,4 +54,9 @@ public class DockServiceImpl implements DockService {
         dockRepository.delete(foundEntity);
         return foundEntity;
     }
+
+    @Override
+    public Integer countVesselsByDockId(Long id) {
+        return getDockById(id).getVessels().size();
+    }
 }

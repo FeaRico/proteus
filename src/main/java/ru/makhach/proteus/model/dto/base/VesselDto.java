@@ -2,10 +2,12 @@ package ru.makhach.proteus.model.dto.base;
 
 import ru.makhach.proteus.model.base.interfaces.CoordObj;
 import ru.makhach.proteus.validation.Marker;
+import ru.makhach.proteus.validation.vessel.VesselValid;
 
 import javax.validation.constraints.*;
 import java.util.Objects;
 
+@VesselValid
 public class VesselDto implements CoordObj {
     @Null(groups = Marker.Create.class)
     @NotNull(groups = Marker.Update.class)

@@ -2,10 +2,12 @@ package ru.makhach.proteus.model.dto.base;
 
 import ru.makhach.proteus.model.base.interfaces.CoordObj;
 import ru.makhach.proteus.validation.Marker;
+import ru.makhach.proteus.validation.dock.DockValid;
 
 import javax.validation.constraints.*;
 import java.util.Objects;
 
+@DockValid
 public class DockDto implements CoordObj {
     @Null(groups = Marker.Create.class)
     @NotNull(groups = Marker.Update.class)

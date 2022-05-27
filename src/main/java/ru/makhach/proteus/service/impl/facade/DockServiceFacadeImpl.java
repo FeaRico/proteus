@@ -58,4 +58,9 @@ public class DockServiceFacadeImpl implements DockServiceFacade {
     public DockDto deleteDock(Long id) {
         return dockMapper.convert(dockService.deleteDock(id));
     }
+
+    @Override
+    public Integer countVesselsByDockId(Long id) {
+        return dockService.countVesselsByDockId(id);
+    }
 }

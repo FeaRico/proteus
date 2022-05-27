@@ -21,4 +21,6 @@ public interface DockServiceFacade {
     DockDto saveDock(DockDto dock);
 
     DockDto deleteDock(Long id);
+
+    Integer countVesselsByDockId(Long id);
 }

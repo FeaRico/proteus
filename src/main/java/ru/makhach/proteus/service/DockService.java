@@ -20,4 +20,6 @@ public interface DockService {
     Dock saveDock(Dock dock);
 
     Dock deleteDock(Long id);
+
+    Integer countVesselsByDockId(Long id);
 }
