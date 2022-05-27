@@ -34,15 +34,12 @@ public class VesselDto implements CoordObj {
     @Min(1)
     private final Long countryId;
 
-    @NotNull
     @Min(1)
     private final Long currentPortId;
 
-    @NotNull
     @Min(1)
     private final Long homePortId;
 
-    @NotNull
     @Min(1)
     private final Long dockId;
 

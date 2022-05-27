@@ -4,6 +4,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Статус судна
+ */
 public enum Status {
     UNKNOWN("Неизвестно"),
     UNDERWAY("На ходу"),
@@ -17,6 +20,9 @@ public enum Status {
         descriptionMap = Stream.of(values()).collect(Collectors.toMap(Status::getDescription, status -> status));
     }
 
+    /**
+     * Описание статуса
+     */
     private final String description;
 
     Status(String description) {
@@ -27,6 +33,12 @@ public enum Status {
         return description;
     }
 
+    /**
+     * Получение типа статуса по описанию статуса
+     *
+     * @param description описание
+     * @return тип статуса
+     */
     public static Status getStatusByDescription(String description) {
         Status status = descriptionMap.get(description);
         if (status == null)

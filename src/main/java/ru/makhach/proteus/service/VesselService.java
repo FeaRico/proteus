@@ -6,6 +6,10 @@ import ru.makhach.proteus.model.entity.Vessel;
 
 import java.util.List;
 
+/**
+ * Сервис для работы с сущностью {@link Vessel}
+ * Слой без логики
+ */
 public interface VesselService {
     List<Vessel> getAllVessels();
 

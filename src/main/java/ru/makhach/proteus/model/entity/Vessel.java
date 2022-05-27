@@ -7,33 +7,60 @@ import ru.makhach.proteus.model.base.types.Type;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Сущность судна
+ */
 @Entity
 @Table(name = "vessel")
 @SequenceGenerator(name = "default_seq", sequenceName = "vessel_id_seq")
 public class Vessel extends CoordEntity {
+    /**
+     * Статус
+     */
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;
 
+    /**
+     * Тип
+     */
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private Type type;
 
+    /**
+     * Год строительства
+     */
     @Column(name = "year_built")
     private Integer yearBuilt;
 
+    /**
+     * Страна к которой относится судно
+     */
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
+    /**
+     * Порт в котором находится в данный момент
+     * Может быть null, если в море
+     */
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "current_port_id")
     private Port currentPort;
 
+    /**
+     * Порт к которому судно изначально принадлежит
+     * Может быть null
+     */
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "home_port_id")
     private Port homePort;
 
+    /**
+     * Причал к которому пришвартован
+     * Может быть null в зависимости от статуса
+     */
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "dock_id")
     private Dock dock;
@@ -63,22 +90,6 @@ public class Vessel extends CoordEntity {
 
     public void setYearBuilt(Integer yearBuilt) {
         this.yearBuilt = yearBuilt;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
     }
 
     public Country getCountry() {

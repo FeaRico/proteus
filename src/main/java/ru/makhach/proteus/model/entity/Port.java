@@ -6,35 +6,28 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Сущность порта
+ */
 @Entity
 @Table(name = "port")
 @SequenceGenerator(name = "default_seq", sequenceName = "port_id_seq")
 public class Port extends CoordEntity {
+    /**
+     * Город в котором находится порт
+     */
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
 
+    /**
+     * Коллекция суден связанных с портом
+     */
     @OneToMany(mappedBy = "port", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Dock> docks;
 
     public Port() {
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
     }
 
     public City getCity() {

@@ -4,6 +4,10 @@ import ru.makhach.proteus.model.entity.City;
 
 import java.util.List;
 
+/**
+ * Сервис для работы с сущностью {@link City}
+ * Слой без логики
+ */
 public interface CityService {
     List<City> getAllCities();
 

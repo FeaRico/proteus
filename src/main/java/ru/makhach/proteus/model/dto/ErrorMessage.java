@@ -1,18 +1,21 @@
 package ru.makhach.proteus.model.dto;
 
+/**
+ * Трансферный объект для сообщения с ошибкой
+ */
 public class ErrorMessage {
-    private final Long createdTime;
+    private final Long createdAt;
     private final String status;
     private final String message;
 
-    public ErrorMessage(Long createdTime, String status, String message) {
-        this.createdTime = createdTime;
+    public ErrorMessage(Long createdAt, String status, String message) {
+        this.createdAt = createdAt;
         this.status = status;
         this.message = message;
     }
 
-    public Long getCreatedTime() {
-        return createdTime;
+    public Long getCreatedAt() {
+        return createdAt;
     }
 
     public String getStatus() {

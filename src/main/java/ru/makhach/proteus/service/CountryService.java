@@ -4,6 +4,10 @@ import ru.makhach.proteus.model.entity.Country;
 
 import java.util.List;
 
+/**
+ * Сервис для работы с сущностью {@link Country}
+ * Слой без логики
+ */
 public interface CountryService {
     List<Country> getAllCountries();
 

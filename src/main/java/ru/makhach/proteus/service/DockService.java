@@ -4,6 +4,10 @@ import ru.makhach.proteus.model.entity.Dock;
 
 import java.util.List;
 
+/**
+ * Сервис для работы с сущностью {@link Dock}
+ * Слой без логики
+ */
 public interface DockService {
     List<Dock> getAllDocks();
 

@@ -6,6 +6,11 @@ import ru.makhach.proteus.model.dto.base.VesselDto;
 
 import java.util.List;
 
+/**
+ * Сервис для работы с {@link VesselDto}
+ * Этот слой для взаимодействия
+ * с сервисами связанных моделей
+ */
 public interface VesselServiceFacade {
     List<VesselDto> getAllVessels();
 

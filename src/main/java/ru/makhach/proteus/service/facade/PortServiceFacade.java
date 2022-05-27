@@ -4,6 +4,11 @@ import ru.makhach.proteus.model.dto.base.PortDto;
 
 import java.util.List;
 
+/**
+ * Сервис для работы с {@link PortDto}
+ * Этот слой для взаимодействия
+ * с сервисами связанных моделей
+ */
 public interface PortServiceFacade {
     List<PortDto> getAllPorts();
 

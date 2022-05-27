@@ -4,6 +4,10 @@ import ru.makhach.proteus.model.base.interfaces.IdObj;
 
 import javax.persistence.*;
 
+/**
+ * Абстрактный класс для сущностей с идентификатором
+ * В наследнике необходимо объявить свой Sequence Generator
+ */
 @MappedSuperclass
 public abstract class IdEntity implements IdObj {
     @Id

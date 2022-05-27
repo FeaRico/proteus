@@ -4,6 +4,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Тип судна
+ */
 public enum Type {
     UNKNOWN("Неизвестное судно"),
     TANKER("Танкер"),
@@ -13,6 +16,9 @@ public enum Type {
 
     private final static Map<String, Type> nameMap;
 
+    /**
+     * Имя типа
+     */
     private final String name;
 
     static {
@@ -27,6 +33,12 @@ public enum Type {
         return name;
     }
 
+    /**
+     * Получение типа по имени
+     *
+     * @param name имя
+     * @return тип
+     */
     public static Type getTypeByName(String name) {
         Type type = nameMap.get(name);
         if (type == null)

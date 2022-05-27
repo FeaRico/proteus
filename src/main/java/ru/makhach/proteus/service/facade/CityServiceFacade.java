@@ -4,6 +4,11 @@ import ru.makhach.proteus.model.dto.base.CityDto;
 
 import java.util.List;
 
+/**
+ * Сервис для работы с {@link CityDto}
+ * Этот слой для взаимодействия
+ * с сервисами связанных моделей
+ */
 public interface CityServiceFacade {
     List<CityDto> getAllCities();
 

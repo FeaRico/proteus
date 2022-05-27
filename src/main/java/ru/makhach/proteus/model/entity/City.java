@@ -5,23 +5,21 @@ import ru.makhach.proteus.model.base.abstr.NamedEntity;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * Сущность города
+ */
 @Entity
 @Table(name = "city")
 @SequenceGenerator(name = "default_seq", sequenceName = "city_id_seq")
 public class City extends NamedEntity {
+    /**
+     * Страна к которой принадлежит город
+     */
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country country;
 
     public City() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Country getCountry() {

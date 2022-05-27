@@ -7,17 +7,29 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Сущность причала
+ */
 @Entity
 @Table(name = "dock")
 @SequenceGenerator(name = "default_seq", sequenceName = "dock_id_seq")
 public class Dock extends CoordEntity {
+    /**
+     * Кол-во мест для пришвартовки суден
+     */
     @Column(name = "capacity", nullable = false)
     private Integer vesselsCapacity;
 
+    /**
+     * Порт к которому относится порт
+     */
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "port_id")
     private Port port;
 
+    /**
+     * Коллекция суден связанных в данный момент с причалом
+     */
     @OneToMany(mappedBy = "dock", cascade = CascadeType.ALL,
             fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Vessel> vessels;

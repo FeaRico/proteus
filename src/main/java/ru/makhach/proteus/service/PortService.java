@@ -4,6 +4,10 @@ import ru.makhach.proteus.model.entity.Port;
 
 import java.util.List;
 
+/**
+ * Сервис для работы с сущностью {@link Port}
+ * Слой без логики
+ */
 public interface PortService {
     List<Port> getAllPorts();
 

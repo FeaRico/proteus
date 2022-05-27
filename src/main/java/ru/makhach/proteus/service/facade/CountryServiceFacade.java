@@ -4,6 +4,11 @@ import ru.makhach.proteus.model.dto.base.CountryDto;
 
 import java.util.List;
 
+/**
+ * Сервис для работы с {@link CountryDto}
+ * Этот слой для взаимодействия
+ * с сервисами связанных моделей
+ */
 public interface CountryServiceFacade {
     List<CountryDto> getAllCountries();
 

@@ -5,6 +5,9 @@ import ru.makhach.proteus.model.base.interfaces.CoordObj;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
+/**
+ * Абстрактный класс для сущностей с координатами
+ */
 @MappedSuperclass
 public abstract class CoordEntity extends NamedEntity implements CoordObj {
     @Column(name = "lat")

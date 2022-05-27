@@ -7,13 +7,22 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Сущность страны
+ */
 @Entity
 @Table(name = "country")
 @SequenceGenerator(name = "default_seq", sequenceName = "country_id_seq")
 public class Country extends NamedEntity {
+    /**
+     * Код страны
+     */
     @Column(name = "code", nullable = false, unique = true)
     private String code;
 
+    /**
+     * Коллекция городов страны
+     */
     @OneToMany(mappedBy = "country", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
     private List<City> cities;
