@@ -1,14 +1,27 @@
 package ru.makhach.proteus.model.dto.base;
 
 import ru.makhach.proteus.model.base.interfaces.CoordObj;
+import ru.makhach.proteus.validation.Marker;
 
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class PortDto implements CoordObj {
+    @Null(groups = Marker.Create.class)
+    @NotNull(groups = Marker.Update.class)
+    @Min(value = 1, groups = Marker.Update.class)
     private final Long id;
+
+    @NotEmpty
+    @Size(min = 1, max = 255)
     private final String name;
+
     private final Double latitude;
+
     private final Double longitude;
+
+    @NotNull
+    @Min(1)
     private final Long cityId;
 
     protected PortDto(Builder builder) {

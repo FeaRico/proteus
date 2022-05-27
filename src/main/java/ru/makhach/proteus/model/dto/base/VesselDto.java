@@ -1,20 +1,49 @@
 package ru.makhach.proteus.model.dto.base;
 
 import ru.makhach.proteus.model.base.interfaces.CoordObj;
+import ru.makhach.proteus.validation.Marker;
 
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class VesselDto implements CoordObj {
+    @Null(groups = Marker.Create.class)
+    @NotNull(groups = Marker.Update.class)
+    @Min(value = 1, groups = Marker.Update.class)
     private final Long id;
+
+    @NotEmpty
+    @Size(min = 1, max = 255)
     private final String name;
+
+    @NotNull
     private final String status;
+
+    @NotNull
     private final String type;
+
+    @NotNull
+    @Size(min = 333, max = 5000)
     private final Integer yearBuilt;
+
     private final Double latitude;
+
     private final Double longitude;
+
+    @NotNull
+    @Min(1)
     private final Long countryId;
+
+    @NotNull
+    @Min(1)
     private final Long currentPortId;
+
+    @NotNull
+    @Min(1)
     private final Long homePortId;
+
+    @NotNull
+    @Min(1)
     private final Long dockId;
 
     protected VesselDto(Builder builder) {
@@ -157,7 +186,7 @@ public class VesselDto implements CoordObj {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         VesselDto vesselDto = (VesselDto) o;
-        return Objects.equals(id, vesselDto.id) && Objects.equals(name, vesselDto.name) && status == vesselDto.status && type == vesselDto.type && Objects.equals(yearBuilt, vesselDto.yearBuilt) && Objects.equals(latitude, vesselDto.latitude) && Objects.equals(longitude, vesselDto.longitude) && Objects.equals(countryId, vesselDto.countryId) && Objects.equals(currentPortId, vesselDto.currentPortId) && Objects.equals(homePortId, vesselDto.homePortId) && Objects.equals(dockId, vesselDto.dockId);
+        return Objects.equals(id, vesselDto.id) && Objects.equals(name, vesselDto.name) && status.equals(vesselDto.status) && type.equals(vesselDto.type) && Objects.equals(yearBuilt, vesselDto.yearBuilt) && Objects.equals(latitude, vesselDto.latitude) && Objects.equals(longitude, vesselDto.longitude) && Objects.equals(countryId, vesselDto.countryId) && Objects.equals(currentPortId, vesselDto.currentPortId) && Objects.equals(homePortId, vesselDto.homePortId) && Objects.equals(dockId, vesselDto.dockId);
     }
 
     @Override

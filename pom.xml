@@ -19,6 +19,7 @@
         <posgresql.version>42.3.4</posgresql.version>
         <springfox.version>3.0.0</springfox.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <javax.validation.version>2.0.1.Final</javax.validation.version>
     </properties>
     <dependencies>
         <dependency>
@@ -58,6 +59,11 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
             <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation.version}</version>
         </dependency>
     </dependencies>
 

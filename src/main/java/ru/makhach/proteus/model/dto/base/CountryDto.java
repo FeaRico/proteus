@@ -1,12 +1,23 @@
 package ru.makhach.proteus.model.dto.base;
 
 import ru.makhach.proteus.model.base.interfaces.NamedObj;
+import ru.makhach.proteus.validation.Marker;
 
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class CountryDto implements NamedObj {
+    @Null(groups = Marker.Create.class)
+    @NotNull(groups = Marker.Update.class)
+    @Min(value = 1, groups = Marker.Update.class)
     private final Long id;
+
+    @NotEmpty
+    @Size(min = 1, max = 255)
     private final String name;
+
+    @NotEmpty
+    @Size(min = 1, max = 10)
     private final String code;
 
     public CountryDto(Long id, String name, String code) {
