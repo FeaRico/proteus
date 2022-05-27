@@ -1,6 +1,7 @@
 package ru.makhach.proteus.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.makhach.proteus.exceptions.ResourceNotFoundException;
 import ru.makhach.proteus.model.base.types.Status;
 import ru.makhach.proteus.model.base.types.Type;
@@ -11,6 +12,7 @@ import ru.makhach.proteus.service.VesselService;
 import java.util.List;
 
 @Service
+@Transactional
 public class VesselServiceImpl implements VesselService {
     private final VesselRepository vesselRepository;
 
@@ -19,51 +21,61 @@ public class VesselServiceImpl implements VesselService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Vessel> getAllVessels() {
         return vesselRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Vessel> getAllVesselsByStatus(Status status) {
         return vesselRepository.findAllByStatus(status);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Vessel> getAllVesselsByType(Type type) {
         return vesselRepository.findAllByType(type);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Vessel> getAllVesselsByYearBuilt(Integer yearBuilt) {
         return vesselRepository.findAllByYearBuilt(yearBuilt);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Vessel> getAllVesselsByCountry(Long countryId) {
         return vesselRepository.findAllByCountry(countryId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Vessel> getAllVesselsByCurrentPort(Long portId) {
         return vesselRepository.findAllByCurrentPort(portId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Vessel> getAllVesselsByHomePort(Long portId) {
         return vesselRepository.findAllByHomePort(portId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Vessel> getAllVesselsByDock(Long dockId) {
         return vesselRepository.findAllByDock(dockId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Vessel> getAllVesselsWhereNameStartWith(String name) {
         return vesselRepository.findAllByNameStartsWith(name);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Vessel> getVesselByName(String name) {
         return vesselRepository.findAllByName(name);
     }

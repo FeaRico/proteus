@@ -19,7 +19,7 @@
         <posgresql.version>42.3.4</posgresql.version>
         <springfox.version>3.0.0</springfox.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
-        <javax.validation.version>2.0.1.Final</javax.validation.version>
+        <spring.validation.version>2.6.4</spring.validation.version>
     </properties>
     <dependencies>
         <dependency>
@@ -61,9 +61,9 @@
             <version>${mapstruct.version}</version>
         </dependency>
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>${javax.validation.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+            <version>${spring.validation.version}</version>
         </dependency>
     </dependencies>
 

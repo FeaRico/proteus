@@ -1,6 +1,7 @@
 package ru.makhach.proteus.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.makhach.proteus.exceptions.ResourceNotFoundException;
 import ru.makhach.proteus.model.entity.City;
 import ru.makhach.proteus.repository.CityRepository;
@@ -9,6 +10,7 @@ import ru.makhach.proteus.service.CityService;
 import java.util.List;
 
 @Service
+@Transactional
 public class CityServiceImpl implements CityService {
     private final CityRepository cityRepository;
 
@@ -17,16 +19,19 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<City> getAllCities() {
         return cityRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<City> getAllCitiesByCountry(Long countryId) {
         return cityRepository.findAllByCountry(countryId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public City getCityById(Long id) {
         return cityRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(City.class, "id", id));

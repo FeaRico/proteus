@@ -1,6 +1,7 @@
 package ru.makhach.proteus.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.makhach.proteus.exceptions.ResourceNotFoundException;
 import ru.makhach.proteus.model.entity.Port;
 import ru.makhach.proteus.repository.PortRepository;
@@ -9,6 +10,7 @@ import ru.makhach.proteus.service.PortService;
 import java.util.List;
 
 @Service
+@Transactional
 public class PortServiceImpl implements PortService {
     private final PortRepository portRepository;
 
@@ -17,21 +19,25 @@ public class PortServiceImpl implements PortService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Port> getAllPorts() {
         return portRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Port> getAllPortsByCity(Long cityId) {
         return portRepository.findAllByCity(cityId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Port> getAllPortsByCountry(Long countryId) {
         return portRepository.findAllByCountry(countryId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Port getPortById(Long id) {
         return portRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Port.class, "id", id));

@@ -1,6 +1,7 @@
 package ru.makhach.proteus.service.impl;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.makhach.proteus.exceptions.ResourceNotFoundException;
 import ru.makhach.proteus.model.entity.Dock;
 import ru.makhach.proteus.repository.DockRepository;
@@ -9,6 +10,7 @@ import ru.makhach.proteus.service.DockService;
 import java.util.List;
 
 @Service
+@Transactional
 public class DockServiceImpl implements DockService {
     private final DockRepository dockRepository;
 
@@ -17,16 +19,19 @@ public class DockServiceImpl implements DockService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Dock> getAllDocks() {
         return dockRepository.findAll();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Dock> getAllDocksByPort(Long portId) {
         return dockRepository.findAllByPort(portId);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Dock getDockById(Long id) {
         return dockRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Dock.class, "id", id));
@@ -56,6 +61,7 @@ public class DockServiceImpl implements DockService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Integer countVesselsByDockId(Long id) {
         return getDockById(id).getVessels().size();
     }
