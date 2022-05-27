@@ -1,24 +1,16 @@
 package ru.makhach.vesselmanager.model.entity;
 
+import ru.makhach.vesselmanager.model.base.abstr.NamedEntity;
+import ru.makhach.vesselmanager.model.base.interfaces.NamedObj;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "port")
-public class Port {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "port_id_seq")
-    @SequenceGenerator(name = "port_id_seq",
-            sequenceName = "port_id_seq")
-    @Column(name = "id", unique = true,
-            nullable = false, insertable = false)
-    private Long id;
-
-    @Column(name = "name", nullable = false)
-    private String name;
-
+@SequenceGenerator(name = "default_seq", sequenceName = "port_id_seq")
+public class Port extends NamedEntity implements NamedObj {
     @Column(name = "lat")
     private Double latitude;
 
@@ -34,22 +26,6 @@ public class Port {
     private List<Dock> docks;
 
     public Port() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Double getLatitude() {

@@ -1,8 +1,10 @@
 package ru.makhach.vesselmanager.model.dto.base;
 
+import ru.makhach.vesselmanager.model.base.interfaces.IdObj;
+
 import java.util.Objects;
 
-public class DockDto {
+public class DockDto implements IdObj {
     private final Long id;
     private final Integer vesselsCapacity;
     private final Double latitude;

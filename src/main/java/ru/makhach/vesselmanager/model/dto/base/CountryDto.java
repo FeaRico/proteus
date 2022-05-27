@@ -1,8 +1,10 @@
 package ru.makhach.vesselmanager.model.dto.base;
 
+import ru.makhach.vesselmanager.model.base.interfaces.NamedObj;
+
 import java.util.Objects;
 
-public class CountryDto {
+public class CountryDto implements NamedObj {
     private final Long id;
     private final String name;
     private final String code;

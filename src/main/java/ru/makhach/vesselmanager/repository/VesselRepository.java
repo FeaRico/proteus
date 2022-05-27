@@ -2,9 +2,9 @@ package ru.makhach.vesselmanager.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import ru.makhach.vesselmanager.model.base.types.Status;
+import ru.makhach.vesselmanager.model.base.types.Type;
 import ru.makhach.vesselmanager.model.entity.Vessel;
-import ru.makhach.vesselmanager.model.util.Status;
-import ru.makhach.vesselmanager.model.util.Type;
 
 import java.util.List;
 

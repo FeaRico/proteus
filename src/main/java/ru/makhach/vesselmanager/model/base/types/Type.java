@@ -1,4 +1,4 @@
-package ru.makhach.vesselmanager.model.util;
+package ru.makhach.vesselmanager.model.base.types;
 
 import java.util.Map;
 import java.util.stream.Collectors;

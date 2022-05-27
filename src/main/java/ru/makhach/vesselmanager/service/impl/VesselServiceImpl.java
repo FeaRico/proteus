@@ -2,9 +2,9 @@ package ru.makhach.vesselmanager.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.makhach.vesselmanager.exceptions.ResourceNotFoundException;
+import ru.makhach.vesselmanager.model.base.types.Status;
+import ru.makhach.vesselmanager.model.base.types.Type;
 import ru.makhach.vesselmanager.model.entity.Vessel;
-import ru.makhach.vesselmanager.model.util.Status;
-import ru.makhach.vesselmanager.model.util.Type;
 import ru.makhach.vesselmanager.repository.VesselRepository;
 import ru.makhach.vesselmanager.service.VesselService;
 

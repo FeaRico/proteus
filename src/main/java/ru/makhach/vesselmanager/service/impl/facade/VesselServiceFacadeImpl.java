@@ -2,13 +2,13 @@ package ru.makhach.vesselmanager.service.impl.facade;
 
 import org.springframework.stereotype.Service;
 import ru.makhach.vesselmanager.mapper.VesselMapper;
+import ru.makhach.vesselmanager.model.base.types.Status;
+import ru.makhach.vesselmanager.model.base.types.Type;
 import ru.makhach.vesselmanager.model.dto.base.VesselDto;
 import ru.makhach.vesselmanager.model.entity.Country;
 import ru.makhach.vesselmanager.model.entity.Dock;
 import ru.makhach.vesselmanager.model.entity.Port;
 import ru.makhach.vesselmanager.model.entity.Vessel;
-import ru.makhach.vesselmanager.model.util.Status;
-import ru.makhach.vesselmanager.model.util.Type;
 import ru.makhach.vesselmanager.service.CountryService;
 import ru.makhach.vesselmanager.service.DockService;
 import ru.makhach.vesselmanager.service.PortService;

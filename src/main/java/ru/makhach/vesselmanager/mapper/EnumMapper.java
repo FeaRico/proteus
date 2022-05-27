@@ -2,8 +2,8 @@ package ru.makhach.vesselmanager.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
-import ru.makhach.vesselmanager.model.util.Status;
-import ru.makhach.vesselmanager.model.util.Type;
+import ru.makhach.vesselmanager.model.base.types.Status;
+import ru.makhach.vesselmanager.model.base.types.Type;
 
 @Mapper(componentModel = "spring")
 public interface EnumMapper {

@@ -1,5 +1,8 @@
 package ru.makhach.vesselmanager.model.entity;
 
+import ru.makhach.vesselmanager.model.base.abstr.NamedEntity;
+import ru.makhach.vesselmanager.model.base.interfaces.NamedObj;
+
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.List;
@@ -7,19 +10,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "country")
-public class Country {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "country_id_seq")
-    @SequenceGenerator(name = "country_id_seq",
-            sequenceName = "country_id_seq")
-    @Column(name = "id", unique = true,
-            nullable = false, insertable = false)
-    private Long id;
-
-    @Column(name = "name", nullable = false)
-    private String name;
-
+@SequenceGenerator(name = "default_seq", sequenceName = "country_id_seq")
+public class Country extends NamedEntity implements NamedObj {
     @Column(name = "code", nullable = false, unique = true)
     private String code;
 
@@ -28,22 +20,6 @@ public class Country {
     private List<City> cities;
 
     public Country() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getCode() {

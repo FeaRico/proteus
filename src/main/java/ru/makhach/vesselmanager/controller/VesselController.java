@@ -2,9 +2,9 @@ package ru.makhach.vesselmanager.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.makhach.vesselmanager.model.base.types.Status;
+import ru.makhach.vesselmanager.model.base.types.Type;
 import ru.makhach.vesselmanager.model.dto.base.VesselDto;
-import ru.makhach.vesselmanager.model.util.Status;
-import ru.makhach.vesselmanager.model.util.Type;
 import ru.makhach.vesselmanager.service.facade.VesselServiceFacade;
 
 import javax.servlet.http.HttpServletRequest;

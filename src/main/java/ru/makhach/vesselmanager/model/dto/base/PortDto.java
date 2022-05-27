@@ -1,8 +1,10 @@
 package ru.makhach.vesselmanager.model.dto.base;
 
+import ru.makhach.vesselmanager.model.base.interfaces.NamedObj;
+
 import java.util.Objects;
 
-public class PortDto {
+public class PortDto implements NamedObj {
     private final Long id;
     private final String name;
     private final Double latitude;

@@ -1,5 +1,8 @@
 package ru.makhach.vesselmanager.model.entity;
 
+import ru.makhach.vesselmanager.model.base.abstr.IdEntity;
+import ru.makhach.vesselmanager.model.base.interfaces.IdObj;
+
 import javax.persistence.*;
 import java.util.Collections;
 import java.util.List;
@@ -7,16 +10,8 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "dock")
-public class Dock {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "dock_id_seq")
-    @SequenceGenerator(name = "dock_id_seq",
-            sequenceName = "dock_id_seq")
-    @Column(name = "id", nullable = false,
-            unique = true, insertable = false)
-    private Long id;
-
+@SequenceGenerator(name = "default_seq", sequenceName = "dock_id_seq")
+public class Dock extends IdEntity implements IdObj {
     @Column(name = "capacity", nullable = false)
     private Integer vesselsCapacity;
 
@@ -35,14 +30,6 @@ public class Dock {
     private List<Vessel> vessels;
 
     public Dock() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Integer getVesselsCapacity() {

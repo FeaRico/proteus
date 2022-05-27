@@ -1,26 +1,17 @@
 package ru.makhach.vesselmanager.model.entity;
 
-import ru.makhach.vesselmanager.model.util.Status;
-import ru.makhach.vesselmanager.model.util.Type;
+import ru.makhach.vesselmanager.model.base.abstr.NamedEntity;
+import ru.makhach.vesselmanager.model.base.interfaces.NamedObj;
+import ru.makhach.vesselmanager.model.base.types.Status;
+import ru.makhach.vesselmanager.model.base.types.Type;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "vessel")
-public class Vessel {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "vessel_id_seq")
-    @SequenceGenerator(name = "vessel_id_seq",
-            sequenceName = "vessel_id_seq")
-    @Column(name = "id", insertable = false,
-            unique = true, nullable = false)
-    private Long id;
-
-    @Column(name = "name", nullable = false)
-    private String name;
-
+@SequenceGenerator(name = "default_seq", sequenceName = "vessel_id_seq")
+public class Vessel extends NamedEntity implements NamedObj {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;
@@ -55,22 +46,6 @@ public class Vessel {
     private Dock dock;
 
     public Vessel() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Status getStatus() {

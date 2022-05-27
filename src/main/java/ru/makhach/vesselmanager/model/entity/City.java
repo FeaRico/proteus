@@ -1,36 +1,20 @@
 package ru.makhach.vesselmanager.model.entity;
 
+import ru.makhach.vesselmanager.model.base.abstr.NamedEntity;
+import ru.makhach.vesselmanager.model.base.interfaces.NamedObj;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "city")
-public class City {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "city_id_seq")
-    @SequenceGenerator(name = "city_id_seq",
-            sequenceName = "city_id_seq")
-    @Column(name = "id", unique = true,
-            nullable = false, insertable = false)
-    private Long id;
-
-    @Column(name = "name")
-    private String name;
-
+@SequenceGenerator(name = "default_seq", sequenceName = "city_id_seq")
+public class City extends NamedEntity implements NamedObj {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country country;
 
     public City() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
