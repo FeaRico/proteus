@@ -14,6 +14,7 @@ import java.util.List;
 public interface DockMapper {
     @Mappings({
             @Mapping(target = "id", source = "dock.id"),
+            @Mapping(target = "name", source = "dock.name"),
             @Mapping(target = "vesselsCapacity", source = "dock.vesselsCapacity"),
             @Mapping(target = "latitude", source = "dock.latitude"),
             @Mapping(target = "longitude", source = "dock.longitude"),
@@ -23,6 +24,7 @@ public interface DockMapper {
 
     @Mappings({
             @Mapping(target = "id", source = "dockDto.id"),
+            @Mapping(target = "name", source = "dockDto.name"),
             @Mapping(target = "vesselsCapacity", source = "dockDto.vesselsCapacity"),
             @Mapping(target = "latitude", source = "dockDto.latitude"),
             @Mapping(target = "longitude", source = "dockDto.longitude")
@@ -32,6 +34,7 @@ public interface DockMapper {
 
     @Mappings({
             @Mapping(target = "id", source = "dockDto.id"),
+            @Mapping(target = "name", source = "dockDto.name"),
             @Mapping(target = "vesselsCapacity", source = "dockDto.vesselsCapacity"),
             @Mapping(target = "latitude", source = "dockDto.latitude"),
             @Mapping(target = "longitude", source = "dockDto.longitude"),

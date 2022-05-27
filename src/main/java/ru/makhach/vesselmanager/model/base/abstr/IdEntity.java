@@ -1,9 +1,11 @@
 package ru.makhach.vesselmanager.model.base.abstr;
 
+import ru.makhach.vesselmanager.model.base.interfaces.IdObj;
+
 import javax.persistence.*;
 
 @MappedSuperclass
-public abstract class IdEntity {
+public abstract class IdEntity implements IdObj {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
             generator = "default_seq")

@@ -1,7 +1,6 @@
 package ru.makhach.vesselmanager.model.entity;
 
 import ru.makhach.vesselmanager.model.base.abstr.NamedEntity;
-import ru.makhach.vesselmanager.model.base.interfaces.NamedObj;
 
 import javax.persistence.*;
 import java.util.Collections;
@@ -11,7 +10,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "country")
 @SequenceGenerator(name = "default_seq", sequenceName = "country_id_seq")
-public class Country extends NamedEntity implements NamedObj {
+public class Country extends NamedEntity {
     @Column(name = "code", nullable = false, unique = true)
     private String code;
 

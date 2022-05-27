@@ -1,7 +1,6 @@
 package ru.makhach.vesselmanager.model.entity;
 
-import ru.makhach.vesselmanager.model.base.abstr.NamedEntity;
-import ru.makhach.vesselmanager.model.base.interfaces.NamedObj;
+import ru.makhach.vesselmanager.model.base.abstr.CoordEntity;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,13 +9,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "port")
 @SequenceGenerator(name = "default_seq", sequenceName = "port_id_seq")
-public class Port extends NamedEntity implements NamedObj {
-    @Column(name = "lat")
-    private Double latitude;
-
-    @Column(name = "lon")
-    private Double longitude;
-
+public class Port extends CoordEntity {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;

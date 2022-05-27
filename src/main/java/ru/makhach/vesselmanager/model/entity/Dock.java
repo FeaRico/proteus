@@ -1,7 +1,6 @@
 package ru.makhach.vesselmanager.model.entity;
 
-import ru.makhach.vesselmanager.model.base.abstr.IdEntity;
-import ru.makhach.vesselmanager.model.base.interfaces.IdObj;
+import ru.makhach.vesselmanager.model.base.abstr.CoordEntity;
 
 import javax.persistence.*;
 import java.util.Collections;
@@ -11,15 +10,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "dock")
 @SequenceGenerator(name = "default_seq", sequenceName = "dock_id_seq")
-public class Dock extends IdEntity implements IdObj {
+public class Dock extends CoordEntity {
     @Column(name = "capacity", nullable = false)
     private Integer vesselsCapacity;
-
-    @Column(name = "lat")
-    private Double latitude;
-
-    @Column(name = "lon")
-    private Double longitude;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "port_id")
@@ -38,22 +31,6 @@ public class Dock extends IdEntity implements IdObj {
 
     public void setVesselsCapacity(Integer vesselsCapacity) {
         this.vesselsCapacity = vesselsCapacity;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
     }
 
     public Port getPort() {

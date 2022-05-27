@@ -1,7 +1,6 @@
 package ru.makhach.vesselmanager.model.entity;
 
-import ru.makhach.vesselmanager.model.base.abstr.NamedEntity;
-import ru.makhach.vesselmanager.model.base.interfaces.NamedObj;
+import ru.makhach.vesselmanager.model.base.abstr.CoordEntity;
 import ru.makhach.vesselmanager.model.base.types.Status;
 import ru.makhach.vesselmanager.model.base.types.Type;
 
@@ -11,7 +10,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "vessel")
 @SequenceGenerator(name = "default_seq", sequenceName = "vessel_id_seq")
-public class Vessel extends NamedEntity implements NamedObj {
+public class Vessel extends CoordEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private Status status;
@@ -22,12 +21,6 @@ public class Vessel extends NamedEntity implements NamedObj {
 
     @Column(name = "year_built")
     private Integer yearBuilt;
-
-    @Column(name = "lat", nullable = false)
-    private Double latitude;
-
-    @Column(name = "lon", nullable = false)
-    private Double longitude;
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", nullable = false)

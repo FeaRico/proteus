@@ -1,11 +1,10 @@
 package ru.makhach.vesselmanager.model.dto.base;
 
-import ru.makhach.vesselmanager.model.base.interfaces.NamedObj;
+import ru.makhach.vesselmanager.model.base.interfaces.CoordObj;
 
 import java.util.Objects;
 
-//TODO: вынести координаты в отдельный класс
-public class VesselDto implements NamedObj {
+public class VesselDto implements CoordObj {
     private final Long id;
     private final String name;
     private final String status;

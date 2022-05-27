@@ -1,7 +1,6 @@
 package ru.makhach.vesselmanager.model.entity;
 
 import ru.makhach.vesselmanager.model.base.abstr.NamedEntity;
-import ru.makhach.vesselmanager.model.base.interfaces.NamedObj;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -9,7 +8,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "city")
 @SequenceGenerator(name = "default_seq", sequenceName = "city_id_seq")
-public class City extends NamedEntity implements NamedObj {
+public class City extends NamedEntity {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country country;

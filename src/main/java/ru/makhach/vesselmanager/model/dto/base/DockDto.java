@@ -1,11 +1,12 @@
 package ru.makhach.vesselmanager.model.dto.base;
 
-import ru.makhach.vesselmanager.model.base.interfaces.IdObj;
+import ru.makhach.vesselmanager.model.base.interfaces.CoordObj;
 
 import java.util.Objects;
 
-public class DockDto implements IdObj {
+public class DockDto implements CoordObj {
     private final Long id;
+    private final String name;
     private final Integer vesselsCapacity;
     private final Double latitude;
     private final Double longitude;
@@ -13,6 +14,7 @@ public class DockDto implements IdObj {
 
     protected DockDto(Builder builder) {
         this.id = builder.id;
+        this.name = builder.name;
         this.vesselsCapacity = builder.vesselsCapacity;
         this.latitude = builder.latitude;
         this.longitude = builder.longitude;
@@ -25,6 +27,10 @@ public class DockDto implements IdObj {
 
     public Long getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Integer getVesselsCapacity() {
@@ -45,6 +51,7 @@ public class DockDto implements IdObj {
 
     public static class Builder {
         private Long id;
+        private String name;
         private Integer vesselsCapacity;
         private Double latitude;
         private Double longitude;
@@ -52,6 +59,11 @@ public class DockDto implements IdObj {
 
         public Builder setId(Long id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder setName(String name) {
+            this.name = name;
             return this;
         }
 
