@@ -8,6 +8,7 @@ import ru.makhach.proteus.model.entity.Port;
 import ru.makhach.proteus.service.CityService;
 import ru.makhach.proteus.service.PortService;
 import ru.makhach.proteus.service.facade.PortServiceFacade;
+import ru.makhach.proteus.sse.service.event.PortEventService;
 
 import java.util.List;
 
@@ -16,11 +17,13 @@ public class PortServiceFacadeImpl implements PortServiceFacade {
     private final PortService portService;
     private final CityService cityService;
     private final PortMapper portMapper;
+    private final PortEventService eventService;
 
-    public PortServiceFacadeImpl(PortService portService, CityService cityService, PortMapper portMapper) {
+    public PortServiceFacadeImpl(PortService portService, CityService cityService, PortMapper portMapper, PortEventService eventService) {
         this.portService = portService;
         this.cityService = cityService;
         this.portMapper = portMapper;
+        this.eventService = eventService;
     }
 
     @Override
@@ -48,7 +51,9 @@ public class PortServiceFacadeImpl implements PortServiceFacade {
         Port portEntity = portMapper.convert(port);
         City city = cityService.getCityById(port.getCityId());
         portEntity.setCity(city);
-        return portMapper.convert(portService.updatePort(portEntity));
+        PortDto updatedPort = portMapper.convert(portService.updatePort(portEntity));
+        eventService.updateEvent(updatedPort);
+        return updatedPort;
     }
 
     @Override
@@ -56,11 +61,15 @@ public class PortServiceFacadeImpl implements PortServiceFacade {
         Port portEntity = portMapper.convert(port);
         City city = cityService.getCityById(port.getCityId());
         portEntity.setCity(city);
-        return portMapper.convert(portService.savePort(portEntity));
+        PortDto savedPort = portMapper.convert(portService.savePort(portEntity));
+        eventService.saveEvent(savedPort);
+        return savedPort;
     }
 
     @Override
     public PortDto deletePort(Long id) {
-        return portMapper.convert(portService.deletePort(id));
+        PortDto deletedPort = portMapper.convert(portService.deletePort(id));
+        eventService.deleteEvent(deletedPort);
+        return deletedPort;
     }
 }

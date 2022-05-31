@@ -8,6 +8,7 @@ import ru.makhach.proteus.model.entity.Port;
 import ru.makhach.proteus.service.DockService;
 import ru.makhach.proteus.service.PortService;
 import ru.makhach.proteus.service.facade.DockServiceFacade;
+import ru.makhach.proteus.sse.service.event.DockEventService;
 
 import java.util.List;
 
@@ -16,11 +17,13 @@ public class DockServiceFacadeImpl implements DockServiceFacade {
     private final DockService dockService;
     private final DockMapper dockMapper;
     private final PortService portService;
+    private final DockEventService eventService;
 
-    public DockServiceFacadeImpl(DockService dockService, PortService portService, DockMapper dockMapper) {
+    public DockServiceFacadeImpl(DockService dockService, DockMapper dockMapper, PortService portService, DockEventService eventService) {
         this.dockService = dockService;
-        this.portService = portService;
         this.dockMapper = dockMapper;
+        this.portService = portService;
+        this.eventService = eventService;
     }
 
     @Override
@@ -43,7 +46,9 @@ public class DockServiceFacadeImpl implements DockServiceFacade {
         Dock dockEntity = dockMapper.convert(dock);
         Port port = portService.getPortById(dock.getPortId());
         dockEntity.setPort(port);
-        return dockMapper.convert(dockService.updateDock(dockEntity));
+        DockDto updatedDock = dockMapper.convert(dockService.updateDock(dockEntity));
+        eventService.updateEvent(updatedDock);
+        return updatedDock;
     }
 
     @Override
@@ -51,12 +56,16 @@ public class DockServiceFacadeImpl implements DockServiceFacade {
         Dock dockEntity = dockMapper.convert(dock);
         Port port = portService.getPortById(dock.getPortId());
         dockEntity.setPort(port);
-        return dockMapper.convert(dockService.saveDock(dockEntity));
+        DockDto savedDock = dockMapper.convert(dockService.saveDock(dockEntity));
+        eventService.saveEvent(savedDock);
+        return savedDock;
     }
 
     @Override
     public DockDto deleteDock(Long id) {
-        return dockMapper.convert(dockService.deleteDock(id));
+        DockDto deletedDock = dockMapper.convert(dockService.deleteDock(id));
+        eventService.deleteEvent(deletedDock);
+        return deletedDock;
     }
 
     @Override

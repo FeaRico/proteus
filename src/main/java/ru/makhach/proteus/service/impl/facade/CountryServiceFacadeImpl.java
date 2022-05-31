@@ -6,6 +6,7 @@ import ru.makhach.proteus.model.dto.base.CountryDto;
 import ru.makhach.proteus.model.entity.Country;
 import ru.makhach.proteus.service.CountryService;
 import ru.makhach.proteus.service.facade.CountryServiceFacade;
+import ru.makhach.proteus.sse.service.event.CountryEventService;
 
 import java.util.List;
 
@@ -13,10 +14,12 @@ import java.util.List;
 public class CountryServiceFacadeImpl implements CountryServiceFacade {
     private final CountryService countryService;
     private final CountryMapper countryMapper;
+    private final CountryEventService eventService;
 
-    public CountryServiceFacadeImpl(CountryService countryService, CountryMapper countryMapper) {
+    public CountryServiceFacadeImpl(CountryService countryService, CountryMapper countryMapper, CountryEventService eventService) {
         this.countryService = countryService;
         this.countryMapper = countryMapper;
+        this.eventService = eventService;
     }
 
     public List<CountryDto> getAllCountries() {
@@ -36,17 +39,23 @@ public class CountryServiceFacadeImpl implements CountryServiceFacade {
     @Override
     public CountryDto updateCountry(CountryDto country) {
         Country entity = countryMapper.convert(country);
-        return countryMapper.convert(countryService.updateCountry(entity));
+        CountryDto updatedCountry = countryMapper.convert(countryService.updateCountry(entity));
+        eventService.updateEvent(updatedCountry);
+        return updatedCountry;
     }
 
     @Override
     public CountryDto saveCountry(CountryDto country) {
         Country entity = countryMapper.convert(country);
-        return countryMapper.convert(countryService.saveCountry(entity));
+        CountryDto savedCountry = countryMapper.convert(countryService.saveCountry(entity));
+        eventService.saveEvent(savedCountry);
+        return savedCountry;
     }
 
     @Override
     public CountryDto deleteCountry(Long id) {
-        return countryMapper.convert(countryService.deleteCountry(id));
+        CountryDto deletedCountry = countryMapper.convert(countryService.deleteCountry(id));
+        eventService.deleteEvent(deletedCountry);
+        return deletedCountry;
     }
 }

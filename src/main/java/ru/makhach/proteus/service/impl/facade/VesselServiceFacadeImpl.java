@@ -14,6 +14,7 @@ import ru.makhach.proteus.service.DockService;
 import ru.makhach.proteus.service.PortService;
 import ru.makhach.proteus.service.VesselService;
 import ru.makhach.proteus.service.facade.VesselServiceFacade;
+import ru.makhach.proteus.sse.service.event.VesselEventService;
 
 import java.util.List;
 
@@ -24,13 +25,15 @@ public class VesselServiceFacadeImpl implements VesselServiceFacade {
     private final CountryService countryService;
     private final PortService portService;
     private final DockService dockService;
+    private final VesselEventService eventService;
 
-    public VesselServiceFacadeImpl(VesselService vesselService, VesselMapper vesselMapper, CountryService countryService, PortService portService, DockService dockService) {
+    public VesselServiceFacadeImpl(VesselService vesselService, VesselMapper vesselMapper, CountryService countryService, PortService portService, DockService dockService, VesselEventService eventService) {
         this.vesselService = vesselService;
         this.vesselMapper = vesselMapper;
         this.countryService = countryService;
         this.portService = portService;
         this.dockService = dockService;
+        this.eventService = eventService;
     }
 
     @Override
@@ -85,22 +88,30 @@ public class VesselServiceFacadeImpl implements VesselServiceFacade {
 
     @Override
     public VesselDto updateStatusByVesselId(Long id, Status status) {
-        return vesselMapper.convert(vesselService.updateStatusByVesselId(id, status));
+        VesselDto updatedVessel = vesselMapper.convert(vesselService.updateStatusByVesselId(id, status));
+        eventService.updateStatusEvent(updatedVessel);
+        return updatedVessel;
     }
 
     @Override
     public VesselDto updateVessel(VesselDto vessel) {
-        return vesselMapper.convert(vesselService.updateVessel(configureVesselEntities(vessel)));
+        VesselDto updatedVessel = vesselMapper.convert(vesselService.updateVessel(configureVesselEntities(vessel)));
+        eventService.updateEvent(updatedVessel);
+        return updatedVessel;
     }
 
     @Override
     public VesselDto saveVessel(VesselDto vessel) {
-        return vesselMapper.convert(vesselService.saveVessel(configureVesselEntities(vessel)));
+        VesselDto savedVessel = vesselMapper.convert(vesselService.saveVessel(configureVesselEntities(vessel)));
+        eventService.saveEvent(savedVessel);
+        return savedVessel;
     }
 
     @Override
     public VesselDto deleteVessel(Long id) {
-        return vesselMapper.convert(vesselService.deleteVessel(id));
+        VesselDto deletedVessel = vesselMapper.convert(vesselService.deleteVessel(id));
+        eventService.deleteEvent(deletedVessel);
+        return deletedVessel;
     }
 
     private Vessel configureVesselEntities(VesselDto vessel) {

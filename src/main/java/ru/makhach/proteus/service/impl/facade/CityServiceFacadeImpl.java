@@ -8,6 +8,7 @@ import ru.makhach.proteus.model.entity.Country;
 import ru.makhach.proteus.service.CityService;
 import ru.makhach.proteus.service.CountryService;
 import ru.makhach.proteus.service.facade.CityServiceFacade;
+import ru.makhach.proteus.sse.service.event.CityEventService;
 
 import java.util.List;
 
@@ -16,12 +17,15 @@ public class CityServiceFacadeImpl implements CityServiceFacade {
     private final CityService cityService;
     private final CountryService countryService;
     private final CityMapper cityMapper;
+    private final CityEventService eventService;
 
-    public CityServiceFacadeImpl(CityService cityService, CountryService countryService, CityMapper cityMapper) {
+    public CityServiceFacadeImpl(CityService cityService, CountryService countryService, CityMapper cityMapper, CityEventService eventService) {
         this.cityService = cityService;
         this.countryService = countryService;
         this.cityMapper = cityMapper;
+        this.eventService = eventService;
     }
+
 
     @Override
     public List<CityDto> getAllCities() {
@@ -43,7 +47,9 @@ public class CityServiceFacadeImpl implements CityServiceFacade {
         City cityEntity = cityMapper.convert(city);
         Country country = countryService.getCountryById(city.getCountryId());
         cityEntity.setCountry(country);
-        return cityMapper.convert(cityService.updateCity(cityEntity));
+        CityDto updatedCity = cityMapper.convert(cityService.updateCity(cityEntity));
+        eventService.updateEvent(updatedCity);
+        return updatedCity;
     }
 
     @Override
@@ -51,11 +57,15 @@ public class CityServiceFacadeImpl implements CityServiceFacade {
         City cityEntity = cityMapper.convert(city);
         Country country = countryService.getCountryById(city.getCountryId());
         cityEntity.setCountry(country);
-        return cityMapper.convert(cityService.saveCity(cityEntity));
+        CityDto savedCity = cityMapper.convert(cityService.saveCity(cityEntity));
+        eventService.saveEvent(city);
+        return savedCity;
     }
 
     @Override
     public CityDto deleteCity(Long id) {
-        return cityMapper.convert(cityService.deleteCity(id));
+        CityDto deletedCity = cityMapper.convert(cityService.deleteCity(id));
+        eventService.deleteEvent(deletedCity);
+        return deletedCity;
     }
 }
