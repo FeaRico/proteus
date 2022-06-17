@@ -5,10 +5,5 @@ import ru.makhach.proteus.model.dto.base.CityDto;
 /**
  * Слой событий для {@link CityDto}
  */
-public interface CityEventService {
-    void saveEvent(CityDto city);
-
-    void updateEvent(CityDto city);
-
-    void deleteEvent(CityDto city);
+public interface CityEventService extends EventService<CityDto> {
 }

@@ -26,7 +26,6 @@ public class CityServiceFacadeImpl implements CityServiceFacade {
         this.eventService = eventService;
     }
 
-
     @Override
     public List<CityDto> getAllCities() {
         return cityMapper.convertToDtos(cityService.getAllCities());
