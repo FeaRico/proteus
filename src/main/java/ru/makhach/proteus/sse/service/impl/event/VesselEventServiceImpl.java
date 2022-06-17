@@ -30,9 +30,7 @@ public class VesselEventServiceImpl implements VesselEventService {
     @Override
     public void updateStatusEvent(VesselDto vessel) {
         long changedAt = System.currentTimeMillis();
-        eventPublisher.publishEvent(
-                new VesselStatusChangedEvent(vessel.getId(), changedAt, vessel.getStatus())
-        );
+        eventPublisher.publishEvent(new VesselStatusChangedEvent(vessel.getId(), changedAt, vessel.getStatus()));
     }
 
     @Override

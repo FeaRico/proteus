@@ -1,4 +1,4 @@
-package ru.makhach.proteus.sse.service.event;
+package ru.makhach.proteus.sse.service.event.base;
 
 /**
  * Интерфейс для слоя событий.
