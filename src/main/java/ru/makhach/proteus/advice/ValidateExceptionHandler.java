@@ -15,7 +15,7 @@ public class ValidateExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     ResponseEntity<ErrorMessage> handleConstrainViolationException(ConstraintViolationException ex) {
         ErrorMessage errorMessage = new ErrorMessage(System.currentTimeMillis(),
-                HttpStatus.BAD_REQUEST.getReasonPhrase(), ex.getMessage());
+                HttpStatus.BAD_REQUEST, ex.getMessage());
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }
 }

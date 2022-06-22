@@ -15,7 +15,7 @@ public class NotFoundExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorMessage> handleResourceNotFound(ResourceNotFoundException ex, WebRequest request) {
         ErrorMessage errorMessage = new ErrorMessage(System.currentTimeMillis(),
-                HttpStatus.NOT_FOUND.getReasonPhrase(), ex.getMessage());
+                HttpStatus.NOT_FOUND, ex.getMessage());
         return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
     }
 }

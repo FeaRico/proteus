@@ -1,16 +1,20 @@
 package ru.makhach.proteus.model.dto;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * Трансферный объект для сообщения с ошибкой
  */
 public class ErrorMessage {
     private final Long createdAt;
-    private final String status;
+    private final Integer statusCode;
+    private final String statusMessage;
     private final String message;
 
-    public ErrorMessage(Long createdAt, String status, String message) {
+    public ErrorMessage(Long createdAt, HttpStatus status, String message) {
         this.createdAt = createdAt;
-        this.status = status;
+        this.statusCode = status.value();
+        this.statusMessage = status.getReasonPhrase();
         this.message = message;
     }
 
@@ -18,8 +22,12 @@ public class ErrorMessage {
         return createdAt;
     }
 
-    public String getStatus() {
-        return status;
+    public Integer getStatusCode() {
+        return statusCode;
+    }
+
+    public String getStatusMessage() {
+        return statusMessage;
     }
 
     public String getMessage() {
