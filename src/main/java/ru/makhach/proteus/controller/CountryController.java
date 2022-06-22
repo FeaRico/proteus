@@ -9,6 +9,7 @@ import ru.makhach.proteus.validation.Marker;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class CountryController {
     }
 
     @GetMapping("/code/{code}")
-    public ResponseEntity<CountryDto> getByCode(@PathVariable @NotNull @Min(1) String code) {
+    public ResponseEntity<CountryDto> getByCode(@PathVariable @NotNull @NotEmpty String code) {
         return ResponseEntity.ok(countryServiceFacade.getCountryByCode(code));
     }
 
