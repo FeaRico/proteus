@@ -1,6 +1,7 @@
 package ru.makhach.proteus.utils;
 
 import ru.makhach.proteus.model.dto.base.CityDto;
+import ru.makhach.proteus.model.dto.base.CountryDto;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,11 +13,21 @@ public class Utility {
         }
 
         public static List<CityDto> getCityDtos() {
-            CityDto city1 = Utility.City.createCityDto(12L, "City1", 434L);
-            CityDto city2 = Utility.City.createCityDto(54L, "City2", 666L);
+            CityDto city1 = createCityDto(11L, "city1", 666L);
+            CityDto city2 = createCityDto(22L, "city2", 666L);
             return Arrays.asList(city1, city2);
         }
     }
 
+    public static class Country {
+        public static CountryDto createCountryDto(Long id, String name) {
+            return new CountryDto(id, name, "en_En");
+        }
 
+        public static List<CountryDto> getCountryDtos() {
+            CountryDto country1 = createCountryDto(11L, "country1");
+            CountryDto country2 = createCountryDto(22L, "country2");
+            return Arrays.asList(country1, country2);
+        }
+    }
 }
