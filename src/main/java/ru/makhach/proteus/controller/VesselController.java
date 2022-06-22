@@ -3,6 +3,7 @@ package ru.makhach.proteus.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.makhach.proteus.exceptions.EmptyParametersException;
 import ru.makhach.proteus.model.base.types.Status;
 import ru.makhach.proteus.model.base.types.Type;
 import ru.makhach.proteus.model.dto.base.VesselDto;
@@ -38,7 +39,6 @@ public class VesselController {
     /**
      * Фильтр по параметрам. Обходим в карте все параметры и отдаём собранный результат.
      * Если параметров нет, отдаются все данные.
-     * TODO: кидать эксепш при попытке вызвать метод без параметров
      * TODO: написать енд-поинт, выдающий параметры для фильтра
      *
      * @param request запрос
@@ -49,7 +49,7 @@ public class VesselController {
         Map<String, String[]> parameterMap = request.getParameterMap();
         List<VesselDto> result;
         if (parameterMap.isEmpty())
-            result = vesselServiceFacade.getAllVessels();
+            throw new EmptyParametersException();
         else result = parameterMap.entrySet().stream()
                 .map(entry -> getResultByParam(entry.getKey(), entry.getValue()[0]))
                 .flatMap(Collection::stream).collect(Collectors.toList());
