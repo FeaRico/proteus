@@ -10,38 +10,26 @@ import ru.makhach.proteus.exceptions.base.ProteusException;
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends ProteusException {
     private static final long serialVersionUID = 1L;
-
-    private String resourceName;
-    private String fieldName;
-    private Object fieldValue;
+    private final Class<?> resourceClass;
+    private final String fieldName;
+    private final Object fieldValue;
 
     public ResourceNotFoundException(Class<?> resourceClass, String fieldName, Object fieldValue) {
-        this.resourceName = resourceClass.getSimpleName();
+        super(String.format("Not found %s with %s is %s", resourceClass.getSimpleName(), fieldName, fieldValue));
+        this.resourceClass = resourceClass;
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;
     }
 
-    public String getResourceName() {
-        return resourceName;
-    }
-
-    public void setResourceName(String resourceName) {
-        this.resourceName = resourceName;
+    public String getResourceClassName() {
+        return resourceClass.getSimpleName();
     }
 
     public String getFieldName() {
         return fieldName;
     }
 
-    public void setFieldName(String fieldName) {
-        this.fieldName = fieldName;
-    }
-
     public Object getFieldValue() {
         return fieldValue;
-    }
-
-    public void setFieldValue(Object fieldValue) {
-        this.fieldValue = fieldValue;
     }
 }
