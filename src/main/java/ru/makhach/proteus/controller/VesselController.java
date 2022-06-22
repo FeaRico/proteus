@@ -5,8 +5,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.makhach.proteus.exceptions.EmptyParametersException;
 import ru.makhach.proteus.model.base.types.Status;
-import ru.makhach.proteus.model.base.types.Type;
 import ru.makhach.proteus.model.dto.base.VesselDto;
+import ru.makhach.proteus.model.dto.vessel.VesselFilterParam;
+import ru.makhach.proteus.model.dto.vessel.types.VesselFilterParamType;
 import ru.makhach.proteus.service.facade.VesselServiceFacade;
 import ru.makhach.proteus.validation.Marker;
 
@@ -16,7 +17,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -39,7 +39,6 @@ public class VesselController {
     /**
      * Фильтр по параметрам. Обходим в карте все параметры и отдаём собранный результат.
      * Если параметров нет, отдаются все данные.
-     * TODO: написать енд-поинт, выдающий параметры для фильтра
      *
      * @param request запрос
      * @return коллекция целей
@@ -50,24 +49,21 @@ public class VesselController {
         List<VesselDto> result;
         if (parameterMap.isEmpty())
             throw new EmptyParametersException();
-        else result = parameterMap.entrySet().stream()
-                .map(entry -> getResultByParam(entry.getKey(), entry.getValue()[0]))
-                .flatMap(Collection::stream).collect(Collectors.toList());
+        else {
+            List<VesselFilterParam> filterParams = parameterMap.entrySet().stream()
+                    .map(entry -> new VesselFilterParam(entry.getKey(), entry.getValue()[0])).collect(Collectors.toList());
+            result = filterParams.stream()
+                    .map(vesselServiceFacade::getAllVesselByFilter)
+                    .flatMap(Collection::stream)
+                    .collect(Collectors.toList());
+        }
 
         return ResponseEntity.ok(result);
     }
 
-    private List<VesselDto> getResultByParam(String paramName, String value) {
-        switch (paramName) {
-            case "status":
-                return vesselServiceFacade.getAllVesselsByStatus(Status.valueOf(value));
-            case "type":
-                return vesselServiceFacade.getAllVesselsByType(Type.valueOf(value));
-            case "yearBuilt":
-                return vesselServiceFacade.getAllVesselsByYearBuilt(Integer.valueOf(value));
-            default:
-                return Collections.emptyList();
-        }
+    @GetMapping("/filter/params")
+    public ResponseEntity<List<VesselFilterParamType>> getAllFilterParams() {
+        return ResponseEntity.ok(List.of(VesselFilterParamType.values()));
     }
 
     @GetMapping("/country/{countryId}")

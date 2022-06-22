@@ -5,6 +5,7 @@ import ru.makhach.proteus.mapper.VesselMapper;
 import ru.makhach.proteus.model.base.types.Status;
 import ru.makhach.proteus.model.base.types.Type;
 import ru.makhach.proteus.model.dto.base.VesselDto;
+import ru.makhach.proteus.model.dto.vessel.VesselFilterParam;
 import ru.makhach.proteus.model.entity.Country;
 import ru.makhach.proteus.model.entity.Dock;
 import ru.makhach.proteus.model.entity.Port;
@@ -16,6 +17,7 @@ import ru.makhach.proteus.service.VesselService;
 import ru.makhach.proteus.service.facade.VesselServiceFacade;
 import ru.makhach.proteus.sse.service.event.VesselEventService;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -84,6 +86,20 @@ public class VesselServiceFacadeImpl implements VesselServiceFacade {
     @Override
     public List<VesselDto> getVesselByName(String name) {
         return vesselMapper.convertToDtos(vesselService.getVesselByName(name));
+    }
+
+    @Override
+    public List<VesselDto> getAllVesselByFilter(VesselFilterParam param) {
+        switch (param.getType()) {
+            case STATUS:
+                return getAllVesselsByStatus(Status.valueOf(param.getValue()));
+            case TYPE:
+                return getAllVesselsByType(Type.valueOf(param.getValue()));
+            case YEAR_BUILT:
+                return getAllVesselsByYearBuilt(Integer.valueOf(param.getValue()));
+            default:
+                return Collections.emptyList();
+        }
     }
 
     @Override

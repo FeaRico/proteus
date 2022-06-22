@@ -3,6 +3,7 @@ package ru.makhach.proteus.service.facade;
 import ru.makhach.proteus.model.base.types.Status;
 import ru.makhach.proteus.model.base.types.Type;
 import ru.makhach.proteus.model.dto.base.VesselDto;
+import ru.makhach.proteus.model.dto.vessel.VesselFilterParam;
 
 import java.util.List;
 
@@ -31,6 +32,8 @@ public interface VesselServiceFacade {
     List<VesselDto> getAllVesselsWhereNameStartWith(String name);
 
     List<VesselDto> getVesselByName(String name);
+
+    List<VesselDto> getAllVesselByFilter(VesselFilterParam param);
 
     VesselDto updateStatusByVesselId(Long id, Status status);
 
