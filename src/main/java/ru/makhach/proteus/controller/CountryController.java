@@ -34,7 +34,7 @@ public class CountryController {
     }
 
     @GetMapping("/code/{code}")
-    public ResponseEntity<CountryDto> getByCode(@PathVariable @NotNull @NotEmpty String code) {
+    public ResponseEntity<CountryDto> getByCode(@PathVariable @NotEmpty String code) {
         return ResponseEntity.ok(countryServiceFacade.getCountryByCode(code));
     }
 

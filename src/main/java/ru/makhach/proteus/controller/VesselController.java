@@ -14,7 +14,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -92,12 +91,12 @@ public class VesselController {
     }
 
     @GetMapping("/name/with/{name}")
-    public ResponseEntity<List<VesselDto>> getWhereNameStartWith(@PathVariable @NotNull @Min(1) String name) {
+    public ResponseEntity<List<VesselDto>> getWhereNameStartWith(@PathVariable @NotEmpty String name) {
         return ResponseEntity.ok(vesselServiceFacade.getAllVesselsWhereNameStartWith(name));
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<List<VesselDto>> getByName(@PathVariable @NotEmpty @Size(min = 1, max = 255) String name) {
+    public ResponseEntity<List<VesselDto>> getByName(@PathVariable @NotEmpty String name) {
         return ResponseEntity.ok(vesselServiceFacade.getVesselByName(name));
     }
 
