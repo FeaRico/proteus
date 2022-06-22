@@ -23,6 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+// TODO: 22.06.2022 Дописать тесты на валидацию, можно в отдельном тесте
 @SpringBootTest
 @AutoConfigureMockMvc
 class CityControllerTest {
