@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import ru.makhach.proteus.exceptions.base.ProteusException;
 
+import java.util.Locale;
+
 /**
  * Ошибка недоступности ресурса
  */
@@ -15,7 +17,8 @@ public class ResourceNotFoundException extends ProteusException {
     private final Object fieldValue;
 
     public ResourceNotFoundException(Class<?> resourceClass, String fieldName, Object fieldValue) {
-        super(String.format("Not found %s with %s is %s", resourceClass.getSimpleName(), fieldName, fieldValue));
+        super(String.format("Not found %s with %s is %s", resourceClass.getSimpleName().toLowerCase(Locale.ROOT),
+                fieldName, fieldValue));
         this.resourceClass = resourceClass;
         this.fieldName = fieldName;
         this.fieldValue = fieldValue;
