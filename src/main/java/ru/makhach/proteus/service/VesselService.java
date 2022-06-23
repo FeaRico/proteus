@@ -31,6 +31,8 @@ public interface VesselService {
 
     List<Vessel> getVesselByName(String name);
 
+    Vessel getVesselById(Long id);
+
     Vessel updateStatusByVesselId(Long id, Status status);
 
     Vessel updateVessel(Vessel vessel);

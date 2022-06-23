@@ -103,6 +103,11 @@ public class VesselServiceFacadeImpl implements VesselServiceFacade {
     }
 
     @Override
+    public VesselDto getVesselById(Long id) {
+        return vesselMapper.convert(vesselService.getVesselById(id));
+    }
+
+    @Override
     public VesselDto updateStatusByVesselId(Long id, Status status) {
         VesselDto updatedVessel = vesselMapper.convert(vesselService.updateStatusByVesselId(id, status));
         eventService.updateStatusEvent(updatedVessel);

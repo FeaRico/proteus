@@ -35,6 +35,8 @@ public interface VesselServiceFacade {
 
     List<VesselDto> getAllVesselByFilter(VesselFilterParam param);
 
+    VesselDto getVesselById(Long id);
+
     VesselDto updateStatusByVesselId(Long id, Status status);
 
     VesselDto updateVessel(VesselDto vessel);

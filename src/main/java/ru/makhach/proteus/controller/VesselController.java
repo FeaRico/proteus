@@ -38,7 +38,7 @@ public class VesselController {
 
     /**
      * Фильтр по параметрам. Обходим в карте все параметры и отдаём собранный результат.
-     * Если параметров нет, отдаются все данные.
+     * Если параметров нет, выкидывается исключение.
      *
      * @param request запрос
      * @return коллекция целей
@@ -94,6 +94,11 @@ public class VesselController {
     @GetMapping("/name/{name}")
     public ResponseEntity<List<VesselDto>> getByName(@PathVariable @NotEmpty String name) {
         return ResponseEntity.ok(vesselServiceFacade.getVesselByName(name));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<VesselDto> getById(@PathVariable @NotNull @Min(1) Long id) {
+        return ResponseEntity.ok(vesselServiceFacade.getVesselById(id));
     }
 
     @PutMapping("{id}")

@@ -81,6 +81,13 @@ public class VesselServiceImpl implements VesselService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Vessel getVesselById(Long id) {
+        return vesselRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(Vessel.class, "id", id));
+    }
+
+    @Override
     public Vessel updateStatusByVesselId(Long id, Status status) {
         Vessel vesselEntity = vesselRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Vessel.class, "id", id));
