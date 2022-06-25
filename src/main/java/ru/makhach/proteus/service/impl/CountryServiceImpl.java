@@ -1,5 +1,9 @@
 package ru.makhach.proteus.service.impl;
 
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.makhach.proteus.exceptions.ResourceNotFoundException;
@@ -10,6 +14,7 @@ import ru.makhach.proteus.service.CountryService;
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames = "countryCache")
 @Transactional
 public class CountryServiceImpl implements CountryService {
     private final CountryRepository countryRepository;
@@ -20,12 +25,14 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "countries")
     public List<Country> getAllCountries() {
         return countryRepository.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "country", key = "#id")
     public Country getCountryById(Long id) {
         return countryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Country.class, "id", id));
@@ -39,6 +46,7 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "countries", allEntries = true)
     public Country updateCountry(Country country) {
         Long id = country.getId();
         countryRepository.findById(id)
@@ -48,11 +56,18 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
+    @CacheEvict(cacheNames = "countries", allEntries = true)
     public Country saveCountry(Country country) {
         return countryRepository.save(country);
     }
 
     @Override
+    @Caching(
+            evict = {
+                    @CacheEvict(cacheNames = "countries", allEntries = true),
+                    @CacheEvict(cacheNames = "country", key = "#id"),
+            }
+    )
     public Country deleteCountry(Long id) {
         Country foundEntity = countryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(Country.class, "id", id));
