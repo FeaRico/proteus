@@ -12,7 +12,8 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "dock")
-@SequenceGenerator(name = "default_seq", sequenceName = "dock_id_seq")
+@SequenceGenerator(name = "default_seq",
+        sequenceName = "dock_id_seq", allocationSize = 1)
 public class Dock extends CoordEntity {
     /**
      * Кол-во мест для пришвартовки суден
@@ -26,13 +27,6 @@ public class Dock extends CoordEntity {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "port_id")
     private Port port;
-
-    /**
-     * Коллекция суден связанных в данный момент с причалом
-     */
-    @OneToMany(mappedBy = "dock", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Vessel> vessels;
 
     public Dock() {
     }
@@ -53,27 +47,17 @@ public class Dock extends CoordEntity {
         this.port = port;
     }
 
-    public List<Vessel> getVessels() {
-        return Collections.unmodifiableList(vessels);
-    }
-
-    public void setVessels(List<Vessel> vessels) {
-        if (vessels == null)
-            this.vessels = Collections.emptyList();
-        else this.vessels = Collections.unmodifiableList(vessels);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Dock dock = (Dock) o;
-        return Objects.equals(id, dock.id) && Objects.equals(vesselsCapacity, dock.vesselsCapacity) && Objects.equals(latitude, dock.latitude) && Objects.equals(longitude, dock.longitude) && Objects.equals(port, dock.port) && Objects.equals(vessels, dock.vessels);
+        return Objects.equals(id, dock.id) && Objects.equals(vesselsCapacity, dock.vesselsCapacity) && Objects.equals(latitude, dock.latitude) && Objects.equals(longitude, dock.longitude) && Objects.equals(port, dock.port);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, vesselsCapacity, latitude, longitude, port, vessels);
+        return Objects.hash(id, vesselsCapacity, latitude, longitude, port);
     }
 
     @Override
@@ -84,7 +68,6 @@ public class Dock extends CoordEntity {
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", port=" + port +
-                ", vessels=" + vessels +
                 '}';
     }
 }

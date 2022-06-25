@@ -12,7 +12,8 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "vessel")
-@SequenceGenerator(name = "default_seq", sequenceName = "vessel_id_seq")
+@SequenceGenerator(name = "default_seq",
+        sequenceName = "vessel_id_seq", allocationSize = 1)
 public class Vessel extends CoordEntity {
     /**
      * Статус

@@ -10,7 +10,8 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "city")
-@SequenceGenerator(name = "default_seq", sequenceName = "city_id_seq")
+@SequenceGenerator(name = "default_seq",
+        sequenceName = "city_id_seq", allocationSize = 1)
 public class City extends NamedEntity {
     /**
      * Страна к которой принадлежит город

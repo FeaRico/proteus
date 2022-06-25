@@ -63,6 +63,6 @@ public class DockServiceImpl implements DockService {
     @Override
     @Transactional(readOnly = true)
     public Integer countVesselsByDockId(Long id) {
-        return getDockById(id).getVessels().size();
+        return dockRepository.countVesselByDock(id);
     }
 }

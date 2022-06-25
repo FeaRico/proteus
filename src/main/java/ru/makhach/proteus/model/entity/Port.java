@@ -3,7 +3,6 @@ package ru.makhach.proteus.model.entity;
 import ru.makhach.proteus.model.base.abstr.CoordEntity;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -11,7 +10,8 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "port")
-@SequenceGenerator(name = "default_seq", sequenceName = "port_id_seq")
+@SequenceGenerator(name = "default_seq",
+        sequenceName = "port_id_seq", allocationSize = 1)
 public class Port extends CoordEntity {
     /**
      * Город в котором находится порт
@@ -19,13 +19,6 @@ public class Port extends CoordEntity {
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
-
-    /**
-     * Коллекция суден связанных с портом
-     */
-    @OneToMany(mappedBy = "port", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Dock> docks;
 
     public Port() {
     }
@@ -36,14 +29,6 @@ public class Port extends CoordEntity {
 
     public void setCity(City city) {
         this.city = city;
-    }
-
-    public List<Dock> getDocks() {
-        return docks;
-    }
-
-    public void setDocks(List<Dock> docks) {
-        this.docks = docks;
     }
 
     @Override
@@ -67,7 +52,6 @@ public class Port extends CoordEntity {
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", city=" + city +
-                ", docks=" + docks +
                 '}';
     }
 }
