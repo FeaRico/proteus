@@ -1,7 +1,7 @@
-package ru.makhach.proteus.model.dto.vessel.types;
+package ru.makhach.proteus.model.dto.filter.vessel;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import ru.makhach.proteus.model.dto.base.filter.ParamType;
+import ru.makhach.proteus.model.dto.filter.base.ParamType;
 
 import java.util.Arrays;
 import java.util.Map;

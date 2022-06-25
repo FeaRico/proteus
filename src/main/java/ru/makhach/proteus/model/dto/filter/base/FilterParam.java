@@ -1,4 +1,4 @@
-package ru.makhach.proteus.model.dto.base.filter;
+package ru.makhach.proteus.model.dto.filter.base;
 
 /**
  * Абстрактный класс параметров для фильтра данных

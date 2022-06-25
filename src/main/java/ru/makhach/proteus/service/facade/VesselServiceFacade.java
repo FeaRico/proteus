@@ -3,7 +3,7 @@ package ru.makhach.proteus.service.facade;
 import ru.makhach.proteus.model.base.types.Status;
 import ru.makhach.proteus.model.base.types.Type;
 import ru.makhach.proteus.model.dto.base.VesselDto;
-import ru.makhach.proteus.model.dto.vessel.VesselFilterParam;
+import ru.makhach.proteus.model.dto.filter.vessel.VesselFilterParam;
 
 import java.util.List;
 

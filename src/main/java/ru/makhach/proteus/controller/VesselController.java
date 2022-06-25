@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.makhach.proteus.exceptions.EmptyParametersException;
 import ru.makhach.proteus.model.base.types.Status;
 import ru.makhach.proteus.model.dto.base.VesselDto;
-import ru.makhach.proteus.model.dto.vessel.VesselFilterParam;
-import ru.makhach.proteus.model.dto.vessel.types.VesselFilterParamType;
+import ru.makhach.proteus.model.dto.filter.vessel.VesselFilterParam;
+import ru.makhach.proteus.model.dto.filter.vessel.VesselFilterParamType;
 import ru.makhach.proteus.service.facade.VesselServiceFacade;
 import ru.makhach.proteus.validation.Marker;
 

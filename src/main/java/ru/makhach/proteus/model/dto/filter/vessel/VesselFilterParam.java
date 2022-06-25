@@ -1,7 +1,6 @@
-package ru.makhach.proteus.model.dto.vessel;
+package ru.makhach.proteus.model.dto.filter.vessel;
 
-import ru.makhach.proteus.model.dto.base.filter.FilterParam;
-import ru.makhach.proteus.model.dto.vessel.types.VesselFilterParamType;
+import ru.makhach.proteus.model.dto.filter.base.FilterParam;
 
 /**
  * Параметр для фильтра суден
