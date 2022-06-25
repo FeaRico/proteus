@@ -1,6 +1,5 @@
 package ru.makhach.proteus.sse.listener.impl;
 
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import ru.makhach.proteus.sse.event.ProteusEvent;
 import ru.makhach.proteus.sse.listener.ProteusEventListener;
@@ -15,7 +14,6 @@ public class ProteusEventListenerImpl implements ProteusEventListener {
     }
 
     @Override
-    @EventListener(ProteusEvent.class)
     public void handleEvent(ProteusEvent event) {
         eventSender.send(event);
     }
