@@ -1,11 +1,15 @@
 package ru.makhach.proteus.service.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.makhach.proteus.exceptions.ResourceNotFoundException;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
 import ru.makhach.proteus.model.entity.Dock;
 import ru.makhach.proteus.repository.DockRepository;
 import ru.makhach.proteus.service.DockService;
+import ru.makhach.proteus.utils.PageableUtils;
 
 import java.util.List;
 
@@ -22,6 +26,13 @@ public class DockServiceImpl implements DockService {
     @Transactional(readOnly = true)
     public List<Dock> getAllDocks() {
         return dockRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Dock> getAllDocksPageable(PageRequest request) {
+        Pageable pageable = PageableUtils.pageableFromRequest(request);
+        return dockRepository.findAll(pageable);
     }
 
     @Override

@@ -1,6 +1,8 @@
 package ru.makhach.proteus.service.facade;
 
 import ru.makhach.proteus.model.dto.base.PortDto;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.PageResponse;
 
 import java.util.List;
 
@@ -11,6 +13,8 @@ import java.util.List;
  */
 public interface PortServiceFacade {
     List<PortDto> getAllPorts();
+
+    PageResponse<List<PortDto>> getAllPortsPageable(PageRequest request);
 
     List<PortDto> getAllPortsByCity(Long cityId);
 

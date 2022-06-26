@@ -1,11 +1,15 @@
 package ru.makhach.proteus.service.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.makhach.proteus.exceptions.ResourceNotFoundException;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
 import ru.makhach.proteus.model.entity.Port;
 import ru.makhach.proteus.repository.PortRepository;
 import ru.makhach.proteus.service.PortService;
+import ru.makhach.proteus.utils.PageableUtils;
 
 import java.util.List;
 
@@ -22,6 +26,13 @@ public class PortServiceImpl implements PortService {
     @Transactional(readOnly = true)
     public List<Port> getAllPorts() {
         return portRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Port> getAllPorts(PageRequest request) {
+        Pageable pageable = PageableUtils.pageableFromRequest(request);
+        return portRepository.findAll(pageable);
     }
 
     @Override

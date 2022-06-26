@@ -1,8 +1,11 @@
 package ru.makhach.proteus.service.impl.facade;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import ru.makhach.proteus.mapper.PortMapper;
 import ru.makhach.proteus.model.dto.base.PortDto;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.PageResponse;
 import ru.makhach.proteus.model.entity.City;
 import ru.makhach.proteus.model.entity.Port;
 import ru.makhach.proteus.service.CityService;
@@ -29,6 +32,12 @@ public class PortServiceFacadeImpl implements PortServiceFacade {
     @Override
     public List<PortDto> getAllPorts() {
         return portMapper.convertToDtos(portService.getAllPorts());
+    }
+
+    @Override
+    public PageResponse<List<PortDto>> getAllPortsPageable(PageRequest request) {
+        Page<Port> page = portService.getAllPorts(request);
+        return portMapper.convertToPageResponse(page, request);
     }
 
     @Override

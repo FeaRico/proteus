@@ -1,8 +1,11 @@
 package ru.makhach.proteus.service.impl.facade;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import ru.makhach.proteus.mapper.CountryMapper;
 import ru.makhach.proteus.model.dto.base.CountryDto;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.PageResponse;
 import ru.makhach.proteus.model.entity.Country;
 import ru.makhach.proteus.service.CountryService;
 import ru.makhach.proteus.service.facade.CountryServiceFacade;
@@ -24,6 +27,12 @@ public class CountryServiceFacadeImpl implements CountryServiceFacade {
 
     public List<CountryDto> getAllCountries() {
         return countryMapper.convertToDtos(countryService.getAllCountries());
+    }
+
+    @Override
+    public PageResponse<List<CountryDto>> getAllCountriesPageable(PageRequest request) {
+        Page<Country> page = countryService.getAllCountriesPageable(request);
+        return countryMapper.convertToPageResponse(page, request);
     }
 
     @Override

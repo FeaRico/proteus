@@ -1,7 +1,11 @@
 package ru.makhach.proteus.service.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.utils.PageableUtils;
 import ru.makhach.proteus.exceptions.ResourceNotFoundException;
 import ru.makhach.proteus.model.entity.City;
 import ru.makhach.proteus.repository.CityRepository;
@@ -22,6 +26,13 @@ public class CityServiceImpl implements CityService {
     @Transactional(readOnly = true)
     public List<City> getAllCities() {
         return cityRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<City> getAllCitiesPageable(PageRequest request) {
+        Pageable pageable = PageableUtils.pageableFromRequest(request);
+        return cityRepository.findAll(pageable);
     }
 
     @Override

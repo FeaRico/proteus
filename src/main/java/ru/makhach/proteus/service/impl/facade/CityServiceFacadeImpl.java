@@ -1,8 +1,11 @@
 package ru.makhach.proteus.service.impl.facade;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import ru.makhach.proteus.mapper.CityMapper;
 import ru.makhach.proteus.model.dto.base.CityDto;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.PageResponse;
 import ru.makhach.proteus.model.entity.City;
 import ru.makhach.proteus.model.entity.Country;
 import ru.makhach.proteus.service.CityService;
@@ -29,6 +32,12 @@ public class CityServiceFacadeImpl implements CityServiceFacade {
     @Override
     public List<CityDto> getAllCities() {
         return cityMapper.convertToDtos(cityService.getAllCities());
+    }
+
+    @Override
+    public PageResponse<List<CityDto>> getAllCitiesPageable(PageRequest request) {
+        Page<City> page = cityService.getAllCitiesPageable(request);
+        return cityMapper.convertToPageResponse(page, request);
     }
 
     @Override

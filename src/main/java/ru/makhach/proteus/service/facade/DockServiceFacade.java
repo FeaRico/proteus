@@ -1,6 +1,8 @@
 package ru.makhach.proteus.service.facade;
 
 import ru.makhach.proteus.model.dto.base.DockDto;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.PageResponse;
 
 import java.util.List;
 
@@ -11,6 +13,8 @@ import java.util.List;
  */
 public interface DockServiceFacade {
     List<DockDto> getAllDocks();
+
+    PageResponse<List<DockDto>> getAllDocksPageable(PageRequest request);
 
     List<DockDto> getAllDocksByPort(Long portId);
 

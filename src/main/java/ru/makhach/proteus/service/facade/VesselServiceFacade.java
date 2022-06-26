@@ -3,6 +3,8 @@ package ru.makhach.proteus.service.facade;
 import ru.makhach.proteus.model.base.types.Status;
 import ru.makhach.proteus.model.base.types.Type;
 import ru.makhach.proteus.model.dto.base.VesselDto;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.PageResponse;
 import ru.makhach.proteus.model.dto.filter.vessel.VesselFilterParam;
 
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
  */
 public interface VesselServiceFacade {
     List<VesselDto> getAllVessels();
+
+    PageResponse<List<VesselDto>> getAllVesselsPageable(PageRequest request);
 
     List<VesselDto> getAllVesselsByStatus(Status status);
 

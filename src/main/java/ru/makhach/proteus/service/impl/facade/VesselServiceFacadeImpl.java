@@ -1,10 +1,13 @@
 package ru.makhach.proteus.service.impl.facade;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import ru.makhach.proteus.mapper.VesselMapper;
 import ru.makhach.proteus.model.base.types.Status;
 import ru.makhach.proteus.model.base.types.Type;
 import ru.makhach.proteus.model.dto.base.VesselDto;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.PageResponse;
 import ru.makhach.proteus.model.dto.filter.vessel.VesselFilterParam;
 import ru.makhach.proteus.model.entity.Country;
 import ru.makhach.proteus.model.entity.Dock;
@@ -41,6 +44,12 @@ public class VesselServiceFacadeImpl implements VesselServiceFacade {
     @Override
     public List<VesselDto> getAllVessels() {
         return vesselMapper.convertToDtos(vesselService.getAllVessels());
+    }
+
+    @Override
+    public PageResponse<List<VesselDto>> getAllVesselsPageable(PageRequest request) {
+        Page<Vessel> page = vesselService.getAllVesselsPageable(request);
+        return vesselMapper.convertToPageResponse(page, request);
     }
 
     @Override

@@ -1,8 +1,11 @@
 package ru.makhach.proteus.service.impl.facade;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import ru.makhach.proteus.mapper.DockMapper;
 import ru.makhach.proteus.model.dto.base.DockDto;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.PageResponse;
 import ru.makhach.proteus.model.entity.Dock;
 import ru.makhach.proteus.model.entity.Port;
 import ru.makhach.proteus.service.DockService;
@@ -29,6 +32,12 @@ public class DockServiceFacadeImpl implements DockServiceFacade {
     @Override
     public List<DockDto> getAllDocks() {
         return dockMapper.convertToDtos(dockService.getAllDocks());
+    }
+
+    @Override
+    public PageResponse<List<DockDto>> getAllDocksPageable(PageRequest request) {
+        Page<Dock> page = dockService.getAllDocksPageable(request);
+        return dockMapper.convertToPageResponse(page, request);
     }
 
     @Override

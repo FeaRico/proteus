@@ -4,12 +4,16 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.makhach.proteus.exceptions.ResourceNotFoundException;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
 import ru.makhach.proteus.model.entity.Country;
 import ru.makhach.proteus.repository.CountryRepository;
 import ru.makhach.proteus.service.CountryService;
+import ru.makhach.proteus.utils.PageableUtils;
 
 import java.util.List;
 
@@ -28,6 +32,14 @@ public class CountryServiceImpl implements CountryService {
     @Cacheable(cacheNames = "countries")
     public List<Country> getAllCountries() {
         return countryRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Country> getAllCountriesPageable(PageRequest request) {
+        Pageable pageable = PageableUtils.pageableFromRequest(request);
+
+        return countryRepository.findAll(pageable);
     }
 
     @Override

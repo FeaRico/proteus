@@ -1,13 +1,17 @@
 package ru.makhach.proteus.service.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.makhach.proteus.exceptions.ResourceNotFoundException;
 import ru.makhach.proteus.model.base.types.Status;
 import ru.makhach.proteus.model.base.types.Type;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
 import ru.makhach.proteus.model.entity.Vessel;
 import ru.makhach.proteus.repository.VesselRepository;
 import ru.makhach.proteus.service.VesselService;
+import ru.makhach.proteus.utils.PageableUtils;
 
 import java.util.List;
 
@@ -24,6 +28,13 @@ public class VesselServiceImpl implements VesselService {
     @Transactional(readOnly = true)
     public List<Vessel> getAllVessels() {
         return vesselRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Vessel> getAllVesselsPageable(PageRequest request) {
+        Pageable pageable = PageableUtils.pageableFromRequest(request);
+        return vesselRepository.findAll(pageable);
     }
 
     @Override

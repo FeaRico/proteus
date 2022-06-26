@@ -4,6 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.makhach.proteus.model.dto.base.PortDto;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.PageResponse;
 import ru.makhach.proteus.service.facade.PortServiceFacade;
 import ru.makhach.proteus.validation.Marker;
 
@@ -25,6 +27,14 @@ public class PortController {
     @GetMapping
     public ResponseEntity<List<PortDto>> getAll() {
         return ResponseEntity.ok(portServiceFacade.getAllPorts());
+    }
+
+    @GetMapping("/pageable")
+    public ResponseEntity<PageResponse<List<PortDto>>> getAllPageable(@RequestParam(required = false, defaultValue = "0") @Min(0) Integer pageNum,
+                                                                      @RequestParam(required = false, defaultValue = "20") @Min(1) Integer pageSize,
+                                                                      @RequestParam(required = false, defaultValue = "id") String sortBy,
+                                                                      @RequestParam(required = false, defaultValue = "ASC") String sortDir) {
+        return ResponseEntity.ok(portServiceFacade.getAllPortsPageable(new PageRequest(pageNum, pageSize, sortBy, sortDir)));
     }
 
     @GetMapping("/city/{cityId}")

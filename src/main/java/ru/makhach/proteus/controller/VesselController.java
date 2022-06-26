@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.makhach.proteus.exceptions.EmptyParametersException;
 import ru.makhach.proteus.model.base.types.Status;
 import ru.makhach.proteus.model.dto.base.VesselDto;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.PageResponse;
 import ru.makhach.proteus.model.dto.filter.vessel.VesselFilterParam;
 import ru.makhach.proteus.model.dto.filter.vessel.VesselFilterParamType;
 import ru.makhach.proteus.service.facade.VesselServiceFacade;
@@ -34,6 +36,14 @@ public class VesselController {
     @GetMapping
     public ResponseEntity<List<VesselDto>> getAll() {
         return ResponseEntity.ok(vesselServiceFacade.getAllVessels());
+    }
+
+    @GetMapping("/pageable")
+    public ResponseEntity<PageResponse<List<VesselDto>>> getAllPageable(@RequestParam(required = false, defaultValue = "0") @Min(0) Integer pageNum,
+                                                                        @RequestParam(required = false, defaultValue = "20") @Min(1) Integer pageSize,
+                                                                        @RequestParam(required = false, defaultValue = "id") String sortBy,
+                                                                        @RequestParam(required = false, defaultValue = "ASC") String sortDir) {
+        return ResponseEntity.ok(vesselServiceFacade.getAllVesselsPageable(new PageRequest(pageNum, pageSize, sortBy, sortDir)));
     }
 
     /**

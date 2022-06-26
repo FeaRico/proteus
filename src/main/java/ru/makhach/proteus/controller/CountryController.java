@@ -4,6 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.makhach.proteus.model.dto.base.CountryDto;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.PageResponse;
 import ru.makhach.proteus.service.facade.CountryServiceFacade;
 import ru.makhach.proteus.validation.Marker;
 
@@ -26,6 +28,16 @@ public class CountryController {
     @GetMapping
     public ResponseEntity<List<CountryDto>> getAll() {
         return ResponseEntity.ok(countryServiceFacade.getAllCountries());
+    }
+
+    @GetMapping("/pageable")
+    public ResponseEntity<PageResponse<List<CountryDto>>> getAllPageable(@RequestParam(required = false, defaultValue = "0") @Min(0) Integer pageNum,
+                                                                         @RequestParam(required = false, defaultValue = "20") @Min(1) Integer pageSize,
+                                                                         @RequestParam(required = false, defaultValue = "id") String sortBy,
+                                                                         @RequestParam(required = false, defaultValue = "ASC") String sortDir) {
+        return ResponseEntity.ok(countryServiceFacade.getAllCountriesPageable(
+                new PageRequest(pageNum, pageSize, sortBy, sortDir)
+        ));
     }
 
     @GetMapping("{id}")

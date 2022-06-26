@@ -4,8 +4,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
+import org.springframework.data.domain.Page;
 import ru.makhach.proteus.model.dto.base.DockDto;
 import ru.makhach.proteus.model.dto.base.PortDto;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.PageResponse;
 import ru.makhach.proteus.model.entity.Dock;
 
 import java.util.List;
@@ -45,4 +48,18 @@ public interface DockMapper {
     List<DockDto> convertToDtos(List<Dock> docks);
 
     List<Dock> convertToEntities(List<DockDto> docksDto);
+
+    default PageResponse<List<DockDto>> convertToPageResponse(Page<Dock> page, PageRequest request) {
+        return PageResponse.<List<DockDto>>builder()
+                .content(convertToDtos(page.getContent()))
+                .pageElements(page.getNumberOfElements())
+                .totalElements(page.getTotalElements())
+                .pageNumber(page.getNumber())
+                .totalPages(page.getTotalPages())
+                .sortBy(request.getSortBy())
+                .sortDir(request.getSortDir())
+                .isFirst(page.isFirst())
+                .isLast(page.isLast())
+                .build();
+    }
 }

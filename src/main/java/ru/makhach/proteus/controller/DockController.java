@@ -4,6 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.makhach.proteus.model.dto.base.DockDto;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.PageResponse;
 import ru.makhach.proteus.service.facade.DockServiceFacade;
 import ru.makhach.proteus.validation.Marker;
 
@@ -32,6 +34,14 @@ public class DockController {
         return ResponseEntity.ok(dockServiceFacade.getAllDocksByPort(portId));
     }
 
+    @GetMapping("/pageable")
+    public ResponseEntity<PageResponse<List<DockDto>>> getAllPageable(@RequestParam(required = false, defaultValue = "0") @Min(0) Integer pageNum,
+                                                                      @RequestParam(required = false, defaultValue = "20") @Min(1) Integer pageSize,
+                                                                      @RequestParam(required = false, defaultValue = "id") String sortBy,
+                                                                      @RequestParam(required = false, defaultValue = "ASC") String sortDir) {
+        return ResponseEntity.ok(dockServiceFacade.getAllDocksPageable(new PageRequest(pageNum, pageSize, sortBy, sortDir)));
+    }
+
     @GetMapping("{id}")
     public ResponseEntity<DockDto> getById(@PathVariable @NotNull @Min(1) Long id) {
         return ResponseEntity.ok(dockServiceFacade.getDockById(id));
@@ -53,6 +63,5 @@ public class DockController {
     public ResponseEntity<DockDto> delete(@PathVariable @NotNull @Min(1) Long id) {
         return ResponseEntity.ok(dockServiceFacade.deleteDock(id));
     }
-
 }
 

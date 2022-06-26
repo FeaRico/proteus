@@ -1,5 +1,7 @@
 package ru.makhach.proteus.service;
 
+import org.springframework.data.domain.Page;
+import ru.makhach.proteus.model.dto.filter.PageRequest;
 import ru.makhach.proteus.model.entity.Dock;
 
 import java.util.List;
@@ -10,6 +12,8 @@ import java.util.List;
  */
 public interface DockService {
     List<Dock> getAllDocks();
+
+    Page<Dock> getAllDocksPageable(PageRequest request);
 
     List<Dock> getAllDocksByPort(Long portId);
 
