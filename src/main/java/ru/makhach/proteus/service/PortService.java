@@ -1,8 +1,7 @@
 package ru.makhach.proteus.service;
 
 import org.springframework.data.domain.Page;
-import org.springframework.transaction.annotation.Transactional;
-import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.pageable.PageRequest;
 import ru.makhach.proteus.model.entity.Port;
 
 import java.util.List;

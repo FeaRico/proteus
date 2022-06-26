@@ -1,10 +1,9 @@
 package ru.makhach.proteus.service;
 
 import org.springframework.data.domain.Page;
-import org.springframework.transaction.annotation.Transactional;
 import ru.makhach.proteus.model.base.types.Status;
 import ru.makhach.proteus.model.base.types.Type;
-import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.pageable.PageRequest;
 import ru.makhach.proteus.model.entity.Vessel;
 
 import java.util.List;

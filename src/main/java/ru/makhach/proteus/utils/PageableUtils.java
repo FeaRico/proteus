@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PageableUtils {
-    public static Pageable pageableFromRequest(ru.makhach.proteus.model.dto.filter.PageRequest request) {
+    public static Pageable pageableFromRequest(ru.makhach.proteus.model.dto.filter.pageable.PageRequest request) {
         String sortBy = request.getSortBy();
         Sort sort = Sort.Direction.ASC
                 .name()

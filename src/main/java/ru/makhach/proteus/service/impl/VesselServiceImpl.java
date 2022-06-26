@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.makhach.proteus.exceptions.ResourceNotFoundException;
 import ru.makhach.proteus.model.base.types.Status;
 import ru.makhach.proteus.model.base.types.Type;
-import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.pageable.PageRequest;
 import ru.makhach.proteus.model.entity.Vessel;
 import ru.makhach.proteus.repository.VesselRepository;
 import ru.makhach.proteus.service.VesselService;

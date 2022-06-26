@@ -1,7 +1,7 @@
 package ru.makhach.proteus.service;
 
 import org.springframework.data.domain.Page;
-import ru.makhach.proteus.model.dto.filter.PageRequest;
+import ru.makhach.proteus.model.dto.filter.pageable.PageRequest;
 import ru.makhach.proteus.model.entity.Country;
 
 import java.util.List;

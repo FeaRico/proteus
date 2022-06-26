@@ -1,4 +1,4 @@
-package ru.makhach.proteus.model.dto.filter;
+package ru.makhach.proteus.model.dto.filter.pageable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

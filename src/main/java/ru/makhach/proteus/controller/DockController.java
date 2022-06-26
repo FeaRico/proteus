@@ -4,8 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.makhach.proteus.model.dto.base.DockDto;
-import ru.makhach.proteus.model.dto.filter.PageRequest;
-import ru.makhach.proteus.model.dto.filter.PageResponse;
+import ru.makhach.proteus.model.dto.filter.pageable.PageRequest;
+import ru.makhach.proteus.model.dto.filter.pageable.PageResponse;
 import ru.makhach.proteus.service.facade.DockServiceFacade;
 import ru.makhach.proteus.validation.Marker;
 

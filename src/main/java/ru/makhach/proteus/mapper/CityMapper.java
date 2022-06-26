@@ -7,11 +7,10 @@ import org.mapstruct.Named;
 import org.springframework.data.domain.Page;
 import ru.makhach.proteus.model.dto.base.CityDto;
 import ru.makhach.proteus.model.dto.base.CountryDto;
-import ru.makhach.proteus.model.dto.filter.PageRequest;
-import ru.makhach.proteus.model.dto.filter.PageResponse;
+import ru.makhach.proteus.model.dto.filter.pageable.PageRequest;
+import ru.makhach.proteus.model.dto.filter.pageable.PageResponse;
 import ru.makhach.proteus.model.entity.City;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 @Mapper(componentModel = "spring", uses = {CountryMapper.class})
