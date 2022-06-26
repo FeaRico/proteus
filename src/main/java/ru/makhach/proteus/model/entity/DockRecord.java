@@ -9,7 +9,7 @@ import java.util.Objects;
 @Table(name = "docking_record")
 @SequenceGenerator(name = "default_seq",
         sequenceName = "dock_id_seq", allocationSize = 1)
-public class DockingRecord extends CreatedAtEntity {
+public class DockRecord extends CreatedAtEntity {
     @Column(name = "docking_time", nullable = false)
     private Long dockingTime;
 
@@ -27,7 +27,7 @@ public class DockingRecord extends CreatedAtEntity {
     @JoinColumn(name = "vessel_id")
     private Vessel vessel;
 
-    public DockingRecord() {
+    public DockRecord() {
     }
 
     public Long getDockingTime() {
@@ -74,7 +74,7 @@ public class DockingRecord extends CreatedAtEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DockingRecord that = (DockingRecord) o;
+        DockRecord that = (DockRecord) o;
         return Objects.equals(dockingTime, that.dockingTime) && Objects.equals(isUndocked, that.isUndocked) && Objects.equals(undockedTime, that.undockedTime) && Objects.equals(dock, that.dock) && Objects.equals(vessel, that.vessel);
     }
 
