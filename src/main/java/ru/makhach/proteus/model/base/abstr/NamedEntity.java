@@ -9,7 +9,7 @@ import javax.persistence.MappedSuperclass;
  * Абстрактный класс для сущностей с именами
  */
 @MappedSuperclass
-public abstract class NamedEntity extends IdEntity implements NamedObj {
+public abstract class NamedEntity extends CreatedAtEntity implements NamedObj {
     @Column(name = "name", nullable = false)
     protected String name;
 

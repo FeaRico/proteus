@@ -1,6 +1,7 @@
 package ru.makhach.proteus.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.data.domain.Page;
 import ru.makhach.proteus.model.dto.base.CountryDto;
@@ -15,6 +16,7 @@ public interface CountryMapper {
     CountryDto convert(Country country);
 
     @Named("countryDtoToEntity")
+    @Mapping(target = "createdAt", expression = "java(System.currentTimeMillis())")
     Country convert(CountryDto countryDto);
 
     List<CountryDto> convertToDtos(List<Country> countries);

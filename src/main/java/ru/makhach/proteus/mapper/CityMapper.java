@@ -21,6 +21,7 @@ public interface CityMapper {
     CityDto convert(City city);
 
     @Named("cityDtoToEntity")
+    @Mapping(target = "createdAt", expression = "java(System.currentTimeMillis())")
     City convert(CityDto cityDto);
 
     @Mappings({

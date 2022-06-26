@@ -3,8 +3,6 @@ package ru.makhach.proteus.model.entity;
 import ru.makhach.proteus.model.base.abstr.CoordEntity;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 /**

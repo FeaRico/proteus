@@ -32,6 +32,7 @@ public interface VesselMapper {
 
     @Mappings({
             @Mapping(target = "id", source = "vesselDto.id"),
+            @Mapping(target = "createdAt", expression = "java(System.currentTimeMillis())"),
             @Mapping(target = "name", source = "vesselDto.name"),
             @Mapping(target = "status", source = "vesselDto.status", qualifiedByName = "stringStatusToEnum"),
             @Mapping(target = "type", source = "vesselDto.type", qualifiedByName = "stringTypeToEnum"),

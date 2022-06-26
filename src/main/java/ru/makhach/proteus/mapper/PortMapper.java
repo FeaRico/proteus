@@ -26,6 +26,7 @@ public interface PortMapper {
 
     @Mappings({
             @Mapping(target = "id", source = "portDto.id"),
+            @Mapping(target = "createdAt", expression = "java(System.currentTimeMillis())"),
             @Mapping(target = "name", source = "portDto.name"),
             @Mapping(target = "latitude", source = "portDto.latitude"),
             @Mapping(target = "longitude", source = "portDto.longitude")

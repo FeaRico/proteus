@@ -27,6 +27,7 @@ public interface DockMapper {
 
     @Mappings({
             @Mapping(target = "id", source = "dockDto.id"),
+            @Mapping(target = "createdAt", expression = "java(System.currentTimeMillis())"),
             @Mapping(target = "name", source = "dockDto.name"),
             @Mapping(target = "vesselsCapacity", source = "dockDto.vesselsCapacity"),
             @Mapping(target = "latitude", source = "dockDto.latitude"),
