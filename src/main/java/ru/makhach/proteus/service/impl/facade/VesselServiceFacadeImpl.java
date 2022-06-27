@@ -162,7 +162,6 @@ public class VesselServiceFacadeImpl implements VesselServiceFacade {
         return vesselMapper.convert(vesselService.updateVessel(vessel));
     }
 
-    // TODO: 27.06.2022 Дописать контроллеры
     @Override
     public VesselDto unmooringVessel(Long dockId, Long vesselId) {
         Vessel vessel = vesselService.getVesselById(vesselId);
