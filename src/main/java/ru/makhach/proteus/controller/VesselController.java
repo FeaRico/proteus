@@ -132,4 +132,16 @@ public class VesselController {
     public ResponseEntity<VesselDto> delete(@PathVariable @NotNull @Min(1) Long id) {
         return ResponseEntity.ok(vesselServiceFacade.deleteVessel(id));
     }
+
+    @GetMapping("/{vesselId}/moor/{dockId}")
+    public ResponseEntity<VesselDto> mooringVessel(@PathVariable @NotNull @Min(1) Long dockId,
+                                                   @PathVariable @NotNull @Min(1) Long vesselId) {
+        return ResponseEntity.ok(vesselServiceFacade.mooringVessel(dockId, vesselId));
+    }
+
+    @GetMapping("/{vesselId}/unmoor/{dockId}")
+    public ResponseEntity<VesselDto> unmooringVessel(@PathVariable @NotNull @Min(1) Long dockId,
+                                                     @PathVariable @NotNull @Min(1) Long vesselId) {
+        return ResponseEntity.ok(vesselServiceFacade.unmooringVessel(dockId, vesselId));
+    }
 }
