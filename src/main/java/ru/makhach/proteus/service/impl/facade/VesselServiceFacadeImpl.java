@@ -152,7 +152,6 @@ public class VesselServiceFacadeImpl implements VesselServiceFacade {
     public VesselDto mooringVessel(Long dockId, Long vesselId) {
         Vessel vessel = vesselService.getVesselById(vesselId);
         Dock dock = dockService.getDockById(dockId);
-        dock.setVesselsCapacity(dock.getVesselsCapacity() + 1);
         dockService.updateDock(dock);
         vessel.setDock(dock);
         DockRecordDto dockRecord = DockRecordDto.builder()
@@ -168,9 +167,8 @@ public class VesselServiceFacadeImpl implements VesselServiceFacade {
     public VesselDto unmooringVessel(Long dockId, Long vesselId) {
         Vessel vessel = vesselService.getVesselById(vesselId);
         Dock dock = dockService.getDockById(dockId);
-        dock.setVesselsCapacity(dock.getVesselsCapacity() - 1);
         dockService.updateDock(dock);
-        vessel.setDock(dock);
+        vessel.setDock(null);
         DockRecordDto dockRecord = DockRecordDto.builder()
                 .vesselId(vesselId)
                 .dockId(dockId)
