@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.makhach.proteus.mapper.VesselMapper;
 import ru.makhach.proteus.model.base.types.Status;
 import ru.makhach.proteus.model.base.types.Type;
+import ru.makhach.proteus.model.dto.base.DockRecordDto;
 import ru.makhach.proteus.model.dto.base.VesselDto;
 import ru.makhach.proteus.model.dto.filter.pageable.PageRequest;
 import ru.makhach.proteus.model.dto.filter.pageable.PageResponse;
@@ -17,6 +18,7 @@ import ru.makhach.proteus.service.CountryService;
 import ru.makhach.proteus.service.DockService;
 import ru.makhach.proteus.service.PortService;
 import ru.makhach.proteus.service.VesselService;
+import ru.makhach.proteus.service.facade.DockRecordServiceFacade;
 import ru.makhach.proteus.service.facade.VesselServiceFacade;
 import ru.makhach.proteus.sse.service.event.VesselEventService;
 
@@ -31,14 +33,16 @@ public class VesselServiceFacadeImpl implements VesselServiceFacade {
     private final PortService portService;
     private final DockService dockService;
     private final VesselEventService eventService;
+    private final DockRecordServiceFacade recordServiceFacade;
 
-    public VesselServiceFacadeImpl(VesselService vesselService, VesselMapper vesselMapper, CountryService countryService, PortService portService, DockService dockService, VesselEventService eventService) {
+    public VesselServiceFacadeImpl(VesselService vesselService, VesselMapper vesselMapper, CountryService countryService, PortService portService, DockService dockService, VesselEventService eventService, DockRecordServiceFacade recordServiceFacade) {
         this.vesselService = vesselService;
         this.vesselMapper = vesselMapper;
         this.countryService = countryService;
         this.portService = portService;
         this.dockService = dockService;
         this.eventService = eventService;
+        this.recordServiceFacade = recordServiceFacade;
     }
 
     @Override
@@ -142,6 +146,37 @@ public class VesselServiceFacadeImpl implements VesselServiceFacade {
         VesselDto deletedVessel = vesselMapper.convert(vesselService.deleteVessel(id));
         eventService.deleteEvent(deletedVessel);
         return deletedVessel;
+    }
+
+    @Override
+    public VesselDto mooringVessel(Long dockId, Long vesselId) {
+        Vessel vessel = vesselService.getVesselById(vesselId);
+        Dock dock = dockService.getDockById(dockId);
+        dock.setVesselsCapacity(dock.getVesselsCapacity() + 1);
+        dockService.updateDock(dock);
+        vessel.setDock(dock);
+        DockRecordDto dockRecord = DockRecordDto.builder()
+                .vesselId(vesselId)
+                .dockId(dockId)
+                .build();
+        recordServiceFacade.mooringVessel(dockRecord);
+        return vesselMapper.convert(vesselService.updateVessel(vessel));
+    }
+
+    // TODO: 27.06.2022 Дописать контроллеры
+    @Override
+    public VesselDto unmooringVessel(Long dockId, Long vesselId) {
+        Vessel vessel = vesselService.getVesselById(vesselId);
+        Dock dock = dockService.getDockById(dockId);
+        dock.setVesselsCapacity(dock.getVesselsCapacity() - 1);
+        dockService.updateDock(dock);
+        vessel.setDock(dock);
+        DockRecordDto dockRecord = DockRecordDto.builder()
+                .vesselId(vesselId)
+                .dockId(dockId)
+                .build();
+        recordServiceFacade.unmooringVessel(dockRecord);
+        return vesselMapper.convert(vesselService.updateVessel(vessel));
     }
 
     private Vessel configureVesselEntities(VesselDto vessel) {

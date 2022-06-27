@@ -22,4 +22,8 @@ public interface DockRecordServiceFacade {
     DockRecordDto save(DockRecordDto dockRecordDto);
 
     DockRecordDto delete(Long id);
+
+    DockRecordDto mooringVessel(DockRecordDto recordDto);
+
+    DockRecordDto unmooringVessel(DockRecordDto recordDto);
 }

@@ -19,13 +19,13 @@ public class DockRecordEventServiceImpl implements DockRecordEventService {
     }
 
     @Override
-    public void vesselDockedEvent(DockRecordDto recordDto) {
+    public void vesselMooringEvent(DockRecordDto recordDto) {
         eventPublisher.publishEvent(new DockVesselRecordEvent(recordDto.getId(),
                 recordDto.getVesselId(), recordDto.getDockId(), DockStatus.MOORED));
     }
 
     @Override
-    public void vesselUndockedEvent(DockRecordDto recordDto) {
+    public void vesselUnmooringEvent(DockRecordDto recordDto) {
         eventPublisher.publishEvent(new DockVesselRecordEvent(recordDto.getId(),
                 recordDto.getVesselId(), recordDto.getDockId(), DockStatus.UNMOORED));
     }

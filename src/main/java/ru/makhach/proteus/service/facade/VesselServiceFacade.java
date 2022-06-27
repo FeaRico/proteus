@@ -48,4 +48,8 @@ public interface VesselServiceFacade {
     VesselDto saveVessel(VesselDto vessel);
 
     VesselDto deleteVessel(Long id);
+
+    VesselDto mooringVessel(Long dockId, Long vesselId);
+
+    VesselDto unmooringVessel(Long dockId, Long vesselId);
 }

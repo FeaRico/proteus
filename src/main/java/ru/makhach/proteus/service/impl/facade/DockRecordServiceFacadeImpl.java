@@ -89,4 +89,31 @@ public class DockRecordServiceFacadeImpl implements DockRecordServiceFacade {
         eventService.deleteEvent(deletedDockRecord);
         return deletedDockRecord;
     }
+
+    @Override
+    public DockRecordDto mooringVessel(DockRecordDto recordDto) {
+        eventService.vesselMooringEvent(recordDto);
+        DockRecordDto mooringRecord = DockRecordDto.builder()
+                .id(recordDto.getId())
+                .dockingTime(System.currentTimeMillis())
+                .isUndocked(false)
+                .dockId(recordDto.getDockId())
+                .vesselId(recordDto.getVesselId())
+                .build();
+
+        return save(mooringRecord);
+    }
+
+    @Override
+    public DockRecordDto unmooringVessel(DockRecordDto recordDto) {
+        eventService.vesselUnmooringEvent(recordDto);
+        DockRecordDto unmooringRecord = DockRecordDto.builder()
+                .id(recordDto.getId())
+                .undockedTime(System.currentTimeMillis())
+                .isUndocked(true)
+                .dockId(recordDto.getDockId())
+                .vesselId(recordDto.getVesselId())
+                .build();
+        return save(unmooringRecord);
+    }
 }

@@ -8,8 +8,11 @@ import ru.makhach.proteus.model.dto.filter.pageable.PageRequest;
 import ru.makhach.proteus.model.dto.filter.pageable.PageResponse;
 import ru.makhach.proteus.model.entity.Dock;
 import ru.makhach.proteus.model.entity.Port;
+import ru.makhach.proteus.model.entity.Vessel;
+import ru.makhach.proteus.service.DockRecordService;
 import ru.makhach.proteus.service.DockService;
 import ru.makhach.proteus.service.PortService;
+import ru.makhach.proteus.service.VesselService;
 import ru.makhach.proteus.service.facade.DockServiceFacade;
 import ru.makhach.proteus.sse.service.event.DockEventService;
 
@@ -21,12 +24,16 @@ public class DockServiceFacadeImpl implements DockServiceFacade {
     private final DockMapper dockMapper;
     private final PortService portService;
     private final DockEventService eventService;
+    private final VesselService vesselService;
+    private final DockRecordService recordService;
 
-    public DockServiceFacadeImpl(DockService dockService, DockMapper dockMapper, PortService portService, DockEventService eventService) {
+    public DockServiceFacadeImpl(DockService dockService, DockMapper dockMapper, PortService portService, DockEventService eventService, VesselService vesselService, DockRecordService recordService) {
         this.dockService = dockService;
         this.dockMapper = dockMapper;
         this.portService = portService;
         this.eventService = eventService;
+        this.vesselService = vesselService;
+        this.recordService = recordService;
     }
 
     @Override
