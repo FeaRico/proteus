@@ -28,7 +28,7 @@ public interface VesselRepository extends JpaRepository<Vessel, Long> {
     @Query("select vessel from Vessel vessel join Dock dock where dock.id = ?1")
     List<Vessel> findAllByDock(Long dockId);
 
-    @Query("select vessel from Vessel vessel where vessel.name like '?1%' group by vessel.name")
+    @Query("select vessel from Vessel vessel where vessel.name like ?1 group by vessel.name")
     List<Vessel> findAllByNameStartsWith(String name);
 
     @Query("select vessel from Vessel vessel where vessel.name = ?1 group by vessel.id")
