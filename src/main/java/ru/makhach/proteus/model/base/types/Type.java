@@ -1,6 +1,7 @@
 package ru.makhach.proteus.model.base.types;
 
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,7 +23,7 @@ public enum Type {
     private final String name;
 
     static {
-        nameMap = Stream.of(values()).collect(Collectors.toMap(Type::getName, type -> type));
+        nameMap = Stream.of(values()).collect(Collectors.toMap(Type::getName, Function.identity()));
     }
 
     Type(String name) {

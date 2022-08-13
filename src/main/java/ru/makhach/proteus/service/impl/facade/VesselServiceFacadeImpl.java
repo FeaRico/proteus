@@ -10,6 +10,7 @@ import ru.makhach.proteus.model.dto.base.VesselDto;
 import ru.makhach.proteus.model.dto.filter.pageable.PageRequest;
 import ru.makhach.proteus.model.dto.filter.pageable.PageResponse;
 import ru.makhach.proteus.model.dto.filter.vessel.VesselFilterParam;
+import ru.makhach.proteus.model.dto.filter.vessel.VesselFilterParamType;
 import ru.makhach.proteus.model.entity.Country;
 import ru.makhach.proteus.model.entity.Dock;
 import ru.makhach.proteus.model.entity.Port;
@@ -103,16 +104,8 @@ public class VesselServiceFacadeImpl implements VesselServiceFacade {
 
     @Override
     public List<VesselDto> getAllVesselByFilter(VesselFilterParam param) {
-        switch (param.getType()) {
-            case STATUS:
-                return getAllVesselsByStatus(Status.valueOf(param.getValue()));
-            case TYPE:
-                return getAllVesselsByType(Type.valueOf(param.getValue()));
-            case YEAR_BUILT:
-                return getAllVesselsByYearBuilt(Integer.valueOf(param.getValue()));
-            default:
-                return Collections.emptyList();
-        }
+        VesselFilterParamType paramType = param.getType();
+        return paramType.getFilteredVessels(this, param);
     }
 
     @Override

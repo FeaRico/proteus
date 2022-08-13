@@ -1,6 +1,7 @@
 package ru.makhach.proteus.model.base.types;
 
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,7 +18,7 @@ public enum Status {
     private final static Map<String, Status> descriptionMap;
 
     static {
-        descriptionMap = Stream.of(values()).collect(Collectors.toMap(Status::getDescription, status -> status));
+        descriptionMap = Stream.of(values()).collect(Collectors.toMap(Status::getDescription, Function.identity()));
     }
 
     /**

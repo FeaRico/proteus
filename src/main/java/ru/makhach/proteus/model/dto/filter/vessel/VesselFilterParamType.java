@@ -1,9 +1,14 @@
 package ru.makhach.proteus.model.dto.filter.vessel;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import ru.makhach.proteus.model.base.types.Status;
+import ru.makhach.proteus.model.base.types.Type;
+import ru.makhach.proteus.model.dto.base.VesselDto;
 import ru.makhach.proteus.model.dto.filter.base.ParamType;
+import ru.makhach.proteus.service.facade.VesselServiceFacade;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -13,9 +18,24 @@ import java.util.stream.Collectors;
  */
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum VesselFilterParamType implements ParamType {
-    STATUS("status", "Статус судна в данный момент"),
-    TYPE("type", "Тип судна"),
-    YEAR_BUILT("yearBuilt", "Год постройки судна");
+    STATUS("status", "Статус судна в данный момент") {
+        @Override
+        public List<VesselDto> getFilteredVessels(VesselServiceFacade service, VesselFilterParam param) {
+            return service.getAllVesselsByStatus(Status.valueOf(param.getValue()));
+        }
+    },
+    TYPE("type", "Тип судна") {
+        @Override
+        public List<VesselDto> getFilteredVessels(VesselServiceFacade service, VesselFilterParam param) {
+            return service.getAllVesselsByType(Type.valueOf(param.getValue()));
+        }
+    },
+    YEAR_BUILT("yearBuilt", "Год постройки судна") {
+        @Override
+        public List<VesselDto> getFilteredVessels(VesselServiceFacade service, VesselFilterParam param) {
+            return service.getAllVesselsByYearBuilt(Integer.valueOf(param.getValue()));
+        }
+    };
 
     /**
      * Поле фильтрации
@@ -56,4 +76,6 @@ public enum VesselFilterParamType implements ParamType {
             throw new IllegalArgumentException("Not found param with name =" + filteredField);
         return filterParam;
     }
+
+    public abstract List<VesselDto> getFilteredVessels(VesselServiceFacade service, VesselFilterParam param);
 }
