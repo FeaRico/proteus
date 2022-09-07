@@ -1,0 +1,13 @@
+package ru.makhach.proteus.core.model.dto.filter.pageable;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
+public class PageRequest {
+    private final Integer pageNum;
+    private final Integer pageSize;
+    private final String sortBy;
+    private final String sortDir;
+}

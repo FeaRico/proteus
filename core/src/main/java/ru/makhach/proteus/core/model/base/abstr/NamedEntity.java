@@ -1,0 +1,26 @@
+package ru.makhach.proteus.core.model.base.abstr;
+
+import ru.makhach.proteus.core.model.base.interfaces.NamedObj;
+
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+
+/**
+ * Абстрактный класс для сущностей с именами
+ */
+@MappedSuperclass
+public abstract class NamedEntity extends CreatedAtEntity implements NamedObj {
+    @Column(name = "name", nullable = false)
+    protected String name;
+
+    public NamedEntity() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
